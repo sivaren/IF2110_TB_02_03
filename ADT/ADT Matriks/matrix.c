@@ -13,29 +13,29 @@ void CreateMatrix(int nRow, int nCol, Matrix *m) {
 }
 
 /* *** Selektor "DUNIA Matrix" *** */
-boolean isIdxValid(int i, int j) {
-/* Mengirimkan true jika i, j adalah Index yang valid untuk matriks apa pun */
+boolean isIdxValidMatrix(int i, int j) {
+/* Mengirimkan true jika i, j adalah IndexMatrix yang valid untuk matriks apa pun */
     /* ALGORITMA */
     return ((i >= 0 && i < ROW_CAP) && (j >= 0 && j < COL_CAP));
 }
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
-Index getLastIdxRow(Matrix m) {
-/* Mengirimkan Index baris terbesar m */
+IndexMatrix getLastIdxRow(Matrix m) {
+/* Mengirimkan IndexMatrix baris terbesar m */
     /* ALGORITMA */
     return (ROWS(m)-1);
 }
-Index getLastIdxCol(Matrix m) {
-/* Mengirimkan Index kolom terbesar m */
+IndexMatrix getLastIdxCol(Matrix m) {
+/* Mengirimkan IndexMatrix kolom terbesar m */
     /* ALGORITMA */
     return (COLS(m)-1);
 }
-boolean isIdxEff(Matrix m, Index i, Index j) {
-/* Mengirimkan true jika i, j adalah Index efektif bagi m */
+boolean isIdxEffMatrix(Matrix m, IndexMatrix i, IndexMatrix j) {
+/* Mengirimkan true jika i, j adalah IndexMatrix efektif bagi m */
     /* ALGORITMA */
     return ((i >= 0 && i < ROWS(m)) && (j >= 0 && j < COLS(m)));
 }
-ElType getElmtDiagonal(Matrix m, Index i) {
+ElTypeMatrix getElmtDiagonal(Matrix m, IndexMatrix i) {
 /* Mengirimkan elemen m(i,i) */
     /* ALGORITMA */
     return (ELMT(m, i, i));
@@ -45,7 +45,7 @@ ElType getElmtDiagonal(Matrix m, Index i) {
 void copyMatrix(Matrix mIn, Matrix *mRes) {
 /* Melakukan assignment MRes = MIn */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     CreateMatrix(ROWS(mIn), COLS(mIn), mRes);
     for (i = 0; i < ROWS(mIn); i++) {
@@ -67,7 +67,7 @@ void readMatrix(Matrix *m, int nRow, int nCol) {
 8 9 10 
 */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     CreateMatrix(nRow, nCol, m);
     for (i = 0; i < ROWS(*m); i++) {
@@ -87,7 +87,7 @@ void displayMatrix(Matrix m) {
 8 9 10
 */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     for (i = 0; i < ROWS(m); i++) {
         for (j = 0; j < COLS(m); j++) {
@@ -109,7 +109,7 @@ Matrix addMatrix(Matrix m1, Matrix m2) {
 /* Mengirim hasil penjumlahan matriks: m1 + m2 */
     /* KAMUS LOKAL */
     Matrix m;
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     CreateMatrix(ROWS(m1), COLS(m1), &m);
     for (i = 0; i < ROWS(m1); i++) {
@@ -124,7 +124,7 @@ Matrix subtractMatrix(Matrix m1, Matrix m2) {
 /* Mengirim hasil pengurangan matriks: salinan m1 – m2 */
     /* KAMUS LOKAL */
     Matrix m;
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     CreateMatrix(ROWS(m1), COLS(m1), &m);
     for (i = 0; i < ROWS(m1); i++) {
@@ -139,7 +139,7 @@ Matrix multiplyMatrix(Matrix m1, Matrix m2) {
 /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
     /* KAMUS LOKAL */
     Matrix mRes;
-    Index i,j,k;
+    IndexMatrix i,j,k;
     /* ALGORITMA */
     CreateMatrix(ROWS(m1), COLS(m2), &mRes);
     for (i = 0; i < ROWS(mRes); i++) {
@@ -152,10 +152,10 @@ Matrix multiplyMatrix(Matrix m1, Matrix m2) {
     }
     return mRes;  
 }
-Matrix multiplyConst(Matrix m, ElType x) {
+Matrix multiplyConst(Matrix m, ElTypeMatrix x) {
 /* Mengirim hasil perkalian setiap elemen m dengan x */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     for (i = 0; i < ROWS(m); i++) {
         for (j = 0; j < COLS(m); j++) {
@@ -164,11 +164,11 @@ Matrix multiplyConst(Matrix m, ElType x) {
     }
     return m;  
 }
-void pMultiplyConst(Matrix *m, ElType k) {
+void pMultiplyConst(Matrix *m, ElTypeMatrix k) {
 /* I.S. m terdefinisi, k terdefinisi */
 /* F.S. Mengalikan setiap elemen m dengan k */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     for (i = 0; i < ROWS(*m); i++) {
         for (j = 0; j < COLS(*m); j++) {
@@ -178,12 +178,12 @@ void pMultiplyConst(Matrix *m, ElType k) {
 }
 
 /* ********** KELOMPOK OPERASI RELASIONAL TERHADAP Matrix ********** */
-boolean isEqual(Matrix m1, Matrix m2) {
+boolean isEqualMatrix(Matrix m1, Matrix m2) {
 /* Mengirimkan true jika m1 = m2, yaitu count(m1) = count(m2) dan */
-/* untuk setiap i,j yang merupakan Index baris dan kolom m1(i,j) = m2(i,j) */
+/* untuk setiap i,j yang merupakan IndexMatrix baris dan kolom m1(i,j) = m2(i,j) */
 /* Juga merupakan strong eq karena getLastIdxCol(m1) = getLastIdxCol(m2) */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     boolean isIdentic = true;
     /* ALGORITMA */
     if (getLastIdxCol(m1) == getLastIdxCol(m2)) {
@@ -204,19 +204,19 @@ boolean isEqual(Matrix m1, Matrix m2) {
     }
     return isIdentic;
 }
-boolean isNotEqual(Matrix m1, Matrix m2) {
+boolean isNotEqualMatrix(Matrix m1, Matrix m2) {
 /* Mengirimkan true jika m1 tidak sama dengan m2 */
     /* ALGORITMA */
     return (!isEqual(m1,m2));
 }
-boolean isSizeEqual(Matrix m1, Matrix m2) {
+boolean isSizeEqualMatrix(Matrix m1, Matrix m2) {
 /* Mengirimkan true jika ukuran efektif matriks m1 sama dengan ukuran efektif m2 */
     /* ALGORITMA */
     return ((ROWS(m1) == ROWS(m2)) && (COLS(m1) == COLS(m2)));
 }
 
 /* ********** Operasi lain ********** */
-int count(Matrix m) {
+int countMatrix(Matrix m) {
 /* Mengirimkan banyaknya elemen m */
     /* ALGORITMA */
     return (ROWS(m) * COLS(m));
@@ -232,7 +232,7 @@ boolean isSymmetric(Matrix m) {
 /* Mengirimkan true jika m adalah matriks simetri : isSquare(m) 
    dan untuk setiap elemen m, m(i,j)=m(j,i) */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     boolean isIdentic = true;
     /* ALGORITMA */
     if (isSquare(m)) {
@@ -253,7 +253,7 @@ boolean isIdentity(Matrix m) {
 /* Mengirimkan true jika m adalah matriks satuan: isSquare(m) dan 
    setiap elemen diagonal m bernilai 1 dan elemen yang bukan diagonal bernilai 0 */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     boolean id=true;
     /* ALGORITMA */
     if (isSquare(m)) {
@@ -280,7 +280,7 @@ boolean isSparse(Matrix m) {
 /* Mengirimkan true jika m adalah matriks sparse: matriks “jarang” dengan definisi: 
    hanya maksimal 5% dari memori matriks yang efektif bukan bernilai 0 */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     int countJarang = 0;
     /* ALGORITMA */
     for (i = 0; i < ROWS(m); i++) {
@@ -300,7 +300,7 @@ Matrix inverse1(Matrix m) {
 /* Menghasilkan salinan m dengan setiap elemen "di-invers", yaitu dinegasikan (dikalikan -1) */
     /* KAMUS LOKAL */
     Matrix m1;
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     copyMatrix(m, &m1);
     for (i = 0; i < ROWS(m); i++) {
@@ -314,7 +314,7 @@ void pInverse1(Matrix *m) {
 /* I.S. m terdefinisi */
 /* F.S. m di-invers, yaitu setiap elemennya dinegasikan (dikalikan -1) */
     /* KAMUS LOKAL */
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     for (i = 0; i < ROWS(*m); i++) {
         for (j = 0; j < COLS(*m); j++) {
@@ -327,7 +327,7 @@ float determinant(Matrix m) {
 /* Menghitung nilai determinan m */
     /* KAMUS LOKAL */
     Matrix temp;
-    Index i,j,k,col,row;
+    IndexMatrix i,j,k,col,row;
     float det = 0;
     int sign = 1;
     /* ALGORITMA */
@@ -360,7 +360,7 @@ void transpose(Matrix *m) {
 /* F.S. m "di-transpose", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
     /* KAMUS LOKAL */
     Matrix temp;
-    Index i,j;
+    IndexMatrix i,j;
     /* ALGORITMA */
     CreateMatrix(ROWS(*m), COLS(*m), &temp);
     for (i = 0; i < ROWS(*m); i++) {
@@ -373,4 +373,104 @@ void transpose(Matrix *m) {
             ELMT(*m, i, j) = ELMT(temp, i, j);
         }
     } 
+}
+
+
+float rowMean (Matrix m, IndexMatrix i){
+    /* Menghasilkan rata-rata dari elemen pada baris ke-i */
+    /* Prekondisi: i adalah indeks baris efektif dari M */
+    
+    /* KAMUS LOKAL */
+    float sum;
+    IndexMatrix j;
+
+   /* ALGORITMA */
+    sum = 0;
+    for (j=0 ; j<COLS(m); j++){
+        sum += ELMT(m,i,j);
+    }
+
+    return (sum/COLS(m));
+}
+
+float colMean (Matrix m, IndexMatrix j){
+/* Menghasilkan rata-rata dari elemen pada kolom ke-j */
+/* Prekondisi: j adalah indeks kolom efektif dari M */
+    /* KAMUS LOKAL */
+    float sum;
+    IndexMatrix i;
+
+    /* ALGORITMA */
+    sum = 0;
+    for (i=0 ; i<ROWS(m); i++){
+        sum += ELMT(m,i,j);
+    }
+
+    return (sum/ROWS(m));
+}
+
+void rowExtremes (Matrix m, IndexMatrix i, ElTypeMatrix * max, ElTypeMatrix * min){
+    /* I.S. i adalah indeks baris efektif dari M, M terdefinisi */
+    /* F.S. max berisi elemen maksimum pada baris i dari M
+        min berisi elemen minimum pada baris i dari M */
+    /* KAMUS LOKAL */
+    IndexMatrix j;
+
+    /* ALGORITMA */
+    *max = ELMT(m,i,0);
+    *min = ELMT(m,i,0);
+
+
+    for (j=0 ; j<COLS(m); j++){
+        if (ELMT(m,i,j) >= *max) *max = ELMT(m,i,j);
+        if (ELMT(m,i,j) <= *min) *min = ELMT(m,i,j);
+    
+    }
+}
+
+void colExtremes (Matrix m, IndexMatrix j, ElTypeMatrix * max, ElTypeMatrix * min){
+    /* I.S. j adalah indeks kolom efektif dari M, M terdefinisi */
+    /* F.S. max berisi elemen maksimum pada kolom j dari M
+            min berisi elemen minimum pada kolom j dari M */
+    /* KAMUS LOKAL */
+    IndexMatrix i;
+
+    /* ALGORITMA */
+    *max = ELMT(m,0,j);
+    *min = ELMT(m,0,j);
+
+
+    for (i=0 ; i<ROWS(m); i++){
+        if (ELMT(m,i,j) >= *max) *max = ELMT(m,i,j);
+        if (ELMT(m,i,j) <= *min) *min = ELMT(m,i,j);
+    
+    }
+
+}
+
+int countValOnRow (Matrix m, IndexMatrix i, ElTypeMatrix val){
+    /* Menghasilkan banyaknya kemunculan X pada baris i dari M */
+    /* KAMUS LOKAL */
+    IndexMatrix j;
+    int count;
+
+    /* ALGORITMA */
+    count=0;
+
+    for (j=0 ; j<COLS(m) ; j++){
+        if (ELMT(m,i,j) == val) count++;
+    }
+    return count;
+}
+
+
+int countValOnCol (Matrix m, IndexMatrix j, ElTypeMatrix val){
+    /* Menghasilkan banyaknya kemunculan X pada kolom j dari M */
+    IndexMatrix i;
+    int count=0;
+    for (i=0; i<ROWS(m); i++){
+        if (ELMT(m,i,j) == val) count++;
+    }
+
+    return count;
 }
