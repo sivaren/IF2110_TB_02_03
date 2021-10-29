@@ -16,16 +16,16 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int IdxType; /* type indeks */
-typedef int ElType;  /* type elemen list */
+typedef int IdxTypeListDinPos; /* type indeks */
+typedef int ElTypeListDinPos;  /* type elemen list */
 typedef struct
 {
-  ElType *buffer; /* memori tempat penyimpan elemen (container) */
+  ElTypeListDinPos *buffer; /* memori tempat penyimpan elemen (container) */
   int capacity;  /* ukuran elemen */
-} ListDin;
+} ListDinPos;
 /* Indeks yang digunakan [0..capacity-1] */
-/* Jika l adalah ListDin, cara deklarasi dan akses: */
-/* Deklarasi : l : ListDin */
+/* Jika l adalah ListDinPos, cara deklarasi dan akses: */
+/* Deklarasi : l : ListDinPos */
 /* Maka cara akses:
    l.buffer    untuk mengakses seluruh nilai elemen list
    l.buffer[i] untuk mengakses elemen ke-i */
@@ -38,51 +38,51 @@ typedef struct
                                              dan l.buffer[nEff-1] != VAL_UNDEF */
 
 /* ********** SELEKTOR ********** */
-#define BUFFER(l) (l).buffer
-#define ELMT(l, i) (l).buffer[i]
-#define CAPACITY(l) (l).capacity
+#define BUFFER_ListDinPos(l) (l).buffer
+#define ELMT_ListDinPos(l, i) (l).buffer[i]
+#define CAPACITY_ListDinPos(l) (l).capacity
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
-void CreateListDin(ListDin *l, int capacity);
+void CreateListDinPos(ListDinPos *l, int capacity);
 /* I.S. l sembarang, capacity > 0 */
 /* F.S. Terbentuk list l kosong dengan kapasitas capacity + 1 */
 /* Proses: Inisialisasi semua elemen list l dengan VAL_UNDEF */
 
-void dealocate(ListDin *l);
+void dealocate_ListDinPos(ListDinPos *l);
 /* I.S. l terdefinisi; */
 /* F.S. TI(l) dikembalikan ke system, CAPACITY(l)=0; nEff(l)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int length(ListDin l);
+int length_ListDinPos(ListDinPos l);
 /* Mengirimkan banyaknya elemen efektif list */
 /* Mengirimkan nol jika list kosong */
 
 /* *** Selektor INDEKS *** */
-IdxType getLastIdx(ListDin l);
+IdxTypeListDinPos getLastIdx_ListDinPos(ListDinPos l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid(ListDin l, IdxType i);
+boolean isIdxValid_ListDinPos(ListDinPos l, IdxTypeListDinPos i);
 /* Mengirimkan true jika i adalah indeks yang valid utk ukuran list */
 /* yaitu antara indeks yang terdefinisi utk container*/
-boolean isIdxEff(ListDin l, IdxType i);
+boolean isIdxEff_ListDinPos(ListDinPos l, IdxTypeListDinPos i);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
 /* yaitu antara 0..getLastIdx(l) */
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
-boolean isEmpty(ListDin l);
+boolean isEmpty_ListDinPos(ListDinPos l);
 /* Mengirimkan true jika list l kosong, mengirimkan false jika tidak */
 /* *** Test list penuh *** */
-boolean isFull(ListDin l);
+boolean isFull_ListDinPos(ListDinPos l);
 /* Mengirimkan true jika list l penuh, mengirimkan false jika tidak */
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi list dari pembacaan *** */
-void readList(ListDin *l);
+void readList_ListDinPos(ListDinPos *l);
 /* I.S. l sembarang dan sudah dialokasikan sebelumnya */
 /* F.S. List l terdefinisi */
 /* Proses : membaca banyaknya elemen l dan mengisi nilainya */
@@ -92,7 +92,7 @@ void readList(ListDin *l);
 /* 2. Jika 0 < N <= CAPACITY(l); Lakukan N kali: Baca elemen mulai dari indeks
       IdxMin satu per satu diakhiri enter */
 /*    Jika N = 0; hanya terbentuk l kosong */
-void displayList(ListDin l);
+void displayList_ListDinPos(ListDinPos l);
 /* Proses : Menuliskan isi list dengan traversal, list ditulis di antara kurung siku;
    antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
    di tengah, atau di belakang, termasuk spasi dan enter */
@@ -103,7 +103,7 @@ void displayList(ListDin l);
 
 /* ********** OPERATOR ARITMATIKA ********** */
 /* *** Aritmatika list : Penjumlahan, pengurangan, perkalian, ... *** */
-ListDin plusMinusList(ListDin l1, ListDin l2, boolean plus);
+ListDinPos plusMinusList_ListDinPos(ListDinPos l1, ListDinPos l2, boolean plus);
 /* Prekondisi : l1 dan l2 memiliki nEff sama dan tidak kosong */
 /*              Jika plus=false, tidak ada elemen l1-l2 yang menghasilkan nilai <= 0 */
 /* Jika plus = true, mengirimkan  l1+l2, yaitu setiap elemen l1 dan l2 pada indeks yang sama dijumlahkan */
@@ -111,12 +111,12 @@ ListDin plusMinusList(ListDin l1, ListDin l2, boolean plus);
 
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan list : < =, > *** */
-boolean isListEqual(ListDin l1, ListDin l2);
+boolean isListEqual_ListDinPos(ListDinPos l1, ListDinPos l2);
 /* Mengirimkan true jika l1 sama dengan l2 yaitu jika nEff l1 = l2 dan semua elemennya sama */
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : List boleh kosong!! *** */
-IdxType indexOf(ListDin l, ElType val);
+IdxTypeListDinPos indexOf_ListDinPos(ListDinPos l, ElTypeListDinPos val);
 /* Search apakah ada elemen list l yang bernilai val */
 /* Jika ada, menghasilkan indeks i terkecil, dengan elemen ke-i = val */
 /* Jika tidak ada, mengirimkan VAL_UNDEF */
@@ -124,27 +124,27 @@ IdxType indexOf(ListDin l, ElType val);
 /* Skema Searching yang digunakan bebas */
 
 /* ********** NILAI EKSTREM ********** */
-void extremes(ListDin l, ElType *max, ElType *min);
+void extremes_ListDinPos(ListDinPos l, ElTypeListDinPos *max, ElTypeListDinPos *min);
 /* I.S. List l tidak kosong */
 /* F.S. max berisi nilai maksimum l;
         min berisi nilai minimum l */
 
 /* ********** OPERASI LAIN ********** */
-void copyList(ListDin lIn, ListDin *lOut);
+void copyList_ListDinPos(ListDinPos lIn, ListDinPos *lOut);
 /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
 /* F.S. lOut berisi salinan dari lIn (identik, nEff dan Capacity sama) */
 /* Proses : Menyalin isi lIn ke lOut */
-ElType sumList(ListDin l);
+ElTypeListDinPos sumList_ListDinPos(ListDinPos l);
 /* Menghasilkan hasil penjumlahan semua elemen l */
 /* Jika l kosong menghasilkan 0 */
-int countVal(ListDin l, ElType val);
+int countVal_ListDinPos(ListDinPos l, ElTypeListDinPos val);
 /* Menghasilkan berapa banyak kemunculan val di l */
 /* Jika l kosong menghasilkan 0 */
-boolean isAllEven(ListDin l);
+boolean isAllEven_ListDinPos(ListDinPos l);
 /* Menghailkan true jika semua elemen l genap. l boleh kosong */
 
 /* ********** SORTING ********** */
-void sort(ListDin *l, boolean asc);
+void sort_ListDinPos(ListDinPos *l, boolean asc);
 /* I.S. l boleh kosong */
 /* F.S. Jika asc = true, l terurut membesar */
 /*      Jika asc = false, l terurut mengecil */
@@ -153,12 +153,12 @@ void sort(ListDin *l, boolean asc);
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListDin *l, ElType val);
+void insertLast_ListDinPos(ListDinPos *l, ElTypeListDinPos val);
 /* Proses: Menambahkan X sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLast(ListDin *l, ElType *val);
+void deleteLast_ListDinPos(ListDinPos *l, ElTypeListDinPos *val);
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
@@ -166,17 +166,17 @@ void deleteLast(ListDin *l, ElType *val);
 /*      List l mungkin menjadi kosong */
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
-void growList(ListDin *l, int num);
+void growList_ListDinPos(ListDinPos *l, int num);
 /* Proses : Menambahkan kapasitas sebanyak num */
 /* I.S. List sudah terdefinisi */
 /* F.S. Ukuran list bertambah sebanyak num */
 
-void shrinkList(ListDin *l, int num);
+void shrinkList_ListDinPos(ListDinPos *l, int num);
 /* Proses : Mengurangi kapasitas sebanyak num */
 /* I.S. List sudah terdefinisi, ukuran Capacity > num, dan nEff < Capacity - num. */
 /* F.S. Ukuran list berkurang sebanyak num. */
 
-void compactList(ListDin *l);
+void compactList_ListDinPos(ListDinPos *l);
 /* Proses : Mengurangi kapasitas sehingga nEff = Capacity */
 /* I.S. List tidak kosong */
 /* F.S. Ukuran Capacity = nEff */

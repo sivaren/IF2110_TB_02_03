@@ -22,7 +22,7 @@ void startWord() {
     /* ALGORITMA */
     start();
     ignoreBlank();
-    if (currentChar == MARK) {
+    if (currentChar == MARK_ENGINE) {
         endWord = true;
     } else {
         endWord = false;
@@ -38,7 +38,7 @@ void advWord() {
    Proses : Akuisisi kata menggunakan procedure copyWord */
     /* ALGORITMA */
     ignoreBlank();
-    if (currentChar == MARK) {
+    if (currentChar == MARK_ENGINE) {
         endWord = true;
     } else {
         copyWord();
@@ -56,13 +56,13 @@ void copyWord() {
     /* KAMUS LOKAL */
     int i=0;
     /* ALGORITMA */
-    while (currentChar != MARK && currentChar != BLANK) {
+    while (currentChar != MARK_ENGINE && currentChar != BLANK) {
         currentWord.contents[i] = currentChar;
         adv();
         i++;
     }
     currentWord.length = i;
-    if (currentWord.length > CAPACITY) {
-        currentWord.length = CAPACITY;
+    if (currentWord.length > CAPACITY_WORD) {
+        currentWord.length = CAPACITY_WORD;
     } 
 }

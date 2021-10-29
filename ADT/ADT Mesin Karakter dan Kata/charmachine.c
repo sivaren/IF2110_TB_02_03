@@ -32,7 +32,7 @@ void adv() {
 
 	/* Algoritma */
 	retval = fscanf(tape,"%c",&currentChar);
-	eot = (currentChar == MARK);
+	eot = (currentChar == MARK_ENGINE);
 	if (eot) {
               fclose(tape);
  	}
