@@ -3,17 +3,17 @@
 
 #include <stdlib.h>
 
-typedef int ElType;
+typedef int ElTypeLinked;
 typedef struct node* Address;
 typedef struct node {
-    ElType info;
+    ElTypeLinked info;
     Address next;
 } Node;
 
 #define INFO(p) (p)->info
 #define NEXT(p) (p)->next
 
-Address newNode(ElType val);
+Address newNode(ElTypeLinked val);
 
 
 #endif
