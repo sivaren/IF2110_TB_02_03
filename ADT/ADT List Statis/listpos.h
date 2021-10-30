@@ -10,7 +10,7 @@
 #include "boolean.h"
 
 /*  Kamus Umum */
-#define CAPACITY 100
+#define CAPACITY_LISTSTAT 100
 /* Kapasitas penyimpanan */
 #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
@@ -18,13 +18,13 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int ElType;  /* type elemen List */
+typedef int ElTypeListStat;  /* type elemen List */
 typedef struct {
-   ElType contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
-} ListPos;
+   ElTypeListStat contents[CAPACITY_LISTSTAT]; /* memori tempat penyimpan elemen (container) */
+} ListStatPos;
 /* Indeks yang digunakan [0..CAPACITY-1] */
-/* Jika l adalah ListPos, cara deklarasi dan akses: */
-/* Deklarasi : l : ListPos */
+/* Jika l adalah ListStatPos, cara deklarasi dan akses: */
+/* Deklarasi : l : ListStatPos */
 /* Maka cara akses: 
    ELMT(l,i) untuk mengakses elemen ke-i */
 /* Definisi : 
@@ -32,40 +32,40 @@ typedef struct {
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
-#define ELMT(l, i) (l).contents[(i)]
+#define ELMTListStat(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
-void CreateListPos(ListPos *l);
+void CreateListStatPos(ListStatPos *l);
 /* I.S. l sembarang */
 /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
 /* Proses: Inisialisasi semua elemen List l dengan VAL_UNDEF */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int length(ListPos l);
+int lengthListStat(ListStatPos l);
 /* Mengirimkan banyaknya elemen efektif List */
 /* Mengirimkan nol jika List kosong */
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid(ListPos l, int i);
+boolean isIdxValidListStat(ListStatPos l, int i);
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas List l */
 /* yaitu antara indeks yang terdefinisi utk container*/
-boolean isIdxEff(ListPos l, int i);
+boolean isIdxEffListStat(ListStatPos l, int i);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk List l */
 /* yaitu antara 0..length(l)-1 */
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */
-boolean isEmpty(ListPos l);
+boolean isEmptyListStat(ListStatPos l);
 /* Mengirimkan true jika List l kosong, mengirimkan false jika tidak */
 /* *** Test List penuh *** */
-boolean isFull(ListPos l);
+boolean isFullListStat(ListStatPos l);
 /* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi List dari pembacaan *** */
-void readList(ListPos *l);
+void readListStat(ListStatPos *l);
 /* I.S. l sembarang */
 /* F.S. List l terdefinisi */
 /* Proses: membaca banyaknya elemen l dan mengisi nilainya */
@@ -75,7 +75,7 @@ void readList(ListPos *l);
 /* 2. Jika 0 < n <= CAPACITY; Lakukan n kali: 
           Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
 /*    Jika n = 0; hanya terbentuk List kosong */
-void displayList(ListPos l);
+void displayListStat(ListStatPos l);
 /* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
    siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
    karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
@@ -86,7 +86,7 @@ void displayList(ListPos l);
 
 /* ********** OPERATOR ARITMATIKA ********** */
 /* *** Aritmatika List : Penjumlahan, pengurangan, perkalian, ... *** */
-ListPos plusMinusTab(ListPos l1, ListPos l2, boolean plus);
+ListStatPos plusMinusTabListStat(ListStatPos l1, ListStatPos l2, boolean plus);
 /* Prekondisi : l1 dan l2 berukuran sama dan tidak kosong */
 /* Jika plus = true, mengirimkan  l1+l2, yaitu setiap elemen l1 dan l2 pada 
        indeks yang sama dijumlahkan */
@@ -95,30 +95,30 @@ ListPos plusMinusTab(ListPos l1, ListPos l2, boolean plus);
 
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan List: *** */
-boolean isListEqual(ListPos l1, ListPos l2);
+boolean isListStatEqual(ListStatPos l1, ListStatPos l2);
 /* Mengirimkan true jika l1 sama dengan l2 yaitu jika ukuran l1 = l2 dan semua 
    elemennya sama */
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : List boleh kosong!! *** */
-int indexOf(ListPos l, ElType val);
+int indexOfListStat(ListStatPos l, ElTypeListStat val);
 /* Search apakah ada elemen List l yang bernilai val */
 /* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
 /* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
 /* Skema Searching yang digunakan bebas */
 
 /* ********** NILAI EKSTREM ********** */
-void extremes(ListPos l, ElType *max, ElType *min);
+void extremesListStat(ListStatPos l, ElTypeListStat *max, ElTypeListStat *min);
 /* I.S. List l tidak kosong */
 /* F.S. Max berisi nilai terbesar dalam l;
         Min berisi nilai terkecil dalam l */
 
 /* ********** OPERASI LAIN ********** */
-boolean isAllEven(ListPos l);
+boolean isAllEvenListStat(ListStatPos l);
 /* Menghailkan true jika semua elemen l genap */
 
 /* ********** SORTING ********** */
-void sort(ListPos *l, boolean asc);
+void sortListStat(ListStatPos *l, boolean asc);
 /* I.S. l boleh kosong */
 /* F.S. Jika asc = true, l terurut membesar */
 /*      Jika asc = false, l terurut mengecil */
@@ -127,12 +127,12 @@ void sort(ListPos *l, boolean asc);
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListPos *l, ElType val);
+void insertLastListStat(ListStatPos *l, ElTypeListStat val);
 /* Proses: Menambahkan val sebagai elemen terakhir List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLast(ListPos *l, ElType *val);
+void deleteLastListStat(ListStatPos *l, ElTypeListStat *val);
 /* Proses : Menghapus elemen terakhir List */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */

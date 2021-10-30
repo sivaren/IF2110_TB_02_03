@@ -9,32 +9,32 @@ void CreateQueue(Queue *q) {
 /* - Index tail bernilai IDX_UNDEF */
 /* Proses : Melakukan alokasi, membuat sebuah q kosong */
     /* ALGORITMA */
-    IDX_HEAD(*q) = IDX_UNDEF;
-    IDX_TAIL(*q) = IDX_UNDEF;
+    IDX_HEAD_QUEUE(*q) = IDX_UNDEF;
+    IDX_TAIL_QUEUE(*q) = IDX_UNDEF;
 }
 
 /* ********* Prototype ********* */
-boolean isEmpty(Queue q) {
+boolean isEmptyQueue(Queue q) {
 /* Mengirim true jika q kosong: lihat definisi di atas */
     /* ALGORITMA */
-    return (IDX_HEAD(q) == IDX_UNDEF && IDX_TAIL(q) == IDX_UNDEF);
+    return (IDX_HEAD_QUEUE(q) == IDX_UNDEF && IDX_TAIL_QUEUE(q) == IDX_UNDEF);
 }
-boolean isFull(Queue q) {
+boolean isFullQueue(Queue q) {
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu jika index head bernilai 0 dan index tail bernilai CAPACITY-1 */
     /* ALGORITMA */
-    return (IDX_HEAD(q) == 0 && IDX_TAIL(q) == CAPACITY-1);
+    return (IDX_HEAD_QUEUE(q) == 0 && IDX_TAIL_QUEUE(q) == CAPACITY_QUEUE-1);
 }
-int length(Queue q) {
+int lengthQueue(Queue q) {
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
     /* ALGORITMA */
-    if (isEmpty(q)) {
+    if (isEmptyQueue(q)) {
         return 0;
     }
-    return (IDX_TAIL(q) - IDX_HEAD(q) + 1);
+    return (IDX_TAIL_QUEUE(q) - IDX_HEAD_QUEUE(q) + 1);
 }
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val) {
+void enqueue(Queue *q, ElTypeQueue val) {
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
@@ -43,32 +43,32 @@ void enqueue(Queue *q, ElType val) {
     /* KAMUS LOKAL */
     int i, j;
     /* ALGORITMA */
-    if (isEmpty(*q)) {
-        IDX_HEAD(*q)=0;
-    } else if (IDX_TAIL(*q) == CAPACITY-1) {
-        i = IDX_HEAD(*q); j = 0;
+    if (isEmptyQueue(*q)) {
+        IDX_HEAD_QUEUE(*q)=0;
+    } else if (IDX_TAIL_QUEUE(*q) == CAPACITY_QUEUE-1) {
+        i = IDX_HEAD_QUEUE(*q); j = 0;
         do {
             (*q).buffer[j] = (*q).buffer[i];
             i++; j++;
-        } while (i <= IDX_TAIL(*q));
-        IDX_TAIL(*q) = length(*q)-1; IDX_HEAD(*q) = 0; 
+        } while (i <= IDX_TAIL_QUEUE(*q));
+        IDX_TAIL_QUEUE(*q) = lengthQueue(*q)-1; IDX_HEAD_QUEUE(*q) = 0; 
     }
-    IDX_TAIL(*q)++;
-    TAIL(*q) = val;
+    IDX_TAIL_QUEUE(*q)++;
+    TAIL_QUEUE(*q) = val;
 }
 
-void dequeue(Queue *q, ElType *val) {
+void dequeue(Queue *q, ElTypeQueue *val) {
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., HEAD dan IDX_HEAD "mundur"; 
         q mungkin kosong */
     /* ALGORITMA */
-    *val = HEAD(*q);
-    if (IDX_HEAD(*q) == IDX_TAIL(*q)) {
-        IDX_HEAD(*q) = IDX_UNDEF;
-        IDX_TAIL(*q) = IDX_UNDEF;
+    *val = HEAD_QUEUE(*q);
+    if (IDX_HEAD_QUEUE(*q) == IDX_TAIL_QUEUE(*q)) {
+        IDX_HEAD_QUEUE(*q) = IDX_UNDEF;
+        IDX_TAIL_QUEUE(*q) = IDX_UNDEF;
     } else {
-        IDX_HEAD(*q)++;
+        IDX_HEAD_QUEUE(*q)++;
     }
 }
 
@@ -85,9 +85,9 @@ void displayQueue(Queue q) {
     int i;
     /* ALGORITMA */
     printf("[");
-    if (!isEmpty(q)) {
-        for (i = IDX_HEAD(q); i <= IDX_TAIL(q); i++) {
-            if (i == IDX_TAIL(q)) {
+    if (!isEmptyQueue(q)) {
+        for (i = IDX_HEAD_QUEUE(q); i <= IDX_TAIL_QUEUE(q); i++) {
+            if (i == IDX_TAIL_QUEUE(q)) {
                 printf("%d", q.buffer[i]);
             } else {
                 printf("%d,", q.buffer[i]);
