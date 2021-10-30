@@ -7,7 +7,7 @@
 #include "point.h"
 
 /* *** Konstruktor membentuk POINT *** */
-Point MakePOINT (float X, float Y) {
+Point CreatePOINT (float X, float Y) {
 /* Membentuk sebuah Point dari komponen-komponennya */
     /* KAMUS */
     Point P;
@@ -18,7 +18,7 @@ Point MakePOINT (float X, float Y) {
 }
 
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */                                                 
-void BacaPoint (Point *P) {
+void ReadPoint (Point *P) {
 /* Membaca nilai absis dan ordinat dari keyboard dan membentuk 
 Point P berdasarkan dari nilai absis dan ordinat tersebut */
 /* Komponen X dan Y dibaca dalam 1 baris, dipisahkan 1 buah spasi */
@@ -32,7 +32,7 @@ akan membentuk Point <1,2> */
     scanf("%f %f", &X, &Y);
     *P = CreatePoint(X, Y);
 }
-void TulisPoint (Point P) {
+void WritePoint (Point P) {
 /* Nilai P ditulis ke layar dengan format "(X,Y)" 
    tanpa spasi, enter, atau karakter lain di depan, belakang, 
    atau di antaranya 
