@@ -14,7 +14,6 @@
 #include "ADT/ADT Queue/queue.h" // modif prioqueue
 #include "ADT/ADT Stack/stack.h"
 
-int main(){
 int Money = 0;
 int Time = 0;
 Point Position = {0, 0};
@@ -29,9 +28,9 @@ int heavyItems = 0;
 int speedBoost;
 int increaseCapacity;
 
-
 int isStringEqual(char *a, char *b);
 
+int main(){
 
 
 
