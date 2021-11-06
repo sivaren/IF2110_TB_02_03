@@ -8,17 +8,19 @@
 #include "boolean.h"
 
 typedef struct { 
+   char name /* nama koordinat */ 
 	float X; /* absis   */
 	float Y; /* ordinat */
 } Point;
 
 /* *** Notasi Akses: Selektor Point *** */
+#define Name(P) (P).name
 #define Absis(P) (P).X
 #define Ordinat(P) (P).Y
         
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk Point *** */
-Point CreatePoint (float X, float Y);
+Point CreatePoint (char name, float X, float Y);
 /* Membentuk sebuah Point dari komponen-komponennya */
 
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */                                                 
