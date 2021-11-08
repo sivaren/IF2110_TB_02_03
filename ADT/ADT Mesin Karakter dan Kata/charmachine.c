@@ -23,6 +23,13 @@ void start() {
 	adv();
 }
 
+void startFile(char *fileName){
+/* start baca dari file,mirip start()*/
+  /* Algoritma */
+  tape = fopen(fileName,"r");
+  adv();
+}
+
 void adv() {
 /* Pita dimajukan satu karakter. 
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
@@ -36,4 +43,14 @@ void adv() {
 	if (eot) {
               fclose(tape);
  	}
+}
+
+void advForFile(){
+   retval = fscanf(tape,"%c",&currentChar);
+   if (currentChar == '\n') fscanf(tape,"%c",&currentChar);
+	eot = (currentChar == MARK_FILE);
+	if (eot) {
+              fclose(tape);
+ 	}
+
 }

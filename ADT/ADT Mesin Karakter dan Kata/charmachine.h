@@ -6,7 +6,8 @@
 
 #include "boolean.h"
 
-#define MARK_ENGINE '.'
+#define MARK_ENGINE '\n'
+#define MARK_FILE '.'
 /* Char Engine State */
 extern char currentChar;
 extern boolean eot;
@@ -19,11 +20,13 @@ void start();
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
+void startFile(char *fileName);
+
 void adv();
 /* Pita dimajukan satu karakter. 
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
-
+void advForFile();
 #endif
