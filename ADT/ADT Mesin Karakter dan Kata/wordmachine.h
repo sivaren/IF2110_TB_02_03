@@ -6,6 +6,11 @@
 
 #include "boolean.h"
 #include "charmachine.h"
+#include "../ADT Matriks/matrix.h"
+#include "../ADT Point/point.h"
+#include "../ADT List Statis/listpos.h"
+
+
 
 #define CAPACITY_WORD 50
 #define BLANK ' '
@@ -14,6 +19,16 @@ typedef struct {
    char contents[CAPACITY_WORD]; /* container penyimpan kata, indeks yang dipakai [0..CAPACITY-1] */
    int length;
 } Word;
+
+typedef struct {
+   int waktuMasuk;
+   Point pickUp;
+   Point dropOff;
+   char jenisItem;
+   int waktuHangus;     //untuk perishable
+} Pesanan;
+
+
 
 /* Word Engine State */
 extern boolean endWord;
@@ -30,6 +45,9 @@ void startWord();
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
+void readFile(char *namaFile, Matrix *peta, Point *HQ, ListOfBangunan *bangunan, ListOfPesanan *pesanan);
+
+
 void advWord();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi 
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi, 
@@ -44,6 +62,7 @@ void copyWord();
           currentChar = BLANK atau currentChar = MARK; 
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+int charToInt(Word C);
 
 #endif
 
