@@ -8,7 +8,7 @@
 #include "boolean.h"
 
 typedef struct { 
-   char name /* nama koordinat */ 
+   char name; /* nama koordinat */ 
 	float X; /* absis   */
 	float Y; /* ordinat */
 } Point;

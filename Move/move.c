@@ -86,26 +86,6 @@ void move(MatrixPoint *map, Matrix adjacency_matrix, Point *coordinate_mobita) {
     if (option != 0)
     {
         int idx = option-1;
-        int row = 0;
-        int col = 0;
-        while (row < ROWSP(*map))
-        {
-            while (col < COLSP(*map))
-            {
-                if (NAME(*map,row,col) == Name(*coordinate_mobita))
-                {
-                    NAME(*map,row,col) = NAME_UNDEF;
-                    ABSIS(*map,row,col) = VAL_UNDEF;
-                    ORDINAT(*map,row,col) = VAL_UNDEF;
-                }
-                else if ((ABSIS(*map,row,col) == AbsisELMTListPoint(l, idx)) && (ORDINAT(*map,row,col) == OrdinatELMTListPoint(l, idx)))
-                {
-                    NAME(*map,row,col) = Name(*coordinate_mobita);
-                }
-                col++;
-            }
-            row++;
-        }                 
         *coordinate_mobita = ELMTListPoint(l, idx);
         printf("Mobita sekarang berada di titik ");
         WritePoint(ELMTListPoint(l, idx));
