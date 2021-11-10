@@ -10,7 +10,7 @@
 /* Nilai elemen tak terdefinisi*/
 
 typedef struct {
-    char name;
+    char name[];
     int price;
 } DataGadget;
 typedef struct { 
