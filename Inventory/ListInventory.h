@@ -18,7 +18,7 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef char Gadget;  /* type elemen List */
+typedef char Gadget[];  /* type elemen List */
 typedef struct {
    Gadget contents[CAPACITY_INVENTORY]; /* memori tempat penyimpan elemen (container) */
 } ListInventory;
