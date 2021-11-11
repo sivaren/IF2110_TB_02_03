@@ -1,23 +1,46 @@
+#include <stdio.h>
 #include "map.h"
 
-void Map(MatrixPoint map) {
-    ROWSP(map) += 2;
-    COLSP(map) += 2;
-    for (int i = 0; i < ROWSP(map); i++)
+void map(ListPoint map, Point HQ, int N, int M) {
+    Matrix m;
+    CreateMatrix(N,M,&m);
+    int row = ROWS(m)+2;
+    int col = COLS(m)+2;
+    for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < COLSP(map); j++)
+        for (int j = 0; j < col; j++)
         {
-            if (i == 0 || j == 0 || i == ROWSP(map)-1 || j == COLSP(map)-1)
+            if (i == 0 || j == 0 || i == row-1 || j == col-1)
             {
                 printf("*");
             }
-            else if (NAME(map,i,j) != '#')
+            else if (Absis(HQ) == i && Ordinat(HQ) == j)
             {
-                printf("%c", NAME(map,i,j));
-            }
+                printf("8");
+            }          
             else
             {
-                printf(" ");
+                boolean found = false;
+                int k = 0;
+                while (k < lengthListPoint(map) && !found)
+                {
+                    if (i == AbsisELMTListPoint(map,k) && j == OrdinatELMTListPoint(map,k))
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        k++;
+                    }                    
+                }   
+                if (found)
+                {
+                    printf("%c", NameELMTListPoint(map,k));
+                }
+                else
+                {
+                    printf(" ");
+                }
             }
         }
         printf("\n");

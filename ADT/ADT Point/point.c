@@ -7,11 +7,12 @@
 #include "point.h"
 
 /* *** Konstruktor membentuk POINT *** */
-Point CreatePOINT (float X, float Y) {
+Point CreatePOINT (char name, float X, float Y) {
 /* Membentuk sebuah Point dari komponen-komponennya */
     /* KAMUS */
     Point P;
     /* ALGORITMA */
+    Name(P) = name;
     Absis(P) = X;
     Ordinat(P) = Y;
     return P;
@@ -27,10 +28,11 @@ akan membentuk Point <1,2> */
 /* I.S. Sembarang */
 /* F.S. P terdefinisi */
     /* KAMUS */
+    char name;
     float X, Y;
     /* ALGORITMA */
-    scanf("%f %f", &X, &Y);
-    *P = CreatePoint(X, Y);
+    scanf("%c %f %f", &name, &X, &Y);
+    *P = CreatePoint(name, X, Y);
 }
 void WritePoint (Point P) {
 /* Nilai P ditulis ke layar dengan format "(X,Y)" 
@@ -42,7 +44,7 @@ void WritePoint (Point P) {
 /* F.S. P tertulis di layar dengan format "(X,Y)" */                
     /* KAMUS */
     /* ALGORITMA */
-    printf("(%.2f, %.2f)\n", Absis(P), Ordinat(P));
+    printf("%c (%.2f, %.2f)", Name(P), Absis(P), Ordinat(P));
 }
 
 /* *** Kelompok operasi relasional terhadap Point *** */
@@ -95,17 +97,17 @@ int Kuadran (Point P) {
 Point NextX (Point P) {
 /* Mengirim salinan P dengan absis ditambah satu */             
     /* ALGORITMA */
-    return (CreatePoint(Absis(P)+1, Ordinat(P)));
+    return (CreatePoint(Name(P), Absis(P)+1, Ordinat(P)));
 }
 Point NextY (Point P) {
 /* Mengirim salinan P dengan ordinat ditambah satu */      
     /* ALGORITMA */
-    return (CreatePoint(Absis(P), Ordinat(P)+1));
+    return (CreatePoint(Name(P), Absis(P), Ordinat(P)+1));
 }
 Point PlusDelta (Point P, float deltaX, float deltaY) {
 /* Mengirim salinan P yang absisnya adalah Absis(P) + deltaX dan ordinatnya adalah Ordinat(P) + deltaY */           
     /* ALGORITMA */
-    return (CreatePoint(Absis(P)+deltaX, Ordinat(P)+deltaY));
+    return (CreatePoint(Name(P), Absis(P)+deltaX, Ordinat(P)+deltaY));
 }
 Point MirrorOf (Point P, boolean SbX) {
 /* Menghasilkan salinan P yang dicerminkan terhadap salah satu sumbu */
@@ -113,10 +115,10 @@ Point MirrorOf (Point P, boolean SbX) {
 /* Jika SbX bernilai false, maka dicerminkan terhadap sumbu Y */           
     /* ALGORITMA */
     if (SbX) {
-        return (CreatePoint(Absis(P), -Ordinat(P)));
+        return (CreatePoint(Name(P), Absis(P), -Ordinat(P)));
     }
     else {
-        return (CreatePoint(-Absis(P), Ordinat(P)));
+        return (CreatePoint(Name(P), -Absis(P), Ordinat(P)));
     }
 }
 float Jarak0 (Point P) {

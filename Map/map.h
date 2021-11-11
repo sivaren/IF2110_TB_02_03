@@ -1,8 +1,9 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "matrixpoint.h"
+#include "listpoint.h"
+#include "matrix.h"
 
-void Map(MatrixPoint Map);
+void map(ListPoint Map, Point HQ, int N, int M);
 
 #endif
