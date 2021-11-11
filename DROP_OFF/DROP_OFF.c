@@ -2,56 +2,70 @@
 #include <stdio.h>
 #include "DROP_OFF.h"
 
-void DROP_OFF()
+void DROP_OFF(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int currentTasCapacity, int *Money)
 // prosedur untuk drop item pada drop point
 {
-    if (isDropAvailable()) {
-        drop_action();
+    if (isDropAvailable(CurrentBangunan, *TasNobita, *Todo)) {
+        drop_action(TasNobita, DaftarInprog, heavyitems, speedboost, currentTasCapacity, Money);
     }
     else {
         printf("Tidak dapat pesanan yang dapat diantarkan!\n");
     }
 }
 
-boolean isDropAvailable()
+boolean isDropAvailable(Bangunan CurrentBangunan, Tas TasNobita, ToDoList Todo)
 // mengecek apakah ada item yang bisa di-drop di posisi saat ini
 {
 // cek top dari stack tas
 
 // apakah posisi pesanan top stack === posisi saat ini
-if ((TOP(Tas).posisi.X == Position.X) && (TOP(Tas).posisi.Y == Position.Y)) {
+if (TOP_TAS(TasNobita).dropOff == CurrentBangunan.nama) {
     return true;
 }
 else false;
 }
 
-void drop_action()
+void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int currentTasCapacity, int *Money)
 // drop item apabila tersedia
 {
-    // pop pesanan dari stack tas
     int reward;
-    pop(&Tas, &accPesanan);
-    pop(&InProgressList, &accPesanan);
+    ElTypeTas accPesanan = TOP_TAS(*TasNobita);
+    // pop pesanan dari tas dan inprog list
+    ElmtDelete_DROP_OFF(TasNobita, DaftarInprog);
     // update state heavy item apabila selesai drop heavy item
     // update reward (uang) yang didapat
     // update state speed boost apabila selesai drop heavy item
-    if (accPesanan.JenisItem == 'H') {
+    if (accPesanan.itemType == 'H') {
         printf("Pesanan Heavy Item berhasil diantarkan\n");
-        heavyItems-=1;
-        speedBoost = true;
+        *heavyitems -= 1;
+        if (*heavyitems == 0) {
+        *speedboost = true;
+        }
         reward = 400;
     }
-    else if (accPesanan.JenisItem == 'N') {
+    else if (accPesanan.itemType == 'N') {
         printf("Pesanan Normal Item berhasil diantarkan\n");
         reward = 200;
 
     }
-    else if (accPesanan.JenisItem == 'P') {
+    else if (accPesanan.itemType == 'P') {
         printf("Pesanan Perishable Item berhasil diantarkan\n");
         reward = 400;
-        increaseCapacity = 5; // SESUAIKAN DENGAN INCREASE CAPACITY
+        currentTasCapacity += 1;
+        upgradeTasCapacity(TasNobita, currentTasCapacity);
         
     }
 
     printf("Uang yang didapatkan: %d", reward);
+    // update state uang
+    *Money += reward;
+}
+
+void ElmtDelete_DROP_OFF(Tas *Tasnobita, InProgList *DaftarInprog)
+// menghapus elemen dari tas dan in progress list
+{
+    ElTypeTas delVal;
+    InProgType delVal2;
+    popTas(Tasnobita, &delVal);
+    deleteFirst_InProgList(DaftarInprog, &delVal2);
 }

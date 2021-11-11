@@ -25,11 +25,6 @@
 
 
 
-//asumsi sudah ada struct pesanan
-ToDoType accPesanan;
-
-
-
 void PICK_UP(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost);
 // prosedur untuk mengambil item dari pickup point
 
@@ -42,10 +37,12 @@ void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToD
 
 
 // type converter
-ElTypeTas TodoType_to_EltypeTas(ToDoType Todo);
-InProgType TodoType_to_InProgType(ToDoType InProg);
+ElTypeTas TodoType_to_ElTypeTas(ToDoType Todo);
+InProgType TodoType_to_InProgType(ToDoType Todo);
+InProgType ElTypeTas_to_InProgType(ElTypeTas elmtTas);
+ElTypeTas InProgType_to_ElTypeTas(InProgType elmtInProg);
 
 // proses pemindahan pesanan dari todo ke tas dan inprogress list
-void ElmtTransfer(ToDoType accPesanan, ToDoList *Todo, Tas *Tasnobita, InProgList *DaftarInprog);
+void ElmtTransfer_PICK_UP(ToDoType accPesanan, ToDoList *Todo, Tas *Tasnobita, InProgList *DaftarInprog);
 
 #endif

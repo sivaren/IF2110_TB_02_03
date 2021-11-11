@@ -43,7 +43,7 @@ void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToD
 // F.S pesanan telah berhasil diambil
 {
     // transfer elemen tadi todo list ke inprogress list dan tas
-    ElmtTransfer(accPesanan, Todo, TasNobita, DaftarInprog);
+    ElmtTransfer_PICK_UP(accPesanan, Todo, TasNobita, DaftarInprog);
     
 
 
@@ -67,7 +67,7 @@ void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToD
 }
 
 // type converter
-ElTypeTas TodoType_to_EltypeTas(ToDoType Todo) {
+ElTypeTas TodoType_to_ElTypeTas(ToDoType Todo) {
     ElTypeTas elmtTas;
     elmtTas.pickUp = Todo.pickUp;
     elmtTas.dropOff = Todo.dropOff;
@@ -83,12 +83,28 @@ InProgType TodoType_to_InProgType(ToDoType Todo) {
     elmtInprog.perishTime = Todo.perishTime;
     return elmtInprog;
 }
+InProgType ElTypeTas_to_InProgType(ElTypeTas elmtTas) {
+    InProgType elmtInprog;
+    elmtInprog.pickUp = elmtTas.pickUp;
+    elmtInprog.dropOff = elmtTas.dropOff;
+    elmtInprog.itemType = elmtTas.itemType;
+    elmtInprog.perishTime = elmtTas.perishTime;
+    return elmtInprog;
+}
+ElTypeTas InProgType_to_ElTypeTas(InProgType elmtInProg) {
+    ElTypeTas elmtTas;
+    elmtTas.pickUp = elmtInProg.pickUp;
+    elmtTas.dropOff = elmtInProg.dropOff;
+    elmtTas.itemType = elmtInProg.itemType;
+    elmtTas.perishTime = elmtInProg.perishTime;
+    return elmtTas;
+}
 
 // proses pemindahan pesanan dari todo ke tas dan inprogress list
-void ElmtTransfer(ToDoType accPesanan, ToDoList *Todo, Tas *Tasnobita, InProgList *DaftarInprog) {
+void ElmtTransfer_PICK_UP(ToDoType accPesanan, ToDoList *Todo, Tas *Tasnobita, InProgList *DaftarInprog) {
     // I.S. sembarang
     // F.S. elemen dalam todo list dihapus dan dipindahkan ke dalma tas dan in progress list
-    ElTypeTas elmtTas = TodoType_to_EltypeTas(accPesanan);
+    ElTypeTas elmtTas = TodoType_to_ElTypeTas(accPesanan);
     InProgType elmtInprog = TodoType_to_InProgType(accPesanan);
 
     // delete dari todo
