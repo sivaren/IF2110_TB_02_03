@@ -18,28 +18,19 @@
 #include "../ADT/ADT Queue/queue.h" // modif prioqueue
 #include "../ADT/ADT Stack/stack.h"
 #include "../ADT/ADT List Statis/ListOfBangunan.h"
+#include "../toDo/toDo.h"
+#include "../tas/tas.h"
+#include "../inProg/inProg_rev.h"
 
-extern int Money;
-extern int Time;
-extern Point Position;
-extern Matrix Adjacency;
-extern ListStatPos ListGadget, Inventory;
-extern ListOfBangunan DaftarBangunan;
-extern Queue DaftarPesanan;
-extern LinkedList TodoList;
-extern Stack Tas, InProgressList;
-extern char;
-
-extern int heavyItems;
-extern int speedBoost;
-extern int increaseCapacity;
-
-//asumsi sudah ada struct pesanan
-Pesanan accPesanan;
 
 
 
-void PICK_UP();
+//asumsi sudah ada struct pesanan
+ToDoType accPesanan;
+
+
+
+void PICK_UP(Bangunan CurrentBangunan, Tas TasNobita, );
 // prosedur untuk mengambil item dari pickup point
 
 boolean isPickAvailable();

@@ -13,16 +13,19 @@
 #include "ADT/ADT Linked List/list_linked.h"
 #include "ADT/ADT Queue/queue.h" // modif prioqueue
 #include "ADT/ADT Stack/stack.h"
+#include "ADT/ADT List Statis/ListOfBangunan.h"
 
 int Money = 0;
 int Time = 0;
 Point Position = {0, 0};
 Matrix Adjacency;
-ListStatPos DaftarBangunan, ListGadget, Inventory;
+ListStatPos ListGadget, Inventory;
 Queue DaftarPesanan;
 LinkedList TodoList;
 Stack Tas, InProgressList;
 char command[100];
+ListOfBangunan DaftarBangunan;
+
 
 int heavyItems = 0;
 int speedBoost;

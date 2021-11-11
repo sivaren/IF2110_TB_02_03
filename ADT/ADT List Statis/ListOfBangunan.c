@@ -153,13 +153,34 @@ void deleteLastListStat(ListOfBangunan *l, Bangunan *val) {
     }
 }
 
-Point NamaBangunanToPoint(char x, ListOfBangunan B) {
+Bangunan PointToBangunan(Point P, ListOfBangunan LB) {
+    boolean found = false;
+    int i = 0;
+    while (!found && i<lengthListStat(LB)) {
+        if ((ELMTListOfBangunan(LB, i).posisi.X == P.X) && (ELMTListOfBangunan(LB, i).posisi.Y == P.Y) ) {
+            
+            found = true;
+        }
+        else {
+            i++;
+        }
+    }
+    return ELMTListOfBangunan(LB, i);
+}
+
+Point BangunanToPoint(Bangunan B, ListOfBangunan LB) {
+    char nama = B.nama;
+    Point P = NamaBangunanToPoint(nama, LB);
+    return P;
+}
+
+Point NamaBangunanToPoint(char x, ListOfBangunan LB) {
     boolean found = false;
     int i = 0;
     Point pnt;
     while (!found && i<lengthListStat) {
-        if (ELMTListOfBangunan(B, i).nama == x) {
-            pnt = ELMTListOfBangunan(B, i).posisi;
+        if (ELMTListOfBangunan(LB, i).nama == x) {
+            pnt = ELMTListOfBangunan(LB, i).posisi;
         }
         else {
             i++;
@@ -169,19 +190,14 @@ Point NamaBangunanToPoint(char x, ListOfBangunan B) {
 }
 
 
-char PointToNamaBangunan(Point P, ListOfBangunan B){
+char PointToNamaBangunan(Point P, ListOfBangunan LB){
 
-    boolean found = false;
-    int i = 0;
-    while (!found && i<lengthListStat(B)) {
-        if ((ELMTListOfBangunan(B, i).posisi.X == P.X) && (ELMTListOfBangunan(B, i).posisi.Y == P.Y) ) {
-            
-            found = true;
-        }
-        else {
-            i++;
-        }
-    }
-    return ELMTListOfBangunan(B, i).nama;
+    Bangunan temp = PointToBangunan(P, LB);
+    return temp.nama;
+
+}
+
+void updateCurrentBangunan(Point P, ListOfBangunan LB, Bangunan *CurrentBangunan) {
+    *CurrentBangunan = PointToBangunan(P, LB);
 
 }

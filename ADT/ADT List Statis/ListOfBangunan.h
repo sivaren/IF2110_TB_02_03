@@ -145,4 +145,14 @@ void deleteLastListStat(ListOfBangunan *l, Bangunan *val);
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 
+Bangunan PointToBangunan(Point P, ListOfBangunan LB);
+
+Point BangunanToPoint(Bangunan B, ListOfBangunan LB);
+Point NamaBangunanToPoint(char x, ListOfBangunan LB);
+
+
+char PointToNamaBangunan(Point P, ListOfBangunan LB);
+
+void updateCurrentBangunan(Point *P, ListOfBangunan LB, Bangunan *CurrentBangunan);
+
 #endif
