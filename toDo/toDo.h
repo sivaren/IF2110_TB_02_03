@@ -20,13 +20,13 @@ diganti kalo udah fix
 typedef pesanan ToDoType;
  */
 
-typedef struct node *Address;
-typedef struct node { 
+typedef struct nodeToDo *AddressTodo;
+typedef struct nodeToDo { 
 	ToDoType info;
-	Address next;
+	AddressTodo next;
 } ElmtToDoList;
 
-typedef Address ToDoList;
+typedef AddressTodo ToDoList;
 
 #define PERISH_TIME_UNDEF  (-1)
 #define FIRST_TODO(td)  (td)
@@ -47,8 +47,8 @@ ITEMTYPE_TODO(td)
 PERISHTIME_TODO(td)
 */
 
-/* alokasi new node untuk TO DO LIST */
-Address newToDoNode(int timeIn, char pickUp, char dropOff, char itemType, int perishTime);
+/* alokasi new nodeToDo untuk TO DO LIST */
+AddressTodo newToDoNode(int timeIn, char pickUp, char dropOff, char itemType, int perishTime);
 
 void CreateToDoList(ToDoList *td);
 /* I.S. sembarang             */

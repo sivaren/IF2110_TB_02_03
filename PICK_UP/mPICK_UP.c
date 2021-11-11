@@ -1,4 +1,7 @@
 #include "PICK_UP.h"
+#include <stdlib.h>
+#include <stdio.h>
+
 
 
 void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems) {
@@ -21,14 +24,14 @@ void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems) {
         for (int i=jumlahPesanan; i>0; i--) {
             printf("Tas elemen ke-%d\n", i);
             printf("Masukkan item type: ");
-            scanf("%c", &tempItemType);
+            scanf(" %c", &tempItemType);
             if (tempItemType == 'H') {
                 *heavyitems += 1;
             }
             printf("Masukkan pick up: ");
-            scanf("%c", &tempPickUp);
+            scanf(" %c", &tempPickUp);
             printf("Masukkan drop off: ");
-            scanf("%c", &tempDropOff);
+            scanf(" %c", &tempDropOff);
             printf("Masukkan tempPerishTme: ");
             scanf("%d", &tempPerishTime);
             tempElmt.itemType = tempItemType;
@@ -54,13 +57,17 @@ int main() {
     boolean speedboost;
     Bangunan CurrentBangunan;
         // baca input current bangunan
-        scanf("%c", &CurrentBangunan);
+        printf("Masukkan currentbangunan: ");
+        scanf(" %c", &CurrentBangunan);
     Tas TasNobita;
         // baca input tas nobita
         readTas(&TasNobita, &DaftarInprog, &heavyitems);
     
     displaytas(TasNobita);
     displayInProg(DaftarInprog);
+    printf("heavyitems: %d\n", heavyitems);
+    printf("speedboost: %d\n", speedboost);
+    printf("currentbangunanL %c", CurrentBangunan);
 
 
 

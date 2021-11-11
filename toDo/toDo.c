@@ -2,9 +2,9 @@
 
 #include "toDo.h"
 
-/* alokasi new node untuk TO DO LIST */
-Address newToDoNode(int timeIn,char pickUp, char dropOff, char itemType, int perishTime){
-    Address p = (Address)malloc(sizeof(ElmtToDoList));
+/* alokasi new nodeToDo untuk TO DO LIST */
+AddressTodo newToDoNode(int timeIn,char pickUp, char dropOff, char itemType, int perishTime){
+    AddressTodo p = (AddressTodo)malloc(sizeof(ElmtToDoList));
     if(p != NULL){
         TIMEIN_TODO(p) = timeIn;
         PICKUP_TODO(p) = pickUp;
@@ -28,7 +28,7 @@ boolean isEmpty_ToDo(ToDoList td){
 /* Mengirim true jika list kosong */
 
 int length_ToDoList(ToDoList td){
-    Address p = FIRST_TODO(td);
+    AddressTodo p = FIRST_TODO(td);
     int count = 0;
 
     if(!isEmpty_ToDo(td)){
@@ -42,7 +42,7 @@ int length_ToDoList(ToDoList td){
 /* Mengirim banyaknya elemen list jika ada, jika tidak mengirimkan nol */
 
 void insert_ToDoList(ToDoList *td, ToDoType val){
-    Address p = newToDoNode(val.timeIn, val.pickUp, val.dropOff, val.itemType, val.perishTime);
+    AddressTodo p = newToDoNode(val.timeIn, val.pickUp, val.dropOff, val.itemType, val.perishTime);
     
     if(p != NULL){
 
@@ -50,12 +50,12 @@ void insert_ToDoList(ToDoList *td, ToDoType val){
             NEXT_TODO(p) = FIRST_TODO(*td);
             FIRST_TODO(*td) = p;
         } else {
-            Address last = FIRST_TODO(*td);
+            AddressTodo last = FIRST_TODO(*td);
 
             while(NEXT_TODO(last) != NULL){
                 last = NEXT_TODO(last);
             }
-            // berada di akhir node
+            // berada di akhir nodeToDo
             NEXT_TODO(p) = NEXT_TODO(last);
             NEXT_TODO(last) = p;
         }
@@ -67,8 +67,8 @@ void insert_ToDoList(ToDoList *td, ToDoType val){
 /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
 void delete_ToDoList(ToDoList *td, ToDoType val, ToDoType *delVal){
-    Address p = FIRST_TODO(*td);
-    Address prev = NULL;
+    AddressTodo p = FIRST_TODO(*td);
+    AddressTodo prev = NULL;
 
     while(TIMEIN_TODO(p) != val.timeIn && PICKUP_TODO(p) != val.pickUp 
         && DROPOFF_TODO(p) != val.dropOff && ITEMTYPE_TODO(p) != val.itemType){
@@ -92,7 +92,7 @@ void delete_ToDoList(ToDoList *td, ToDoType val, ToDoType *delVal){
 
 void displayToDoList(ToDoList td){
     if(!isEmpty_ToDo(td)){
-        Address loc;
+        AddressTodo loc;
         loc = FIRST_TODO(td);
 
         int count = 0;

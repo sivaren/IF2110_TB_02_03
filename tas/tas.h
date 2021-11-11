@@ -3,6 +3,8 @@
 #define TAS_H
 
 #include "boolean.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 #define IDX_TAS_UNDEF -1
 

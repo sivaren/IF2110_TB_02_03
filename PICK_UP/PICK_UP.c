@@ -23,7 +23,7 @@ boolean isPickAvailable(Bangunan CurrentBangunan, Tas TasNobita, ToDoList Todo, 
 {
     boolean found = false;
     int i = 0;
-    Address p = FIRST_TODO(Todo);
+    AddressTodo p = FIRST_TODO(Todo);
     while (!found && p!= NULL) {
         if (CurrentBangunan.nama = INFO_TODO(p).pickUp) {
             found = true;
