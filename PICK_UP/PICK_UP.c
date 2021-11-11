@@ -4,7 +4,7 @@
 
 void PICK_UP(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost){
     ToDoType accPesanan;
-    if (isPickAvailable(CurrentBangunan, *TasNobita, *Todo, *DaftarInprog)) {
+    if (isPickAvailable(CurrentBangunan, *TasNobita, *Todo, &accPesanan)) {
         if (isFullTas(*TasNobita)) {
             printf("Tas penuh\n");
         }
