@@ -75,7 +75,7 @@ ElTypeTas TodoType_to_EltypeTas(ToDoType Todo) {
     elmtTas.perishTime = Todo.perishTime;
     return elmtTas;
 }
-InProgType TodoType_toInProgType(ToDoType Todo) {
+InProgType TodoType_to_InProgType(ToDoType Todo) {
     InProgType elmtInprog;
     elmtInprog.pickUp = Todo.pickUp;
     elmtInprog.dropOff = Todo.dropOff;
@@ -89,7 +89,7 @@ void ElmtTransfer(ToDoType accPesanan, ToDoList *Todo, Tas *Tasnobita, InProgLis
     // I.S. sembarang
     // F.S. elemen dalam todo list dihapus dan dipindahkan ke dalma tas dan in progress list
     ElTypeTas elmtTas = TodoType_to_EltypeTas(accPesanan);
-    InProgType elmtInprog = TodoType_toInProgType(accPesanan);
+    InProgType elmtInprog = TodoType_to_InProgType(accPesanan);
 
     // delete dari todo
     delete_ToDoList(Todo, accPesanan, &accPesanan);

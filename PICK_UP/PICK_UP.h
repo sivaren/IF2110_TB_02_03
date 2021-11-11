@@ -30,20 +30,20 @@ ToDoType accPesanan;
 
 
 
-void PICK_UP(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog);
+void PICK_UP(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost);
 // prosedur untuk mengambil item dari pickup point
 
 boolean isPickAvailable(Bangunan CurrentBangunan, Tas TasNobita, ToDoList Todo, ToDoType *accPesanan);
 // mengecek apakah ada pesanan pada bangunan tersebut
 
-void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToDoType accPesanan);
+void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToDoType accPesanan, int *heavyitems, boolean *speedboost);
 // apabila pesanan tersedia lakukan pickup
 // apabila pesanan tidak tersedia print "Pesanan tidak ditemukan"
 
 
 // type converter
 ElTypeTas TodoType_to_EltypeTas(ToDoType Todo);
-InProgType TodoType_toInProgType(ToDoType InProg);
+InProgType TodoType_to_InProgType(ToDoType InProg);
 
 // proses pemindahan pesanan dari todo ke tas dan inprogress list
 void ElmtTransfer(ToDoType accPesanan, ToDoList *Todo, Tas *Tasnobita, InProgList *DaftarInprog);
