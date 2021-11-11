@@ -28,8 +28,8 @@ ListOfBangunan DaftarBangunan;
 
 
 int heavyItems = 0;
-int speedBoost;
-int increaseCapacity;
+boolean speedBoost = false;
+int currentTasCapacity = 3;
 
 int isStringEqual(char *a, char *b);
 
