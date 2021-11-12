@@ -14,13 +14,13 @@ typedef struct {
     int perishTime;
 } InProgType;
 
-typedef struct node *Address;
-typedef struct node { 
+typedef struct nodeInProg *AddressInProg;
+typedef struct nodeInProg { 
 	InProgType info;
-	Address next;
+	AddressInProg next;
 } ElmtInProgList;
 
-typedef Address InProgList;
+typedef AddressInProg InProgList;
 
 #define FIRST_INPROG(P) (P)
 #define INFO_INPROG(P) (P)->info
@@ -42,11 +42,11 @@ ITEMTYPE_INPROG(P)
 PERISHTIME_INPROG(P)
 */
 
-Address allocate_INPROG(char pickUp, char dropOff, char itemType, int perishTime);
-/* Alokasi node baru untuk inprogresslist */
+AddressInProg allocate_INPROG(char pickUp, char dropOff, char itemType, int perishTime);
+/* Alokasi nodeInProg baru untuk inprogresslist */
 
-void deallocate_INPROG (Address p);
-/* Dealokasi suatu node pada inprogresslist */
+void deallocate_INPROG (AddressInProg p);
+/* Dealokasi suatu nodeInProg pada inprogresslist */
 
 void CreateInProgList(InProgList *l);
 /* I.S. sembarang             */

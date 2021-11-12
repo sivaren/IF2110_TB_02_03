@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "DROP_OFF.h"
 
-void DROP_OFF(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int currentTasCapacity, int *Money)
+void DROP_OFF(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int *currentTasCapacity, int *Money)
 // prosedur untuk drop item pada drop point
 {
     if (isDropAvailable(CurrentBangunan, *TasNobita, *Todo)) {
@@ -25,7 +25,7 @@ if (TOP_TAS(TasNobita).dropOff == CurrentBangunan.nama) {
 else false;
 }
 
-void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int currentTasCapacity, int *Money)
+void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int *currentTasCapacity, int *Money)
 // drop item apabila tersedia
 {
     int reward;
@@ -51,8 +51,8 @@ void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, bool
     else if (accPesanan.itemType == 'P') {
         printf("Pesanan Perishable Item berhasil diantarkan\n");
         reward = 400;
-        currentTasCapacity += 1;
-        upgradeTasCapacity(TasNobita, currentTasCapacity);
+        *currentTasCapacity += 1;
+        upgradeTasCapacity(TasNobita, *currentTasCapacity);
         
     }
 

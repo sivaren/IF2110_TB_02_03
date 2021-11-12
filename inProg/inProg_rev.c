@@ -4,19 +4,19 @@
 
 /* Masih bug di insert atau display */
 
-Address allocate_INPROG(char pickUp, char dropOff, char itemType, int perishTime){
-    Address p = (Address)malloc(sizeof(ElmtInProgList));
+AddressInProg allocate_INPROG(char pickUp, char dropOff, char itemType, int perishTime){
+    AddressInProg p = (AddressInProg)malloc(sizeof(ElmtInProgList));
     if(p != NULL){
         PICKUP_INPROG(p)  = pickUp;
         DROPOFF_INPROG(p)  = dropOff;
         ITEMTYPE_INPROG(p) = itemType;
         PERISHTIME_INPROG(p) = perishTime;
-        NEXT_INPROG(p)  = NULL;
+        NEXT_INPROG(p) = NULL;
     }
     return p;
 }
 
-void deallocate_INPROG (Address p){
+void deallocate_INPROG (AddressInProg p){
     free(p);
 }
 
@@ -29,7 +29,7 @@ void CreateInProgList(InProgList *l){
 }
 
 void insertFirst_InProgList(InProgList *l, InProgType val){
-    Address p;
+    AddressInProg p;
     p = allocate_INPROG(val.pickUp, val.dropOff, val.itemType, val.perishTime);
     if(p != NULL){
         NEXT_INPROG(p) = FIRST_INPROG(*l);
@@ -38,7 +38,7 @@ void insertFirst_InProgList(InProgList *l, InProgType val){
 }
 
 void deleteFirst_InProgList(InProgList *l, InProgType *delVal){
-    Address p = FIRST_INPROG(*l);
+    AddressInProg p = FIRST_INPROG(*l);
     *delVal = INFO_INPROG(p);
     FIRST_INPROG(*l) =  NEXT_INPROG(p);
     deallocate_INPROG(p);
@@ -50,7 +50,7 @@ void displayInProg(InProgList l){
     if(isEmpty_InProg(l)){
         printf("Tidak ada pesanan yang sedang diantar\n");
     } else {
-        Address p = FIRST_INPROG(l);
+        AddressInProg p = FIRST_INPROG(l);
         int count = 0;
 
         do{
