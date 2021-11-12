@@ -34,59 +34,40 @@ void startWord() {
 //ASUMSI SUDAH ADA TYPESTRUCT BANGUNAN
 //ASUMSI SUDAH ADA TYPESTRUCT PESANAN
 //ASUMSI SUDAH ADA TYPESTRUCT 
-void readFile(char *namaFile, Matrix *peta, Point *HQ, ListOfBangunan *bangunan, ListOfPesanan *pesanan) {
+void readFile(char *namaFile, Matrix *peta, Point *HQ, ListOfBangunan *Listbangunan, PrioQueuePesanan *QueuePesanan, Matrix *Adjency) {
 // void readFile(char *namaFile) {
     Word kata;
-    int i,j,k,n,m;
-    ;
+    int i,j,k,n,m,jumlahBangunan,jumlahPesanan;
+    Pesanan tempPesanan;
+
     startFile(namaFile); copyWord();
     ROWS(*peta) = charToInt(currentWord);advWord();
     COLS(*peta) = charToInt(currentWord);advWord();
     Absis(*HQ)  = charToInt(currentWord);advWord();
     Ordinat(*HQ)  = charToInt(currentWord);advWord();
-    *bangunan.length  = charToInt(currentWord);advWord();
+    jumlahBangunan  = charToInt(currentWord);advWord();
 
-    for (i=0; i<*bangunan.length; i++){
-        *bangunan[i].nama = currentChar;advWord();
-        *bangunan[i].absis = charToInt(currentWord);advWord();
-        *bangunan[i].ordinat = charToInt(currentWord);advWord();
+    for (i=0; i<jumlahBangunan; i++){
+        ELMTListOfBangunan(*Listbangunan, i).nama = currentChar;advWord();
+        ELMTListOfBangunan(*Listbangunan, i).posisi.X =  charToInt(currentWord);advWord();
+        ELMTListOfBangunan(*Listbangunan, i).posisi.Y =  charToInt(currentWord);advWord();
     }
 
     for (n = 0; n<ROWS(*peta); n++){
         for (m = 0; m<COLS(*peta); m++){
-            ELMT(*peta, n, m) = charToInt(currentWord);advWord();
+            ELMT(*Adjency, n, m) = charToInt(currentWord);advWord();
         }
     }
 
-    *pesanan.length = charToInt(currentWord);advWord();
-    for (j=0 ; j<*pesanan.length; j++){
-        *pesanan[j].waktuMasuk = charToInt(currentWord);advWord();
-        //Kalau pickUp dan dropOff direpresentasikan dengan char (lokasi)
-        // *pesanan[i].pickUP = currentChar;advWord();
-        // *pesanan[i].dropOff = currentChar;advWord();
+    jumlahPesanan = charToInt(currentWord);advWord();
+    for (j=0 ; j<jumlahPesanan; j++){
+        tempPesanan.waktuMasuk = charToInt(currentWord);advWord();
+        tempPesanan.pickUp = currentChar;advWord();
+        tempPesanan.dropOff = currentChar;advWord();
+        tempPesanan.jenisItem = currentChar;advWord();
+        if (tempPesanan.jenisItem == 'P') tempPesanan.waktuHangus = charToInt(currentWord);advWord();
 
-        //Tetap make point
-        //Cari absis ordinat bangunan
-        char namaBangunan = currentChar;advWord();
-        k=0;
-        while (namaBangunan != *bangunan[k].nama){
-            k++;
-        }
-        *pesanan[j].pickUp.absis = *bangunan[k].absis;
-        *pesanan[j].pickUp.ordinat = *bangunan[k].ordinat;
-
-
-        //Cari absis ordinat bangunan
-        char namaBangunan = currentChar;advWord();
-        k=0;
-        while (namaBangunan != *bangunan[k].nama){
-            k++;
-        }
-        *pesanan[j].dropOff.absis = *bangunan[k].absis;
-        *pesanan[j].dropOff.ordinat = *bangunan[k].ordinat;
-
-        *pesanan[j].jenisItem = currentChar;advWord();
-        if (*pesanan[j].jenisItem == 'P') *pesanan[j].waktuHangus = charToInt(currentWord);advWord();
+        enqueuePRIOQUEUE(QueuePesanan, tempPesanan);
     }
 
      

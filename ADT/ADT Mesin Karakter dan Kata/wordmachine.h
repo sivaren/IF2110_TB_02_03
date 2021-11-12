@@ -8,7 +8,9 @@
 #include "charmachine.h"
 #include "../ADT Matriks/matrix.h"
 #include "../ADT Point/point.h"
-#include "../ADT List Statis/listpos.h"
+// #include "../ADT List Statis/listpos.h"
+#include "../ADT List Statis/ListOfBangunan.h"
+#include "../ADT Queue/daftarPesanan.h"
 
 
 
@@ -20,13 +22,13 @@ typedef struct {
    int length;
 } Word;
 
-typedef struct {
-   int waktuMasuk;
-   Point pickUp;
-   Point dropOff;
-   char jenisItem;
-   int waktuHangus;     //untuk perishable
-} Pesanan;
+// typedef struct {
+//    int waktuMasuk;
+//    Point pickUp;
+//    Point dropOff;
+//    char jenisItem;
+//    int waktuHangus;     //untuk perishable
+// } Pesanan;
 
 
 
@@ -45,7 +47,7 @@ void startWord();
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void readFile(char *namaFile, Matrix *peta, Point *HQ, ListOfBangunan *bangunan, ListOfPesanan *pesanan);
+void readFile(char *namaFile, Matrix *peta, Point *HQ, ListOfBangunan *bangunan, PrioQueuePesanan *Queuepesanan, Matrix *Adjency);
 
 
 void advWord();
