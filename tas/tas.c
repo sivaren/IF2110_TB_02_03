@@ -84,3 +84,4 @@ void displaytas(Tas s){
         printf("Tas Kosong!\n");
     }
 }
+/* Display isi tas (hanya untuk debugging) */
