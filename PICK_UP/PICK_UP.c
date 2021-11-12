@@ -61,8 +61,8 @@ void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToD
     }
     else if (accPesanan.itemType == 'P') {
         printf("Perishable item berhasil diambil!\n");
-        printf("Tujuan pesanan: %c", accPesanan.dropOff);
-        printf("Sisa waktu hangus: %d", accPesanan.perishTime);
+        printf("Tujuan pesanan: %c\n", accPesanan.dropOff);
+        printf("Sisa waktu hangus: %d\n", accPesanan.perishTime);
     }
 }
 

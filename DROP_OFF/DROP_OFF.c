@@ -22,7 +22,7 @@ boolean isDropAvailable(Bangunan CurrentBangunan, Tas TasNobita, ToDoList Todo)
 if (TOP_TAS(TasNobita).dropOff == CurrentBangunan.nama) {
     return true;
 }
-else false;
+else {return false;}
 }
 
 void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int *currentTasCapacity, int *Money)
