@@ -32,6 +32,13 @@ typedef AddressInProg InProgList;
 #define PERISHTIME_INPROG(P) (P)->info.perishTime
 
 /* 
+NOTE:
+Asumsi awal, selalu memakai
+adjustPerishTime(InProgList *l) dan deletePerishItem(InProgList *l, InProgType *delVal)
+di setiap penambahan 1 unit waktu
+*/
+
+/* 
 FIRST_INPROG(L)
 INFO_INPROG(P)
 NEXT_INPROG(P) 
@@ -55,6 +62,15 @@ void CreateInProgList(InProgList *l);
 boolean isEmpty_InProg(InProgList l);
 /* Mengirim true jika list kosong */
 
+boolean isHeavyAvail(InProgList l);
+/* Mengirim true jika terdapat heavy item pada list  */
+
+boolean isPerishAvail(InProgList l);
+/* Mengirim true jika terdapat perishable item pada list  */
+
+boolean isPerishExpiredAvail(InProgList l);
+/* Mengirim true jika terdapat perishable item yang telah expired pada list  */
+
 void insertFirst_InProgList(InProgList *l, InProgType val);
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
@@ -65,6 +81,14 @@ void deleteFirst_InProgList(InProgList *l, InProgType *delVal);
 /* I.S. List l tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen pertama di-dealokasi */
+
+void adjustPerishTime(InProgList *l);
+/* Adjust waktu hangus perish item, perishTime - 1 */
+
+void deletePerishItem(InProgList *l, InProgType *delVal);
+/* I.S. - In Progress List sembarang*/
+/* F.S. - Expired perishable item di hapus (JIKA ADA YG EXPIRED)*/
+/* jika tidak ada maka F.S. = I.S.*/
 
 void displayInProg(InProgList l);
 /* Menampilkan isi inprogresslist */
