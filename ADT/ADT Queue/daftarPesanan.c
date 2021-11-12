@@ -1,40 +1,40 @@
 #include <stdio.h>
-#include "queue.h"
+#include "daftarPesanan.h"
 
 /* *** Kreator *** */
-void CreateQueue(Queue *q) {
+void CreatePRIOQUEUE(PrioQueuePesanan *q) {
 /* I.S. sembarang */
 /* F.S. Sebuah q kosong terbentuk dengan kondisi sbb: */
 /* - Index head bernilai IDX_UNDEF */
 /* - Index tail bernilai IDX_UNDEF */
 /* Proses : Melakukan alokasi, membuat sebuah q kosong */
     /* ALGORITMA */
-    IDX_HEAD_QUEUE(*q) = IDX_UNDEF;
-    IDX_TAIL_QUEUE(*q) = IDX_UNDEF;
+    IDX_HEAD_PRIOQUEUE(*q) = IDX_UNDEF;
+    IDX_TAIL_PRIOQUEUE(*q) = IDX_UNDEF;
 }
 
 /* ********* Prototype ********* */
-boolean isEmptyQueue(Queue q) {
+boolean isEmptyPRIOQUEUE(PrioQueuePesanan q) {
 /* Mengirim true jika q kosong: lihat definisi di atas */
     /* ALGORITMA */
-    return (IDX_HEAD_QUEUE(q) == IDX_UNDEF && IDX_TAIL_QUEUE(q) == IDX_UNDEF);
+    return (IDX_HEAD_PRIOQUEUE(q) == IDX_UNDEF && IDX_TAIL_PRIOQUEUE(q) == IDX_UNDEF);
 }
-boolean isFullQueue(Queue q) {
+boolean isFullPRIOQUEUE(PrioQueuePesanan q) {
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu jika index head bernilai 0 dan index tail bernilai CAPACITY-1 */
     /* ALGORITMA */
-    return (IDX_HEAD_QUEUE(q) == 0 && IDX_TAIL_QUEUE(q) == CAPACITY_QUEUE-1);
+    return (IDX_HEAD_PRIOQUEUE(q) == 0 && IDX_TAIL_PRIOQUEUE(q) == CAPACITY_PRIOQUEUE-1);
 }
-int lengthQueue(Queue q) {
-/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
+int lengthPRIOQUEUE(PrioQueuePesanan q) {
+/* Mengirimkan banyaknya elemen PRIOQUEUE. Mengirimkan 0 jika q kosong. */
     /* ALGORITMA */
-    if (isEmptyQueue(q)) {
+    if (isEmptyPRIOQUEUE(q)) {
         return 0;
     }
-    return (IDX_TAIL_QUEUE(q) - IDX_HEAD_QUEUE(q) + 1);
+    return (IDX_TAIL_PRIOQUEUE(q) - IDX_HEAD_PRIOQUEUE(q) + 1);
 }
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElTypeQueue val) {
+void enqueuePRIOQUEUE(PrioQueuePesanan *q, Pesanan val) {
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
@@ -43,56 +43,82 @@ void enqueue(Queue *q, ElTypeQueue val) {
     /* KAMUS LOKAL */
     int i, j;
     /* ALGORITMA */
-    if (isEmptyQueue(*q)) {
-        IDX_HEAD_QUEUE(*q)=0;
-    } else if (IDX_TAIL_QUEUE(*q) == CAPACITY_QUEUE-1) {
-        i = IDX_HEAD_QUEUE(*q); j = 0;
+    if (isEmptyPRIOQUEUE(*q)) {
+        IDX_HEAD_PRIOQUEUE(*q)=0;
+    } else if (IDX_TAIL_PRIOQUEUE(*q) == CAPACITY_PRIOQUEUE-1) {
+        i = IDX_HEAD_PRIOQUEUE(*q); j = 0;
         do {
             (*q).buffer[j] = (*q).buffer[i];
             i++; j++;
-        } while (i <= IDX_TAIL_QUEUE(*q));
-        IDX_TAIL_QUEUE(*q) = lengthQueue(*q)-1; IDX_HEAD_QUEUE(*q) = 0; 
+        } while (i <= IDX_TAIL_PRIOQUEUE(*q));
+        IDX_TAIL_PRIOQUEUE(*q) = lengthPRIOQUEUE(*q)-1; IDX_HEAD_PRIOQUEUE(*q) = 0; 
     }
-    IDX_TAIL_QUEUE(*q)++;
-    TAIL_QUEUE(*q) = val;
+    IDX_TAIL_PRIOQUEUE(*q)++;
+    TAIL_PRIOQUEUE(*q) = val;
 }
 
-void dequeue(Queue *q, ElTypeQueue *val) {
+void dequeuePRIOQUEUE(PrioQueuePesanan *q, Pesanan *val) {
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., HEAD dan IDX_HEAD "mundur"; 
         q mungkin kosong */
     /* ALGORITMA */
-    *val = HEAD_QUEUE(*q);
-    if (IDX_HEAD_QUEUE(*q) == IDX_TAIL_QUEUE(*q)) {
-        IDX_HEAD_QUEUE(*q) = IDX_UNDEF;
-        IDX_TAIL_QUEUE(*q) = IDX_UNDEF;
+    *val = HEAD_PRIOQUEUE(*q);
+    if (IDX_HEAD_PRIOQUEUE(*q) == IDX_TAIL_PRIOQUEUE(*q)) {
+        IDX_HEAD_PRIOQUEUE(*q) = IDX_UNDEF;
+        IDX_TAIL_PRIOQUEUE(*q) = IDX_UNDEF;
     } else {
-        IDX_HEAD_QUEUE(*q)++;
+        IDX_HEAD_PRIOQUEUE(*q)++;
     }
 }
 
-/* *** Display Queue *** */
-void displayQueue(Queue q) {
-/* Proses : Menuliskan isi Queue dengan traversal, Queue ditulis di antara kurung 
+/* *** Display PRIOQUEUE *** */
+void displayPRIOQUEUE(PrioQueuePesanan q) {
+/* Proses : Menuliskan isi PRIOQUEUE dengan traversal, PRIOQUEUE ditulis di antara kurung 
    siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
    karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
 /* I.S. q boleh kosong */
 /* F.S. Jika q tidak kosong: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika Queue kosong : menulis [] */
+/* Jika PRIOQUEUE kosong : menulis [] */
     /* KAMUS LOKAL */
     int i;
     /* ALGORITMA */
-    printf("[");
-    if (!isEmptyQueue(q)) {
-        for (i = IDX_HEAD_QUEUE(q); i <= IDX_TAIL_QUEUE(q); i++) {
-            if (i == IDX_TAIL_QUEUE(q)) {
-                printf("%d", q.buffer[i]);
-            } else {
-                printf("%d,", q.buffer[i]);
+    if (!isEmptyPRIOQUEUE(q)) {
+        printf("Daftar Pesanan yang masuk :\n");
+        for (i = IDX_HEAD_PRIOQUEUE(q); i <= IDX_TAIL_PRIOQUEUE(q); i++) {
+            
+            printf("%d. waktuMasuk : %d\n", i+1, q.buffer[i].waktuMasuk);
+            printf("   pickUp     : %c\n",  q.buffer[i].pickUp);
+            printf("   dropOff    : %c\n",  q.buffer[i].dropOff);
+            printf("   jenisItem  : %c\n",  q.buffer[i].jenisItem);
+            if (q.buffer[i].jenisItem == 'P'){
+                printf("   waktuHangus: %d\n",  q.buffer[i].waktuHangus);
             }
+            printf("\n");
         }
     }
-    printf("]");
 }
+
+
+
+void sortQueue(PrioQueuePesanan *Q){
+
+/* KAMUS LOKAL */
+    int i,j;
+    Pesanan temp;
+
+/* ALGORITMA */
+     for (i=0; i<lengthPRIOQUEUE(*Q)-1; i++){
+                for(j=IDX_HEAD_PRIOQUEUE(*Q); j<lengthPRIOQUEUE(*Q)-i-1;j++){
+
+                    if((*Q).buffer[j].waktuMasuk > (*Q).buffer[j+1].waktuMasuk){
+                        temp = (*Q).buffer[j];
+
+                        (*Q).buffer[j] = (*Q).buffer[j+1];
+                        (*Q).buffer[j+1] = temp;
+                    }
+                }
+            }
+}
+
