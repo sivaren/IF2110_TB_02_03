@@ -1,6 +1,7 @@
 /* Implementasi file tas.h */
 
 #include "tas.h"
+
 /* *** Konstruktor/Kreator *** */
 void CreateTas(Tas *s, int capacity){
     BUFFER_TAS(*s) = malloc(sizeof(ElTypeTas)*capacity);
@@ -44,6 +45,55 @@ void popTas(Tas *s, ElTypeTas *val){
 /* Menghapus val dari Tas s */
 /* I.S. s tidak mungkin kosong */
 /* F.S. val adalah nilai elemen TOP yang lama, IDX_TOP berkurang 1 */
+
+void adjustPerishTime_inTas(Tas *s){
+    Tas temp;
+    ElTypeTas popVal;
+    CreateTas(&temp, TAS_CAPACITY(*s));
+
+    // mengisi tas temp
+    while(!isEmptyTas(*s)){
+        popTas(&(*s), &popVal);
+        if(popVal.itemType == 'P'){
+            popVal.perishTime = popVal.perishTime - 1;
+        }
+        pushTas(&(temp), popVal);
+    }
+    // mengisi kembali tas *s dengan perishTime item perishable yang telah di decrement
+    while(!isEmptyTas(temp)){
+        popTas(&temp, &popVal);
+        pushTas(&(*s), popVal);
+    }
+}
+/* Adjust waktu hangus perish item, perishTime - 1 */
+/* adjustPerishTime_inTas dipakai dalam prosedur adjustPerishTime_inProg (ADT In Progress List)*/
+
+void deletePerishItem_inTas(Tas *s){
+    Tas temp;
+    Tas perishContainer;
+    ElTypeTas popVal;
+    CreateTas(&temp, TAS_CAPACITY(*s));
+    CreateTas(&perishContainer, TAS_CAPACITY(*s));
+
+    // mengisi tas temp dan tas perishContainer
+    while(!isEmptyTas(*s)){
+        popTas(&(*s), &popVal);
+        if(popVal.itemType == 'P' && popVal.perishTime <= 0){
+            pushTas(&(perishContainer), popVal);
+        } else {
+            pushTas(&(temp), popVal);
+        }
+    }
+    // mengisi kembali tas *s dengan expired perishable item telah di buang dari tas
+    while(!isEmptyTas(temp)){
+        popTas(&temp, &popVal);
+        pushTas(&(*s), popVal);
+    }
+}
+/* I.S. - Tas sembarang*/
+/* F.S. - Expired perishable item di hapus (JIKA ADA YG EXPIRED)*/
+/* jika tidak ada maka F.S. = I.S.*/
+/* deletePerishItem_inTas dipakai dalam prosedur deletePerishItem_inProg (ADT In Progress List) */
 
 void copyTas(Tas t1, Tas *t2){
     Tas temp;
