@@ -32,7 +32,7 @@ akan membentuk Point <1,2> */
     float X, Y;
     /* ALGORITMA */
     scanf("%c %f %f", &name, &X, &Y);
-    *P = CreatePoint(name, X, Y);
+    *P = CreatePOINT(name, X, Y);
 }
 void WritePoint (Point P) {
 /* Nilai P ditulis ke layar dengan format "(X,Y)" 
@@ -97,17 +97,17 @@ int Kuadran (Point P) {
 Point NextX (Point P) {
 /* Mengirim salinan P dengan absis ditambah satu */             
     /* ALGORITMA */
-    return (CreatePoint(Name(P), Absis(P)+1, Ordinat(P)));
+    return (CreatePOINT(Name(P), Absis(P)+1, Ordinat(P)));
 }
 Point NextY (Point P) {
 /* Mengirim salinan P dengan ordinat ditambah satu */      
     /* ALGORITMA */
-    return (CreatePoint(Name(P), Absis(P), Ordinat(P)+1));
+    return (CreatePOINT(Name(P), Absis(P), Ordinat(P)+1));
 }
 Point PlusDelta (Point P, float deltaX, float deltaY) {
 /* Mengirim salinan P yang absisnya adalah Absis(P) + deltaX dan ordinatnya adalah Ordinat(P) + deltaY */           
     /* ALGORITMA */
-    return (CreatePoint(Name(P), Absis(P)+deltaX, Ordinat(P)+deltaY));
+    return (CreatePOINT(Name(P), Absis(P)+deltaX, Ordinat(P)+deltaY));
 }
 Point MirrorOf (Point P, boolean SbX) {
 /* Menghasilkan salinan P yang dicerminkan terhadap salah satu sumbu */
@@ -115,10 +115,10 @@ Point MirrorOf (Point P, boolean SbX) {
 /* Jika SbX bernilai false, maka dicerminkan terhadap sumbu Y */           
     /* ALGORITMA */
     if (SbX) {
-        return (CreatePoint(Name(P), Absis(P), -Ordinat(P)));
+        return (CreatePOINT(Name(P), Absis(P), -Ordinat(P)));
     }
     else {
-        return (CreatePoint(Name(P), -Absis(P), Ordinat(P)));
+        return (CreatePOINT(Name(P), -Absis(P), Ordinat(P)));
     }
 }
 float Jarak0 (Point P) {

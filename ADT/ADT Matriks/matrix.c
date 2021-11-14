@@ -187,7 +187,7 @@ boolean isEqualMatrix(Matrix m1, Matrix m2) {
     boolean isIdentic = true;
     /* ALGORITMA */
     if (getLastIdxCol(m1) == getLastIdxCol(m2)) {
-        if (count(m1) == count(m2)) {
+        if (countMatrix(m1) == countMatrix(m2)) {
             for (i = 0; i < ROWS(m1); i++) {
                 for (j = 0; j < COLS(m1); j++) {
                     if (ELMT(m1, i, j) != ELMT(m2, i, j)) {
@@ -207,7 +207,7 @@ boolean isEqualMatrix(Matrix m1, Matrix m2) {
 boolean isNotEqualMatrix(Matrix m1, Matrix m2) {
 /* Mengirimkan true jika m1 tidak sama dengan m2 */
     /* ALGORITMA */
-    return (!isEqual(m1,m2));
+    return (!isEqualMatrix(m1,m2));
 }
 boolean isSizeEqualMatrix(Matrix m1, Matrix m2) {
 /* Mengirimkan true jika ukuran efektif matriks m1 sama dengan ukuran efektif m2 */
@@ -290,7 +290,7 @@ boolean isSparse(Matrix m) {
             }        
         }       
     }
-    if (countJarang <= count(m)/20) {
+    if (countJarang <= countMatrix(m)/20) {
         return true;
     } else {
         return false;
@@ -332,7 +332,7 @@ float determinant(Matrix m) {
     int sign = 1;
     /* ALGORITMA */
     CreateMatrix(ROWS(m)-1, COLS(m)-1, &temp);
-    if (count(m)==1) {
+    if (countMatrix(m)==1) {
         return ELMT(m, 0, 0);
     }
     for (k = 0; k < COLS(m); k++) {
