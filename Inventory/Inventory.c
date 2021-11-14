@@ -1,17 +1,8 @@
 #include <stdio.h>
-#include "ListInventory.h"
+#include "Inventory.h"
 
-#include "../Move/matrixpoint.h"
-#include "../Move/matrix.h"
-#include "../Move/point.h"
-#include "../ADT/ADT Stack/stack.h"
 
-//dari awal udah createlist inventory
-//ListStatPos inventory
-//CreateListStatPos(&inventory)
-int Time;
-
-void inventory(ListInventory inventory)
+void inventory(ListInventory inventory, Tas *tasMobita, ListOfBangunan LB, Point *coordinate_mobita, int *Time)
 {
     //menampilkan isi inventory
     displayInventory(inventory);
@@ -31,7 +22,7 @@ void inventory(ListInventory inventory)
     {
         int idx = op-1;
         //tidak ada gadget pada opsi yang dipilih
-        if(ELMTInventory(inventory,idx) == VAL_UNDEF)
+        if(ELMTInventory(inventory,idx) == INVENTORY_GADGETUNDEF)
         {
             printf("Tidak ada Gadget yang dapat digunakan!");
         }
@@ -44,29 +35,31 @@ void inventory(ListInventory inventory)
             //efek dari gadget aktif
             if(ELMTInventory(inventory,idx) == 'Kain Pembungkus Waktu')
             {
-                KainPembungkusWaktu();
+                KainPembungkusWaktu(*tasMobita);
             }
             else if(ELMTInventory(inventory,idx) == 'Senter Pembesar')
             {
-                SenterPembesar();
+                SenterPembesar(tasMobita);
             }
             else if(ELMTInventory(inventory,idx) == 'Pintu Kemana Saja')
             {
-                PintuKemanaSaja();
+                PintuKemanaSaja(LB, coordinate_mobita);
             }
             else if(ELMTInventory(inventory,idx) == 'Mesin Waktu')
             {
-                MesinWaktu();
+                MesinWaktu(*Time);
             }
         }
     }
 }
 
-void KainPembungkusWaktu()
+
+//Waktu item perishable di TOP tas kembali ke semula
+void KainPembungkusWaktu(Tas tasMobita)
 {
-    if(TOP(Tas).JenisItem == 'P')
+    if(TOP_TAS(tasMobita).itemType == 'P')
     {
-        //Baca konfigurasi awal
+        //TOP_TAS(tasMobita).perishTime == waktu hangus di awal daftar pesanan;
     }
     else
     {
@@ -74,15 +67,15 @@ void KainPembungkusWaktu()
     }
 }
 
-//Meningkatkan kapasitas tas 2 kali lipat
-void SenterPembesar()
+//kapasitas tas menjadi 2 kali lipat
+void SenterPembesar(Tas *tasMobita)
 {
     //sesuain sama file tas
-    int newCapacity, CAPACITY_TAS;
-    newCapacity = CAPACITY_TAS*2;
+    int newCapacity;
+    newCapacity = TAS_CAPACITY(*tasMobita)*2;
     if (newCapacity <= 100)
     {
-        CAPACITY_TAS = newCapacity;
+        upgradeTasCapacity(tasMobita, newCapacity);
     }
     else //Melebihi 100
     {
@@ -91,14 +84,41 @@ void SenterPembesar()
 }
 
 //Berpindah lokasi tanpa menambah unit waktu
-void PintuKemanaSaja(MatrixPoint *map, Matrix adjacency_matrix, Point *coordinate_mobita)
+void PintuKemanaSaja(ListOfBangunan LB, Point *coordinate_mobita)
 {
-    //panggil fungsi move
-    //move(MatrixPoint *map, Matrix adjacency_matrix, Point *coordinate_mobita);
+    int num;
+    for (num = 1; num <= lengthListStat(LB); num++)
+    {
+        printf("%d. ", num);
+        //tampilin list semua bangunan yang ada
+    }
+    
+    printf("Anda mau pindah ke titik mana?\n");
+    int op;
+    printf("ENTER COMMAND: ");
+    scanf("%d", &op); 
+    while (op < 0 || op > lengthListStat(LB))
+    {
+        printf("Masukkan angka antara 0-total_point!\n");
+        printf("ENTER COMMAND: ");
+        scanf("%d", &op); 
+    }
+    printf("\n");
+    if (op != 0)
+    {
+        ListPoint l;
+        int idx = op-1;
+        //set koordinat mobita = yg dipilih
+        *coordinate_mobita = ELMTListPoint(l, idx);
+        printf("Anda telah menggunakan Pintu Kemana Saja! Sekarang Mobita berada di titik ");
+        WritePoint(ELMTListPoint(l, idx));
+        printf("!\n");
+    }
+
 }
 
 //Mengurangi waktu sebanyak 50 unit
-void MesinWaktu()
+void MesinWaktu(Time)
 {
     int currTime;
     currTime = Time - 50;
