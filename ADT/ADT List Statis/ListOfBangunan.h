@@ -15,7 +15,7 @@
 /* Kapasitas penyimpanan */
 #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
-#define VAL_UNDEF '-'
+#define VAL_UNDEF_BANGUNAN '-'
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
@@ -32,7 +32,7 @@ typedef struct {
 /* Maka cara akses: 
    ELMT(l,i) untuk mengakses elemen ke-i */
 /* Definisi : 
-   List kosong: semua elemen bernilai VAL_UNDEF
+   List kosong: semua elemen bernilai VAL_UNDEF_BANGUNAN
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
@@ -43,7 +43,7 @@ typedef struct {
 void CreateListStatPos(ListOfBangunan *l);
 /* I.S. l sembarang */
 /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
-/* Proses: Inisialisasi semua elemen List l dengan VAL_UNDEF */
+/* Proses: Inisialisasi semua elemen List l dengan VAL_UNDEF_BANGUNAN */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */

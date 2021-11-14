@@ -1,52 +1,39 @@
-/* Nama: Farnas Rozaan Iraqee */
-/* NIM: 13520067 */
-/* Tanggal: 8 September 2021 */
-/* Topik: ADT List */
-/* Deskripsi: Realisasi ADT List */
-
 #include <stdio.h>
 #include "ListInventory.h"
+#include "../Buy/ListGadget.h"
 
-/* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
-void CreateListStatPos(ListInventory *l) {
-/* I.S. l sembarang */
-/* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
-/* Proses: Inisialisasi semua elemen List l dengan VAL_UNDEF */
-    /* KAMUS LOKAL */
+void CreateListInventory(ListInventory *l) 
+{
     int i;
-    /* ALGORITMA */
-    for (i = 0; i < CAPACITY_INVENTORY; i++) {
-        ELMTInventory(*l,i) = VAL_UNDEF;
+    for (i = 0; i < INVENTORY_CAPACITY; i++) 
+    {
+        ELMTInventory(*l,i) = INVENTORY_GADGETUNDEF;
     }
 }
 
-/* ********** SELEKTOR (TAMBAHAN) ********** */
-/* *** Banyaknya elemen *** */
-int lengthListStat(ListInventory l) {
+int lengthListInventory(ListInventory l) 
 /* Mengirimkan banyaknya elemen efektif List */
-/* Mengirimkan nol jika List kosong */
-    /* KAMUS LOKAL */
+{
     int i, sum = 0;
     /* ALGORITMA */
-    for (i = 0; i < CAPACITY_INVENTORY; i++) {
-        if (ELMTInventory(l,i) != VAL_UNDEF) {
+    for (i = 0; i < INVENTORY_CAPACITY; i++) {
+        if (ELMTInventory(l,i) != INVENTORY_GADGETUNDEF) {
             sum += 1;
         }
     }
     return sum;
 }
 
-/* ********** TEST KOSONG/PENUH ********** */
-/* *** Test List penuh *** */
-boolean isFullInventory(ListInventory l) {
+boolean isFullInventory(ListInventory l)
 /* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
-    /* ALGORITMA */
-    return (lengthListStat(l) == CAPACITY_INVENTORY);
+{
+    return (lengthListInventory(l) == INVENTORY_CAPACITY);
 }
 
-void displayInventory(ListInventory l) {
+void displayInventory(ListInventory l) 
 /* Menampilkan list gadget yang ada di dalam Inventory */
+{
     /* KAMUS LOKAL */
     int i;
     int num;
@@ -54,28 +41,23 @@ void displayInventory(ListInventory l) {
     for (num = 1; num <= 5; num++)
     {
         printf("%d.", num);
-        for (i = 0; i < 5; i++) 
-        {
-            printf("%c\n", ELMTInventory(l,i));
-        }
+        i = num-1;
+        printf("%c\n", ELMTInventory(l,i));
     }
+    i++;
 }    
 
-/* ********** MENAMBAH DAN MENGHAPUS ELEMEN LIST INVENTORY ********** */
-/* *** Menambahkan elemen terakhir *** */
-void insertGadget(ListInventory *l, Gadget val) {
-/* Proses: Menambahkan val sebagai elemen terakhir List */
-/* I.S. List l boleh kosong, tetapi tidak penuh */
-/* F.S. val adalah elemen terakhir l yang baru */
-    /* ALGORITMA */
-    if (lengthListStat(*l) < CAPACITY_INVENTORY) {
-        ELMTInventory(*l,lengthListStat(*l)) = val;
+void insertGadget(ListInventory *l, Gadget val) 
+/* Memasukkan Gadget yang telah dibeli ke dalam inventory*/
+{
+    if (lengthListInventory(*l) < INVENTORY_CAPACITY) 
+    {
+        ELMTInventory(*l,lengthListInventory(*l)) = val;
     }
 }
-/* ********** MENGHAPUS ELEMEN ********** */
-void deleteGadget(ListInventory l, Gadget val) {
-/* Menghapus elemen list pada index tertentu */
 
-    val = VAL_UNDEF;
-
+void deleteGadget(ListInventory l, Gadget val) 
+/* Menghapus Gadget yang telah digunakan dari inventory */
+{
+    val = INVENTORY_GADGETUNDEF;
 }

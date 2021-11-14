@@ -9,8 +9,8 @@ void displayHelp(){
     printf("3. DROP_OFF     -> Untuk mengantarkan item ke lokasi terkini\n");
     printf("4. MAP          -> Untuk menampilkan peta permainan\n");
     printf("5. TO_DO        -> Untuk menampilkan pesanan yang masuk ke To Do List\n");
-    // IN_PROGRESS hanya dapat dipanggil di Headquarters
     printf("6. IN_PROGRESS  -> Untuk menampilkan pesanan yang sedang dikerjakan\n");
+    // BUY hanya dapat dipanggil di Headquarters
     printf("7. BUY          -> Untuk menampilkan gadget yang dapat dibeli lalu membelinya\n");
     printf("8. INVENTORY    -> Untuk melihat gadget yang dimiliki dan menggunakannya\n");
     printf("9. HELP         -> Untuk mengeluarkan list command dan kegunaannya\n");

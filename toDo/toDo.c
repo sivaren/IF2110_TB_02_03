@@ -66,12 +66,12 @@ void insert_ToDoList(ToDoList *td, ToDoType val){
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
-void delete_ToDoList(ToDoList *td, ToDoType val, ToDoType *delVal){
+void delete_ToDoList(ToDoList *td, ToDoType delTarget, ToDoType *delVal){
     AddressTodo p = FIRST_TODO(*td);
     AddressTodo prev = NULL;
 
-    while(TIMEIN_TODO(p) != val.timeIn && PICKUP_TODO(p) != val.pickUp 
-        && DROPOFF_TODO(p) != val.dropOff && ITEMTYPE_TODO(p) != val.itemType){
+    while(TIMEIN_TODO(p) != delTarget.timeIn && PICKUP_TODO(p) != delTarget.pickUp 
+        && DROPOFF_TODO(p) != delTarget.dropOff && ITEMTYPE_TODO(p) != delTarget.itemType){
         prev = p;
         p = NEXT_TODO(p);
     }

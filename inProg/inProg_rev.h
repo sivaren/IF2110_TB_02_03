@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
+#include "../tas/tas.h"
 
 typedef struct {
 	char pickUp;
@@ -32,14 +33,10 @@ typedef AddressInProg InProgList;
 #define PERISHTIME_INPROG(P) (P)->info.perishTime
 
 /* 
-FIRST_INPROG(L)
-INFO_INPROG(P)
-NEXT_INPROG(P) 
-
-PICKUP_INPROG(P) 
-DROPOFF_INPROG(P) 
-ITEMTYPE_INPROG(P) 
-PERISHTIME_INPROG(P)
+NOTE:
+Asumsi awal, selalu memakai
+adjustPerishTime_inProg(InProgList *l) dan deletePerishItem_inProg(InProgList *l, InProgType *delVal)
+di setiap penambahan 1 unit waktu
 */
 
 AddressInProg allocate_INPROG(char pickUp, char dropOff, char itemType, int perishTime);
@@ -55,6 +52,15 @@ void CreateInProgList(InProgList *l);
 boolean isEmpty_InProg(InProgList l);
 /* Mengirim true jika list kosong */
 
+boolean isHeavyAvail_inProg(InProgList l);
+/* Mengirim true jika terdapat heavy item pada list  */
+
+boolean isPerishAvail_inProg(InProgList l);
+/* Mengirim true jika terdapat perishable item pada list  */
+
+boolean isPerishExpiredAvail_inProg(InProgList l);
+/* Mengirim true jika terdapat perishable item yang telah expired pada list  */
+
 void insertFirst_InProgList(InProgList *l, InProgType val);
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
@@ -65,6 +71,14 @@ void deleteFirst_InProgList(InProgList *l, InProgType *delVal);
 /* I.S. List l tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen pertama di-dealokasi */
+
+void adjustPerishTime_inProg(InProgList *l, Tas *s);
+/* Adjust waktu hangus perish item, perishTime - 1 */
+
+void deletePerishItem_inProg(InProgList *l, Tas *s, InProgType *delVal);
+/* I.S. - In Progress List sembarang*/
+/* F.S. - Expired perishable item di hapus (JIKA ADA YG EXPIRED)*/
+/* jika tidak ada maka F.S. = I.S.*/
 
 void displayInProg(InProgList l);
 /* Menampilkan isi inprogresslist */

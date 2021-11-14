@@ -17,7 +17,7 @@ void CreateListStatPos(ListOfBangunan *l) {
     int i;
     /* ALGORITMA */
     for (i = 0; i < CAPACITY_LISTSTAT; i++) {
-        ELMTListOfBangunan(*l,i).nama = VAL_UNDEF;
+        ELMTListOfBangunan(*l,i).nama = VAL_UNDEF_BANGUNAN;
     }
 }
 
@@ -30,7 +30,7 @@ int lengthListStat(ListOfBangunan l) {
     int i, sum = 0;
     /* ALGORITMA */
     for (i = 0; i < CAPACITY_LISTSTAT; i++) {
-        if (ELMTListOfBangunan(l,i).nama != VAL_UNDEF) {
+        if (ELMTListOfBangunan(l,i).nama != VAL_UNDEF_BANGUNAN) {
             sum += 1;
         }
     }
@@ -149,7 +149,7 @@ void deleteLastListStat(ListOfBangunan *l, Bangunan *val) {
     /* ALGORITMA */
     if (lengthListStat(*l) > 0) {
         *val = ELMTListOfBangunan(*l,lengthListStat(*l)-1);
-        ELMTListOfBangunan(*l,lengthListStat(*l)-1).nama = VAL_UNDEF;
+        ELMTListOfBangunan(*l,lengthListStat(*l)-1).nama = VAL_UNDEF_BANGUNAN;
     }
 }
 
@@ -178,7 +178,7 @@ Point NamaBangunanToPoint(char x, ListOfBangunan LB) {
     boolean found = false;
     int i = 0;
     Point pnt;
-    while (!found && i<lengthListStat) {
+    while (!found && i<lengthListStat(LB)) {
         if (ELMTListOfBangunan(LB, i).nama == x) {
             pnt = ELMTListOfBangunan(LB, i).posisi;
         }
@@ -197,7 +197,7 @@ char PointToNamaBangunan(Point P, ListOfBangunan LB){
 
 }
 
-void updateCurrentBangunan(Point P, ListOfBangunan LB, Bangunan *CurrentBangunan) {
-    *CurrentBangunan = PointToBangunan(P, LB);
+void updateCurrentBangunan(Point *P, ListOfBangunan LB, Bangunan *CurrentBangunan) {
+    *CurrentBangunan = PointToBangunan(*P, LB);
 
 }

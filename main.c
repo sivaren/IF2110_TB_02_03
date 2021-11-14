@@ -15,26 +15,29 @@
 
 
 int isStringEqual(char *a, char *b);
+void START(int *Money, int *Time, int *heavyItems, boolean *speedBoost, int *currentTasCapaicty, boolean *started) {
+    *Money = 0;
+    *Time = 0;
+    *heavyItems = 0;
+    *speedBoost = false;
+    *currentTasCapaicty = 3;
+    *started = true;
+}
 
 int main(){
 
-
-int Money = 0;
-int Time = 0;
-Point Position = {0, 0};
-Bangunan currentBangunan; // diupdate setiap selesai move ('-' apabila berada di headquarter)
+boolean started;
+int Money;
+int Time;
+Point Position;
+Bangunan currentBangunan; // diupdate setiap selesai move ('8' apabila berada di headquarter)
 Matrix Adjacency;
-// ListStatPos ListGadget, Inventory;
-// Queue DaftarPesanan;
+// 
 char command[100];
 ListOfBangunan DaftarBangunan;
-
-
-
-
-int heavyItems = 0;
-boolean speedBoost = false;
-int currentTasCapacity = 3;
+int heavyItems;
+boolean speedBoost;
+int currentTasCapacity;
 ToDoList DaftarTodo;
 Tas TasNobita;
 InProgList DaftarInProg;
@@ -43,12 +46,18 @@ InProgList DaftarInProg;
 
 
 
-Read_Config();
+started = false;
 
 // scan input
+printf("Selamat datang di MOBILITA\n");
+
 int opt;
+while (!started) {
+    printf("1) START\n2) LOAD\n3) QUIT\n");
+    printf("Masukkan command: ");
+    scanf("%d", &opt); // GANTI MESIN KARAKTER
 if(opt == 1) {
-    Start();
+    START(&Money, &Time, &heavyItems, &speedBoost, &currentTasCapacity, &started);
 }
 else if (opt == 2) {
     Load_Game();
@@ -56,15 +65,21 @@ else if (opt == 2) {
 else if (opt == 3) {
     quit();
 }
+else {
+    printf("command salah\n");
+}
+
+}
 
 
 // start game
+while (!isStringEqual(&command, "QUIT")) {
 
 // input command pake mesin kata / is string equal
-if (command == "PICK_UP"){
+if (isStringEqual(&command, "PICK_UP")){
 PICK_UP(currentBangunan, &TasNobita, &DaftarTodo, &DaftarInProg, &heavyItems, &speedBoost);
 }
-else if (command == "DROP_OFF") {
+else if (&command, "DROP_OFF") {
 DROP_OFF(currentBangunan, &TasNobita, &DaftarTodo, &DaftarInProg, &heavyItems, &speedBoost, &currentTasCapacity, &Money);
 }
 /*
@@ -77,7 +92,10 @@ INVENTORY();
 HELP();
 SAVE_GAME();
 */
-
+else {
+    printf("Command salah\n");
+}
+}
 }
 
 

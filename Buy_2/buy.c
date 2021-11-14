@@ -1,8 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "buy.h"
+#include "List_Inventory.h"
 
-void Buy(ListGadget gadget, ListInventory *inventory, ListOfBangunan LB, Point *coordinate_mobita, int *Money)
+#include "../ADT/ADT List Statis/ListOfBangunan.h"
+#include "../ADT/ADT Point/point.h"
+#include "../Move/move.h"
+
+void Buy(ListInventory *inventory, ListOfBangunan LB, Point *coordinate_mobita, int *Money)
 {
     if(PointToNamaBangunan(*coordinate_mobita, LB) != '8')
     {
@@ -10,12 +13,21 @@ void Buy(ListGadget gadget, ListInventory *inventory, ListOfBangunan LB, Point *
     }
     else 
     {
+        int i;
         printf("Uang Anda sekarang: %d Yen\n", Money);
-        displayGadget(gadget);
+        printf("Gadget yang tersedia: \n");
+        for(i = 0; i < 4; i++)
+        {
+            prinf("%d. ", (i+1));
+            //bingung ngeprintnya karna pake ID
+            //atau print manual?
+        }
+        printf("Gadget mana yang ingin kau beli? (ketik 0 jika ingin kembali)\n");
         printf("\n");
 
         int op;
         scanf("ENTER COMMAND: %d", &op);
+
         //meminta inputan yang valid
         while (op < 0 || op > 4)
         {
@@ -23,24 +35,27 @@ void Buy(ListGadget gadget, ListInventory *inventory, ListOfBangunan LB, Point *
             scanf("ENTER COMMAND: %d", &op); 
         }
 
-        //hanya bisa membeli item jika inventory belum penuh
         if (op != 0)
         {
             //hanya dapat membeli gadget apabila inventory gadget belum penuh
-            if(!isFullInventory(*inventory))
+            if(!isFullListInventory(inventory))
             {
                 int idx, currMoney;
                 idx = op-1;
-
-                currMoney = *Money - ELMTListGadget(gadget,idx).price;
+                
+                //bingung juga set harganya gimana
+                currMoney = *Money - INVENTORY_GADGETPRICE(*inventory,idx);
                 if(currMoney >= 0)
                 {
                     //uang berkurang
                     *Money = currMoney;
-                    printf("%c berhasil dibeli!\n",ELMTListGadget(gadget,idx).name);
+
+                    //bingung ngeprint nama barangnya karna pake ID
+                    printf("%c berhasil dibeli!\n",ELMTListInventory(*inventory,idx).id);
                     printf("Uang Anda sekarang: %d Yen", *Money);
+
                     //memasukkan Gadget yang dibeli ke dalam list inventory
-                    insertGadget(inventory, ELMTListGadget(gadget,idx).name);
+                    insertGadget(inventory, createGadget(idx,INVENTORY_GADGETPRICE(*inventory,idx)));
                 }
                 else
                 {
@@ -49,10 +64,9 @@ void Buy(ListGadget gadget, ListInventory *inventory, ListOfBangunan LB, Point *
             }
             else
             {
-                printf("Inventory Gadget Anda sudah penuh!");
+                printf("Inventory gadget Anda sudah penuh!");
             }
         }
     }
     
 }
-

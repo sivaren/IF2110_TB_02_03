@@ -66,7 +66,7 @@ void insert_ToDoList(ToDoList *td, ToDoType val);
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
-void delete_ToDoList(ToDoList *td, ToDoType val, ToDoType *delVal);
+void delete_ToDoList(ToDoList *td, ToDoType delTarget, ToDoType *delVal);
 /* Menghapus elemen toDoList tertentu */
 
 void displayToDoList(ToDoList td);

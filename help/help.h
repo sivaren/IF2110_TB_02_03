@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 /* NOTE:
-Masih nunggu adjust posisi jika lagi di HQ
+-
  */
 
 /* Display Help */
