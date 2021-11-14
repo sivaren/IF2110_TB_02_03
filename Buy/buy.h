@@ -10,6 +10,6 @@
 #include "../ADT/ADT Point/point.h"
 #include "ListGadget.h"
 
-void Buy(ListGadget gadget, ListInventory *inventory, ListOfBangunan LB, Point *coordinate_mobita, int *Money)
+void Buy(ListGadget gadget, ListInventory *inventory, ListOfBangunan LB, Point *coordinate_mobita, int *Money);
 
 #endif

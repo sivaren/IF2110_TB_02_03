@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "ListGadget.c"
+#include "ListGadget.h"
 
 //baru buat ngetes displaynya
 int main()

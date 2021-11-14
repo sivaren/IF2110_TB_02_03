@@ -33,19 +33,19 @@ void inventory(ListInventory inventory, Tas *tasMobita, ListOfBangunan LB, Point
             printf("%c berhasil digunakan!", ELMTInventory(inventory,idx));
 
             //efek dari gadget aktif
-            if(ELMTInventory(inventory,idx) == 'Kain Pembungkus Waktu')
+            if(ELMTInventory(inventory,idx) == "Kain Pembungkus Waktu")
             {
                 KainPembungkusWaktu(*tasMobita);
             }
-            else if(ELMTInventory(inventory,idx) == 'Senter Pembesar')
+            else if(ELMTInventory(inventory,idx) == "Senter Pembesar")
             {
                 SenterPembesar(tasMobita);
             }
-            else if(ELMTInventory(inventory,idx) == 'Pintu Kemana Saja')
+            else if(ELMTInventory(inventory,idx) == "Pintu Kemana Saja")
             {
                 PintuKemanaSaja(LB, coordinate_mobita);
             }
-            else if(ELMTInventory(inventory,idx) == 'Mesin Waktu')
+            else if(ELMTInventory(inventory,idx) == "Mesin Waktu")
             {
                 MesinWaktu(*Time);
             }
@@ -63,7 +63,7 @@ void KainPembungkusWaktu(Tas tasMobita)
     }
     else
     {
-        printf('Item teratas bukan perishable item.');
+        printf("Item teratas bukan perishable item.");
     }
 }
 
@@ -79,7 +79,7 @@ void SenterPembesar(Tas *tasMobita)
     }
     else //Melebihi 100
     {
-        printf('Kapasitas tas melebihi maksimum!');
+        printf("Kapasitas tas melebihi maksimum!");
     }
 }
 
@@ -118,7 +118,7 @@ void PintuKemanaSaja(ListOfBangunan LB, Point *coordinate_mobita)
 }
 
 //Mengurangi waktu sebanyak 50 unit
-void MesinWaktu(Time)
+void MesinWaktu(int Time)
 {
     int currTime;
     currTime = Time - 50;
