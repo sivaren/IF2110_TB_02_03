@@ -153,6 +153,6 @@ Point NamaBangunanToPoint(char x, ListOfBangunan LB);
 
 char PointToNamaBangunan(Point P, ListOfBangunan LB);
 
-void updateCurrentBangunan(Point *P, ListOfBangunan LB, Bangunan *CurrentBangunan);
+void updateCurrentBangunan(Point P, ListOfBangunan LB, Bangunan *CurrentBangunan);
 
 #endif
