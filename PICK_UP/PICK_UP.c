@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "PICK_UP.h"
 
-void PICK_UP(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost){
+void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost){
     ToDoType accPesanan;
     if (isPickAvailable(CurrentBangunan, *TasNobita, *Todo, &accPesanan)) {
         if (isFullTas(*TasNobita)) {
@@ -18,14 +18,14 @@ void PICK_UP(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgLis
 }
 // prosedur untuk mengambil item dari pickup point
 
-boolean isPickAvailable(Bangunan CurrentBangunan, Tas TasNobita, ToDoList Todo, ToDoType *accPesanan)
+boolean isPickAvailable(Point CurrentBangunan, Tas TasNobita, ToDoList Todo, ToDoType *accPesanan)
 // mengecek apakah ada pesanan pada bangunan tersebut
 {
     boolean found = false;
     int i = 0;
     AddressTodo p = FIRST_TODO(Todo);
     while (!found && p!= NULL) {
-        if (CurrentBangunan.nama == INFO_TODO(p).pickUp) {
+        if (CurrentBangunan.name == INFO_TODO(p).pickUp) {
             found = true;
         }
         else {

@@ -9,6 +9,6 @@
 @REM readFile
 
 
-gcc driverBacaFile.c wordmachine.c charmachine.c "../ADT Matriks/matrix.c" "../ADT Point/point.c"  "../ADT List Statis/ListOfBangunan.c" "../ADT Queue/daftarPesanan.c" -o readFile
+gcc driverBacaFile.c wordmachine.c charmachine.c "../ADT Matriks/matrix.c" "../ADT Point/point.c"  "../../Move/listpoint.c" "../ADT Queue/daftarPesanan.c" -o readFile
 
 readFile

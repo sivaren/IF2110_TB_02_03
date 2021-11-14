@@ -43,9 +43,7 @@ int length_ToDoList(ToDoList td){
 
 void insert_ToDoList(ToDoList *td, ToDoType val){
     AddressTodo p = newToDoNode(val.timeIn, val.pickUp, val.dropOff, val.itemType, val.perishTime);
-    
     if(p != NULL){
-
         if(isEmpty_ToDo(*td)){
             NEXT_TODO(p) = FIRST_TODO(*td);
             FIRST_TODO(*td) = p;

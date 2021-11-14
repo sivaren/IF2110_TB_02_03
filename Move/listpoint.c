@@ -46,3 +46,11 @@ void insertLastListPoint(ListPoint *l, ElTypeListPoint val) {
         ELMTListPoint(*l,lengthListPoint(*l)) = val;
     }
 }
+
+void printOneBangunan(Point b) {
+    printf("(");
+    printf("%c:", b.name);
+    printf("%d,", Absis(b));
+    printf("%d", Ordinat(b));
+    printf(")");
+}

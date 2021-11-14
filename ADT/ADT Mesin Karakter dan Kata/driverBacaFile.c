@@ -6,7 +6,7 @@ int main(){
     char* filename;
     Matrix map,map1;
     Point HQ;
-    ListOfBangunan ListOfBangunan;
+    ListPoint ListOfBangunan;
     PrioQueuePesanan daftarPesanMasuk;
     
     /* ALGORITMA */

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "DROP_OFF.h"
 
-void DROP_OFF(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int *currentTasCapacity, int *Money)
+void DROP_OFF(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int *currentTasCapacity, int *Money)
 // prosedur untuk drop item pada drop point
 {
     if (isDropAvailable(CurrentBangunan, *TasNobita, *Todo)) {
@@ -13,13 +13,13 @@ void DROP_OFF(Bangunan CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgLi
     }
 }
 
-boolean isDropAvailable(Bangunan CurrentBangunan, Tas TasNobita, ToDoList Todo)
+boolean isDropAvailable(Point CurrentBangunan, Tas TasNobita, ToDoList Todo)
 // mengecek apakah ada item yang bisa di-drop di posisi saat ini
 {
 // cek top dari stack tas
 
 // apakah posisi pesanan top stack === posisi saat ini
-if (TOP_TAS(TasNobita).dropOff == CurrentBangunan.nama) {
+if (TOP_TAS(TasNobita).dropOff == CurrentBangunan.name) {
     return true;
 }
 else {return false;}

@@ -34,21 +34,25 @@ void startWord() {
 //ASUMSI SUDAH ADA TYPESTRUCT BANGUNAN
 //ASUMSI SUDAH ADA TYPESTRUCT PESANAN
 //ASUMSI SUDAH ADA TYPESTRUCT 
-void readFile(char *namaFile, Matrix *peta, Point *HQ, ListOfBangunan *Listbangunan, PrioQueuePesanan *QueuePesanan, Matrix *Adjency) {
+void readFile(char *namaFile, Matrix *peta, Point *HQ, ListPoint *Listbangunan, PrioQueuePesanan *QueuePesanan, Matrix *Adjency) {
 // void readFile(char *namaFile) {
     Word kata;
     int i,j,k,n,m,jumlahBangunan,jumlahPesanan;
     Pesanan tempPesanan;
-    Bangunan tempBangunan;
+    Point tempBangunan;
     Point tempPoint;
 
 
 
     startFile(namaFile); copyWord();
+    
     ROWS(*peta) = charToInt(currentWord);advWord();
+    
     COLS(*peta) = charToInt(currentWord);advWord();
+    
     Absis(*HQ)  = charToInt(currentWord);advWord();
     Ordinat(*HQ)  = charToInt(currentWord);advWord();
+    Name(*HQ) = '8';
     jumlahBangunan  = charToInt(currentWord);
     for (i=0; i<jumlahBangunan; i++){
        
@@ -71,15 +75,14 @@ void readFile(char *namaFile, Matrix *peta, Point *HQ, ListOfBangunan *Listbangu
         Name(tempPoint)= currentChar;advWord(); advWord();
         Absis(tempPoint)=  charToInt(currentWord);advWord();
         Ordinat(tempPoint) =  charToInt(currentWord);
-        printf("diassign ke point dulu "); WritePoint(tempPoint);printf("\n");
+       // printf("diassign ke point dulu "); WritePoint(tempPoint);printf("\n");
 
-        tempBangunan.nama= Name(tempPoint);
-        tempBangunan.posisi.X =  Absis(tempPoint);
-        tempBangunan.posisi.Y =  Ordinat(tempPoint);
-        printf("printOneBangunan ");printOneBangunan(tempBangunan); printf("\n\n");
-        insertLastListStat(Listbangunan,tempBangunan);
+        tempBangunan.name= Name(tempPoint);
+        tempBangunan.X =  Absis(tempPoint);
+        tempBangunan.Y =  Ordinat(tempPoint);
+       // printf("printOneBangunan ");printOneBangunan(tempBangunan); printf("\n\n");
+        insertLastListPoint(Listbangunan,tempBangunan);
     }
-    displayListStat(*Listbangunan);
     for (n = 0; n<ROWS(*peta); n++){
         for (m = 0; m<COLS(*peta); m++){
             ELMT(*Adjency, n, m) = charToInt(currentWord);advWord();

@@ -9,7 +9,7 @@
 #include "../ADT Matriks/matrix.h"
 #include "../ADT Point/point.h"
 // #include "../ADT List Statis/listpos.h"
-#include "../ADT List Statis/ListOfBangunan.h"
+#include "../../Move/listpoint.h"
 #include "../ADT Queue/daftarPesanan.h"
 
 
@@ -47,7 +47,7 @@ void startWord();
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void readFile(char *namaFile, Matrix *peta, Point *HQ, ListOfBangunan *bangunan, PrioQueuePesanan *Queuepesanan, Matrix *Adjency);
+void readFile(char *namaFile, Matrix *peta, Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan, Matrix *Adjency);
 
 
 void advWord();

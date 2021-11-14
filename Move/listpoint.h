@@ -54,4 +54,6 @@ void insertLastListPoint(ListPoint *l, ElTypeListPoint val);
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 
+void printOneBangunan(Point b);
+
 #endif
