@@ -9,7 +9,7 @@ void ignoreBlank() {
    I.S. : currentChar sembarang 
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
     /* Algoritma */
-    while (currentChar == BLANK) {
+    while (currentChar == BLANK || currentChar == MARK_ENGINE) {
         advForFile();
     }
 }
@@ -39,20 +39,47 @@ void readFile(char *namaFile, Matrix *peta, Point *HQ, ListOfBangunan *Listbangu
     Word kata;
     int i,j,k,n,m,jumlahBangunan,jumlahPesanan;
     Pesanan tempPesanan;
+    Bangunan tempBangunan;
+    Point tempPoint;
+
+
 
     startFile(namaFile); copyWord();
     ROWS(*peta) = charToInt(currentWord);advWord();
     COLS(*peta) = charToInt(currentWord);advWord();
     Absis(*HQ)  = charToInt(currentWord);advWord();
     Ordinat(*HQ)  = charToInt(currentWord);advWord();
-    jumlahBangunan  = charToInt(currentWord);advWord();
-
+    jumlahBangunan  = charToInt(currentWord);
     for (i=0; i<jumlahBangunan; i++){
-        ELMTListOfBangunan(*Listbangunan, i).nama = currentChar;advWord();
-        ELMTListOfBangunan(*Listbangunan, i).posisi.X =  charToInt(currentWord);advWord();
-        ELMTListOfBangunan(*Listbangunan, i).posisi.Y =  charToInt(currentWord);advWord();
-    }
+       
+        // printf("%c", (currentChar)); advWord(); advWord();
+        // printf(" %d",  charToInt(currentWord));advWord();
+        // printf(" %d\n",  charToInt(currentWord));
 
+        // printf("%c", (currentChar));
+        // ELMTListOfBangunan(*Listbangunan, i).nama = currentChar;advWord(); advWord();
+        // printf(" %d",  charToInt(currentWord));
+        // printf(" %d",  charToInt(currentWord));
+        
+        // ELMTListOfBangunan(*Listbangunan, i).posisi.X =  charToInt(currentWord);advWord();
+        // printf(" %d\n",  charToInt(currentWord));
+        // ELMTListOfBangunan(*Listbangunan, i).posisi.Y =  charToInt(currentWord);
+        // tempBangunan.posisi.name= currentChar;
+        // tempBangunan.nama= currentChar;advWord(); advWord();
+        // tempBangunan.posisi.X =  charToInt(currentWord);advWord();
+        // tempBangunan.posisi.Y =  charToInt(currentWord);
+        Name(tempPoint)= currentChar;advWord(); advWord();
+        Absis(tempPoint)=  charToInt(currentWord);advWord();
+        Ordinat(tempPoint) =  charToInt(currentWord);
+        printf("diassign ke point dulu "); WritePoint(tempPoint);printf("\n");
+
+        tempBangunan.nama= Name(tempPoint);
+        tempBangunan.posisi.X =  Absis(tempPoint);
+        tempBangunan.posisi.Y =  Ordinat(tempPoint);
+        printf("printOneBangunan ");printOneBangunan(tempBangunan); printf("\n\n");
+        insertLastListStat(Listbangunan,tempBangunan);
+    }
+    displayListStat(*Listbangunan);
     for (n = 0; n<ROWS(*peta); n++){
         for (m = 0; m<COLS(*peta); m++){
             ELMT(*Adjency, n, m) = charToInt(currentWord);advWord();
@@ -124,14 +151,16 @@ void copyWord() {
     int i=0;
     /* ALGORITMA */
     while (currentChar != MARK_ENGINE && currentChar != BLANK) {
+        // printf("saat ini %c \n", currentChar);
         currentWord.contents[i] = currentChar;
-        adv();
+        advForFile();
         i++;
     }
     currentWord.length = i;
     if (currentWord.length > CAPACITY_WORD) {
         currentWord.length = CAPACITY_WORD;
-    } 
+    }
+    // if(currentChar == MARK_ENGINE):
 }
 
 int charToInt(Word C){

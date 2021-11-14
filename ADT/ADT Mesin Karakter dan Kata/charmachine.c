@@ -27,7 +27,7 @@ void startFile(char *fileName){
 /* start baca dari file,mirip start()*/
   /* Algoritma */
   tape = fopen(fileName,"r");
-  adv();
+  advForFile();
 }
 
 void adv() {
@@ -47,10 +47,15 @@ void adv() {
 
 void advForFile(){
    retval = fscanf(tape,"%c",&currentChar);
-   if (currentChar == '\n') fscanf(tape,"%c",&currentChar);
+   // if (currentChar == '\n') fscanf(tape,"%c",&currentChar);
 	eot = (currentChar == MARK_FILE);
 	if (eot) {
               fclose(tape);
  	}
 
 }
+
+
+// void advNewline(){
+//    retval = fscanf(tape,"\n",&currentChar)
+// }
