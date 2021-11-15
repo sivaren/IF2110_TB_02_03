@@ -21,12 +21,10 @@ ListPoint adjacent(ListPoint map, Matrix adjacency_matrix, Point coordinate_mobi
         {
             if (j == 0)
             {
-                printf("%d. Headquarters\n", num);
                 insertLastListPoint(&l,HQ);             
             }
             else
             {
-                printf("%d. ", num);
                 int ctr = 0;
                 boolean found = false;
                 while (!found)
@@ -34,8 +32,6 @@ ListPoint adjacent(ListPoint map, Matrix adjacency_matrix, Point coordinate_mobi
                     char name = (char) (j+64);
                     if (name == NameELMTListPoint(map,ctr))
                     {
-                        WritePoint(ELMTListPoint(map,ctr));
-                        printf("\n");
                         insertLastListPoint(&l,ELMTListPoint(map,ctr));
                         found = true;
                     }
@@ -54,15 +50,28 @@ ListPoint adjacent(ListPoint map, Matrix adjacency_matrix, Point coordinate_mobi
 void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Point HQ) {
     printf("Posisi yang dapat dicapai:\n");
     ListPoint list_adjacent = adjacent(map,adjacency_matrix,*coordinate_mobita,HQ);
+    for (int i = 0; i < lengthListPoint(list_adjacent); i++)
+    {
+        if (NameELMTListPoint(list_adjacent,i) == Name(HQ))
+        {
+            printf("%d. Headquarters", i+1);
+        }
+        else
+        {
+            printf("%d. ", i+1);
+            WritePoint(ELMTListPoint(list_adjacent,i));
+        }
+        printf("\n");
+    }
     int total_point = lengthListPoint(list_adjacent);
     printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n");
     int option;
-    printf("ENTER COMMAND: ");
+    printf("Masukkan pilihan opsi: ");
     scanf("%d", &option); // Pilih angka antara 0-total_point
     while (option < 0 || option > total_point)
     {
         printf("Masukkan angka antara 0-total_point!\n");
-        printf("ENTER COMMAND: ");
+        printf("Masukkan pilihan opsi: ");
         scanf("%d", &option); // Pilih angka antara 0-total_point
     }
     printf("\n");
