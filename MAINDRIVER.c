@@ -114,7 +114,7 @@ void readTodo(ToDoList *Todo) {
             }
 }
 
-void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, int speedboost, int currentCapacity, Point currentPos, int Money) {
+void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, int speedboost, int currentCapacity, Point currentPos, int Money, int Time) {
     printf("\n=============\n");
     displaytas(TasNobita);
     printf("\n=============\n");
@@ -122,9 +122,8 @@ void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavy
     printf("\n=============\n");
     displayToDoList(Todo);
     printf("\n=============\n");
-    printf("money: %d\n", Money);
-    printf("heavyitems: %d\n", heavyitems);
-    printf("speedboost: %d\n", speedboost);
+    printf("Time = : %d\n", Time);
+    printf("Speedboost = : %d\n", speedboost);
     printf("current capacity: %d\n", currentCapacity);
     printf("currentPos: %c\n", currentPos.name);
     printf("\n=============\n");
@@ -157,7 +156,7 @@ int main() {
 
     pointHQ = CreatePoint('X', 1, 1);
     printf("AbsisHQ sebelum read: %d\n", pointHQ.X);
-    CreateListPoint(&DaftarBangunan);
+    CreateListPoint(&DaftarBangunan, 17); // GANTI JUMLAH BANGUNAN YG ADA
     CreateMatrix(lengthListPoint(DaftarBangunan), lengthListPoint(DaftarBangunan), &Adjacency);
     CreatePRIOQUEUE(&DaftarPesanan);
     // readfile kalo udh ada
@@ -219,7 +218,7 @@ int main() {
     CreateInProgList(&DaftarInprog);
     
 
-    displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money);
+    displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money, Time);
     displayPRIOQUEUE(DaftarPesanan);
     printf("NAME HQ= %c\n", Name(pointHQ));
     printf("config loaded\n");
@@ -275,7 +274,7 @@ int main() {
             }
 
             // daftar pesanan to todo
-            while (Time >= HEAD_PRIOQUEUE(DaftarPesanan).waktuMasuk) {
+            while (!isEmptyPRIOQUEUE(DaftarPesanan) && Time >= HEAD_PRIOQUEUE(DaftarPesanan).waktuMasuk) {
                 Pesanan tempPesanan;
                 ToDoType tempTodo;
                 dequeuePRIOQUEUE(&DaftarPesanan, &tempPesanan);
@@ -283,9 +282,16 @@ int main() {
                 tempTodo.pickUp = tempPesanan.pickUp;
                 tempTodo.dropOff = tempPesanan.dropOff;
                 tempTodo.perishTime = tempPesanan.waktuHangus;
+                tempTodo.itemType = tempPesanan.jenisItem;
                 insert_ToDoList(&Todo, tempTodo);
 
             }
+
+            printf("Time = : %d\n", Time);
+            printf("CurrBangunan = : %c\n", currentPos.name);
+            printf("Speedboost = : %d\n", speedboost);
+            
+
 
 	
 
@@ -315,7 +321,7 @@ int main() {
         }
         else if (opt == 'D') {
             //print all state
-            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money);
+            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money, Time);
 
         }
         else if (opt == 'c') {
