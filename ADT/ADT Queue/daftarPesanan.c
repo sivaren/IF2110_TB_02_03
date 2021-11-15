@@ -61,10 +61,10 @@ void enqueuePRIOQUEUE(PrioQueuePesanan *q, Pesanan val) {
     boolean found = false;
     int idxFound = 0;
 
-    int i = IDX_HEAD(*q) + 1;
-    while (!found && i<=IDX_TAIL(*q)) {
+    int i = IDX_HEAD_PRIOQUEUE(*q) + 1;
+    while (!found && i<=IDX_TAIL_PRIOQUEUE(*q)) {
 
-        if ((*q).buffer[i].waktuMasuk < val.waktuMasuk) {
+        if ((*q).buffer[i].waktuMasuk > val.waktuMasuk) {
             found = true;
             idxFound = i;
         }
@@ -78,7 +78,7 @@ void enqueuePRIOQUEUE(PrioQueuePesanan *q, Pesanan val) {
         TAIL_PRIOQUEUE(*q) = val;
     }
     else {
-        for (int i=idxFound; i<IDX_TAIL(*q); i++) {
+        for (int i=idxFound; i<IDX_TAIL_PRIOQUEUE(*q); i++) {
             (*q).buffer[i+1] = (*q).buffer[i];
         } 
         (*q).buffer[idxFound] = val;

@@ -117,17 +117,17 @@ void readTodo(ToDoList *Todo) {
 void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, int speedboost, int currentCapacity, Point currentPos, int Money) {
     printf("\n=============\n");
     displaytas(TasNobita);
-    printf("=============\n");
+    printf("\n=============\n");
     displayInProg(DaftarInprog);
-    printf("=============\n");
+    printf("\n=============\n");
     displayToDoList(Todo);
-    printf("=============\n");
+    printf("\n=============\n");
     printf("money: %d\n", Money);
     printf("heavyitems: %d\n", heavyitems);
     printf("speedboost: %d\n", speedboost);
     printf("current capacity: %d\n", currentCapacity);
     printf("currentPos: %c\n", currentPos.name);
-    printf("=============\n");
+    printf("\n=============\n");
 }
 
 int main() {
@@ -273,18 +273,28 @@ int main() {
                     deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
                 }
             }
+
+            // daftar pesanan to todo
+            while (Time >= HEAD_PRIOQUEUE(DaftarPesanan).waktuMasuk) {
+                Pesanan tempPesanan;
+                ToDoType tempTodo;
+                dequeuePRIOQUEUE(&DaftarPesanan, &tempPesanan);
+                tempTodo.timeIn = tempPesanan.waktuMasuk;
+                tempTodo.pickUp = tempPesanan.pickUp;
+                tempTodo.dropOff = tempPesanan.dropOff;
+                tempTodo.perishTime = tempPesanan.waktuHangus;
+                insert_ToDoList(&Todo, tempTodo);
+
+            }
+
 	
 
 
-            // perish controller
-
             //
-            printf("Time = %d\n", Time);
-            printf("Speedboost = %d\n", speedboost);
             }
         else if (opt == 'M') {
             // map
-            map(DaftarBangunan, pointHQ, rows, cols);
+            map(DaftarBangunan, Adjacency, currentPos, pointHQ, TOP_TAS(TasNobita).dropOff, Todo, rows, cols);
         }
         else if (opt == 'p') {
             //pickup

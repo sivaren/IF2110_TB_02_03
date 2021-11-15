@@ -117,3 +117,18 @@ void displayToDoList(ToDoList td){
     }
 }
 /* Menampilkan isi To Do List */
+
+boolean isBangunanInTodo (char namaBangunan, ToDoList DaftarTodo) {
+    boolean found = false;
+    AddressTodo p;
+    p = FIRST_TODO(DaftarTodo);
+    while (p != NULL && !found) {
+        if (PICKUP_TODO(p) == namaBangunan) {
+            found = true;
+        }
+        else {
+            p = NEXT_TODO(p);
+        }
+    }
+    return found;
+}

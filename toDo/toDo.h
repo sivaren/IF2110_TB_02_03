@@ -72,4 +72,6 @@ void delete_ToDoList(ToDoList *td, ToDoType delTarget, ToDoType *delVal);
 void displayToDoList(ToDoList td);
 /* Menampilkan isi To Do List */
 
+boolean isBangunanInTodo (char namaBangunan, ToDoList DaftarTodo);
+
 #endif

@@ -2,6 +2,7 @@
 #include "map.h"
 #include "../Move/move.h"
 #include "../pcolor/pcolor.h"
+#include "../toDo/toDo.h"
 
 boolean isDestination(ListPoint destination, Point building) {
     boolean found = false;
@@ -20,7 +21,7 @@ boolean isDestination(ListPoint destination, Point building) {
     return found;
 }
 
-void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobita, Point HQ, char drop_off, char pick_up, int N, int M) {
+void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobita, Point HQ, char drop_off, ToDoList pick_up, int N, int M) {
     ListPoint destination = adjacent(list_building,adjacency_matrix,coordinate_mobita,HQ);
     Matrix m;
     CreateMatrix(N+2,M+2,&m);
@@ -64,6 +65,9 @@ void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobi
                 }   
                 if (found)
                 {
+                    // list pickup
+
+
                     if (NameELMTListPoint(list_building,k) == Name(coordinate_mobita))
                     {
                         print_yellow(NameELMTListPoint(list_building,k));
@@ -72,8 +76,7 @@ void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobi
                     {
                         print_blue(NameELMTListPoint(list_building,k));
                     }
-                    else if (NameELMTListPoint(list_building,k) == pick_up)
-                    {
+                    else if (isBangunanInTodo(NameELMTListPoint(list_building, k), pick_up)) {
                         print_red(NameELMTListPoint(list_building,k));
                     }
                     else
@@ -87,6 +90,7 @@ void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobi
                             printf("%c", NameELMTListPoint(list_building,k));
                         }
                     }
+
                 }
                 else
                 {
