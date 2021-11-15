@@ -22,7 +22,7 @@ void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Poin
         {
             if (j == 0)
             {
-                printf("%d. Headquarters\n");
+                printf("%d. Headquarters\n", num);
                 insertLastListPoint(&l,HQ);             
             }
             else
