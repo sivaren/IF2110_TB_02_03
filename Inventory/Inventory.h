@@ -9,11 +9,12 @@
 #include "../ADT/ADT Stack/stack.h"
 #include "../Move/listpoint.h"
 #include "ListInventory.h"
+#include "../ADT/ADT Queue/daftarPesanan.h"
 
-void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, Point *coordinate_mobita, int *Time);
+void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, PrioQueuePesanan Q, Point *coordinate_mobita, int *Time);
 
 //Waktu item perishable di TOP tas kembali ke semula
-void KainPembungkusWaktu(Tas tasMobita);
+void KainPembungkusWaktu(Tas tasMobita, PrioQueuePesanan Q);
 
 //Kapasitas tas menjadi 2 kali lipat
 void SenterPembesar(Tas *tasMobita);

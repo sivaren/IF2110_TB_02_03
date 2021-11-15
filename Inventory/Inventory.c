@@ -2,7 +2,7 @@
 #include "Inventory.h"
 
 
-void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, Point *coordinate_mobita, int *Time)
+void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, PrioQueuePesanan Q, Point *coordinate_mobita, int *Time)
 {
     //Menampilkan isi List Inventory
     displayInventory(*inventory);
@@ -35,7 +35,7 @@ void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, Point *co
             if(ELMTInventory(*inventory,idx) == 1)
             {
                 printf("Kain Pembungkus Waktu berhasil digunakan!\n");
-                KainPembungkusWaktu(*tasMobita);
+                KainPembungkusWaktu(*tasMobita, Q);
             }
             else if(ELMTInventory(*inventory,idx) == 2)
             {
@@ -58,11 +58,28 @@ void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, Point *co
 
 
 //Waktu item perishable di TOP tas kembali ke semula
-void KainPembungkusWaktu(Tas tasMobita)
+void KainPembungkusWaktu(Tas tasMobita, PrioQueuePesanan Q)
 {
     if(TOP_TAS(tasMobita).itemType == 'P')
     {
-        //TOP_TAS(tasMobita).perishTime = waktu hangus di awal daftar pesanan;
+        int i;
+        char pickUpTOP, dropOffTOP, itemTypeTOP;
+        pickUpTOP = TOP_TAS(tasMobita).pickUp;
+        dropOffTOP = TOP_TAS(tasMobita).dropOff;
+
+        for(i = IDX_HEAD_PRIOQUEUE(Q); i <= IDX_TAIL_PRIOQUEUE(Q); i++)
+        {
+            if(Q.buffer[i].pickUp == pickUpTOP)
+            {
+                if(Q.buffer[i].dropOff == dropOffTOP)
+                {
+                    if(Q.buffer[i].jenisItem == 'P')
+                    {
+                        TOP_TAS(tasMobita).perishTime = Q.buffer[i].waktuHangus;
+                    }
+                }
+            }
+        }
     }
     else
     {
