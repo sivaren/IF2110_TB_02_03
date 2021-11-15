@@ -65,7 +65,7 @@ void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, int *speedboos
             pushTas(Tasnobita, tempElmt);
             insertFirst_InProgList(Inprog, tempElmt2);
         }
-    printf("speedboost (0 = false, 1 = true): ");
+    printf("speedboost (0 = no sb): ");
         int sb;
         scanf("%d", &sb);
         if (sb == 0) {
@@ -114,7 +114,7 @@ void readTodo(ToDoList *Todo) {
             }
 }
 
-void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, int speedboost, int currentCapacity, Point CurrentBangunan, int Money) {
+void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, int speedboost, int currentCapacity, Point currentPos, int Money) {
     printf("\n=============\n");
     displaytas(TasNobita);
     printf("=============\n");
@@ -124,15 +124,9 @@ void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavy
     printf("=============\n");
     printf("money: %d\n", Money);
     printf("heavyitems: %d\n", heavyitems);
-    printf("speedboost: ");
-    if (speedboost) {
-        printf("true\n");
-    }
-    else {
-        printf("false\n");
-    }
+    printf("speedboost: %d\n", speedboost);
     printf("current capacity: %d\n", currentCapacity);
-    printf("currentbangunan: %c\n", CurrentBangunan.name);
+    printf("currentPos: %c\n", currentPos.name);
     printf("=============\n");
 }
 
@@ -144,14 +138,12 @@ int main() {
     InProgList DaftarInprog;
     int heavyitems = 0;
     int speedboost = 0;
-    Point CurrentBangunan;
     Tas TasNobita;
         // baca input tas nobita
         readTas(&TasNobita, &DaftarInprog, &heavyitems, &speedboost);
     ToDoList Todo;
         // baca input todo list
         readTodo(&Todo);
-        displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, CurrentBangunan, Money);
 
     Matrix dummyPeta;
     Point pointHQ;
@@ -164,15 +156,65 @@ int main() {
     int cols = 15; //DUMMY
 
 
-    pointHQ = CreatePoint('X', 1, 1);
+    // pointHQ = CreatePoint('X', 1, 1);
     printf("AbsisHQ sebelum read: %d\n", pointHQ.X);
     CreateMatrix(rows, cols, &dummyPeta);
     CreateListPoint(&DaftarBangunan);
     CreateMatrix(lengthListPoint(DaftarBangunan), lengthListPoint(DaftarBangunan), &Adjacency);
 
+    // readfile kalo udh ada
+    // readFile("config.txt", &dummyPeta, &pointHQ, &DaftarBangunan, &DaftarPesanan, &Adjacency);
+    // printf("AbsisHQ setelah read: %d\n", pointHQ.X);
 
-    readFile("config.txt", &dummyPeta, &pointHQ, &DaftarBangunan, &DaftarPesanan, &Adjacency);
-    printf("AbsisHQ setelah read: %d\n", pointHQ.X);
+
+    // kalo blm ada read
+    printf("input adjacency: \n");
+    pointHQ = CreatePoint('8',1,1);
+    currentPos = pointHQ;
+    Point A = CreatePoint('A',10,1);
+    insertLastListPoint(&DaftarBangunan,A);
+    Point B = CreatePoint('B',1,15);
+    insertLastListPoint(&DaftarBangunan,B);
+    Point C = CreatePoint('C',1,9);
+    insertLastListPoint(&DaftarBangunan,C);
+    Point D = CreatePoint('D',1,13);
+    insertLastListPoint(&DaftarBangunan,D);
+    Point E = CreatePoint('E',2,3);
+    insertLastListPoint(&DaftarBangunan,E);
+    Point F = CreatePoint('F',3,1);
+    insertLastListPoint(&DaftarBangunan,F);
+    Point G = CreatePoint('G',3,8);
+    insertLastListPoint(&DaftarBangunan,G);
+    Point H = CreatePoint('H',3,14);
+    insertLastListPoint(&DaftarBangunan,H);
+    Point I = CreatePoint('I',4,5);
+    insertLastListPoint(&DaftarBangunan,I);
+    Point J = CreatePoint('J',5,12);
+    insertLastListPoint(&DaftarBangunan,J);
+    Point K = CreatePoint('K',6,3);
+    insertLastListPoint(&DaftarBangunan,K);
+    Point L = CreatePoint('L',7,10);
+    insertLastListPoint(&DaftarBangunan,L);
+    Point M = CreatePoint('M',8,2);
+    insertLastListPoint(&DaftarBangunan,M);
+    Point N = CreatePoint('N',8,6);
+    insertLastListPoint(&DaftarBangunan,N);
+    Point O = CreatePoint('O',8,15);
+    insertLastListPoint(&DaftarBangunan,O);
+    Point P = CreatePoint('P',9,13);
+    insertLastListPoint(&DaftarBangunan,P);
+    Point Q = CreatePoint('Q',10,3);
+    insertLastListPoint(&DaftarBangunan,Q);
+    CreateMatrix(18,18,&Adjacency);
+    readMatrix(&Adjacency,18,18);   
+
+
+
+
+
+
+    displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money);
+
     printf("NAME HQ= %c\n", Name(pointHQ));
     printf("config loaded\n");
    
@@ -184,19 +226,36 @@ int main() {
         if (opt == 'm') {
             //pindah bangunan
             move(DaftarBangunan, Adjacency, &currentPos, pointHQ);
-            Time+=1;
-        }
+            Time += 1; // regular
+            Time += heavyitems; // heavy items
+
+            if ((speedboost%2) == 1) {
+                Time -= 1;
+                printf("Bonus 1 Unit waktu\n");
+            }
+            if (speedboost != 0) {
+            speedboost -= 1;
+            }
+        
+
+
+            // perish controller
+
+            //
+            printf("Time = %d\n", Time);
+            printf("Speedboost = %d\n", speedboost);
+            }
         else if (opt == 'M') {
             // map
             map(DaftarBangunan, pointHQ, rows, cols);
         }
         else if (opt == 'p') {
             //pickup
-            PICK_UP(CurrentBangunan, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost);
+            PICK_UP(currentPos, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost);
         }
         else if (opt == 'd') {
             //dropoff
-            DROP_OFF(CurrentBangunan, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost, &currentCapacity, &Money);
+            DROP_OFF(currentPos, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost, &currentCapacity, &Money);
             
         }
         else if (opt == 't') {
@@ -209,7 +268,7 @@ int main() {
         }
         else if (opt == 'D') {
             //print all state
-            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, CurrentBangunan, Money);
+            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money);
 
         }
         else if (opt == 'c') {
