@@ -2,19 +2,18 @@
 #include "boolean.h"
 #include "move.h"
 
-void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Point HQ) {
-    printf("Posisi yang dapat dicapai:\n");
+ListPoint adjacent(ListPoint map, Matrix adjacency_matrix, Point coordinate_mobita, Point HQ) {
     int num = 1, row_mobita; int j;
     ListPoint l;
     CreateListPoint(&l);
     int total_building = lengthListPoint(map);
-    if (EQ(*coordinate_mobita,HQ))
+    if (EQ(coordinate_mobita,HQ))
     {
         row_mobita = 0;
     }
     else
     {
-        row_mobita = (int) Name(*coordinate_mobita) - 64;
+        row_mobita = (int) Name(coordinate_mobita) - 64;
     }
     for (j = 0; j < COLS(adjacency_matrix); j++)
     {
@@ -46,34 +45,16 @@ void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Poin
                     }
                 }
             }   
-                // int row = 0;
-                // int col = 0;
-                // boolean found = false;
-                // while (row < ROWSP(*map) && !found)
-                // {
-                //     while (col < COLSP(*map) && !found)
-                //     {
-                //         char name = (char) (j + 64);
-                //         if (name == NAME(*map,row,col))
-                //         {
-                //             WritePoint(POINT(*map,row,col));
-                //             insertLastListPoint(&l,POINT(*map,row,col));
-                //             found = true;
-                //         }
-                //         if (!found)
-                //         {
-                //             col++;
-                //         }
-                //     }
-                //     if (!found)
-                //     {
-                //         row++;
-                //     }
-                // }
             num++;
         }        
     }
-    int total_point = lengthListPoint(l);
+    return l;
+}
+
+void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Point HQ) {
+    printf("Posisi yang dapat dicapai:\n");
+    ListPoint list_adjacent = adjacent(map,adjacency_matrix,*coordinate_mobita,HQ);
+    int total_point = lengthListPoint(list_adjacent);
     printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n");
     int option;
     printf("ENTER COMMAND: ");
@@ -88,9 +69,9 @@ void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Poin
     if (option != 0)
     {
         int idx = option-1;
-        *coordinate_mobita = ELMTListPoint(l, idx);
+        *coordinate_mobita = ELMTListPoint(list_adjacent, idx);
         printf("Mobita sekarang berada di titik ");
-        WritePoint(ELMTListPoint(l, idx));
+        WritePoint(ELMTListPoint(list_adjacent, idx));
         printf("!\n");
     }
 }
