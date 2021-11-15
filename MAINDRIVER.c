@@ -253,7 +253,7 @@ int main() {
             }
 
             // daftar pesanan to todo
-            while (!isEmptyPRIOQUEUE(DaftarPesanan) && Time >= HEAD_PRIOQUEUE(DaftarPesanan).waktuMasuk) {
+            while (!isEmptyPRIOQUEUE(DaftarPesanan) && Time >= (DaftarPesanan).buffer[(DaftarPesanan).idxHead].waktuMasuk) {
                 Pesanan tempPesanan;
                 ToDoType tempTodo;
                 dequeuePRIOQUEUE(&DaftarPesanan, &tempPesanan);
