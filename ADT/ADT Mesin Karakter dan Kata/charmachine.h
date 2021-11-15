@@ -8,6 +8,7 @@
 
 #define MARK_ENGINE '\n'
 #define MARK_FILE '.'
+// #define MARK_FILE '\0'
 /* Char Engine State */
 extern char currentChar;
 extern boolean eot;

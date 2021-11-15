@@ -122,9 +122,10 @@ void upgradeTasCapacity(Tas *s, int capacity){
 /* Upgrade tas dengan capacity yang baru */
 
 void displaytas(Tas s){
+    int i;
     if(!isEmptyTas(s)){
         printf("Isi Tas:\n");
-        for(int i = IDX_TOP_TAS(s); i >= 0; i--) {
+        for( i = IDX_TOP_TAS(s); i >= 0; i--) {
             printf("%c ", s.buffer[i].pickUp);
             printf("%c ", s.buffer[i].dropOff);
             printf("%c ", s.buffer[i].itemType);

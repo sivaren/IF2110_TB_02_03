@@ -10,16 +10,22 @@ int main(){
     PrioQueuePesanan daftarPesanMasuk;
     
     /* ALGORITMA */
-    readFile("a.txt", &map1,&HQ, &ListOfBangunan, &daftarPesanMasuk, &map);
-
-    // displayMatrix(map1);
-    // displayPRIOQUEUE(daftarPesanMasuk);
+    CreateListPoint(&ListOfBangunan); 
+    CreateMatrix(18,18,&map);
+    CreatePRIOQUEUE(&daftarPesanMasuk);
+    readFile("a.txt", &HQ, &ListOfBangunan, &daftarPesanMasuk, &map);
+    
+    // displayMatrix(map);
+    displayPRIOQUEUE(daftarPesanMasuk);
     // displayListStat(ListOfBangunan);
+    startWord();
+    printWord(currentWord);
 
-    startFile("a.txt"); copyWord();
-    printf("%d ", ROWS(map1));advWord();
-    printf("%d\n", COLS(map1));advWord();
-    printf("%d ", charToInt(currentWord));advWord();
-    printf("%d\n", charToInt(currentWord));advWord();
-    printf("%d", charToInt(currentWord));advWord();
+    // if (currentWord == 'HELLO') printf("yey");
+    // startFile("a.txt"); copyWord();
+    // printf("%d ", ROWS(map1));advWord();
+    // printf("%d\n", COLS(map1));advWord();
+    // printf("%d ", charToInt(currentWord));advWord();
+    // printf("%d\n", charToInt(currentWord));advWord();
+    // printf("%d", charToInt(currentWord));advWord();
 }

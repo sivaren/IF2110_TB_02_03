@@ -50,7 +50,7 @@ void advForFile(){
    // if (currentChar == '\n') fscanf(tape,"%c",&currentChar);
 	eot = (currentChar == MARK_FILE);
 	if (eot) {
-              fclose(tape);
+         fclose(tape);
  	}
 
 }

@@ -82,13 +82,14 @@ void displayPRIOQUEUE(PrioQueuePesanan q) {
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika PRIOQUEUE kosong : menulis [] */
     /* KAMUS LOKAL */
-    int i;
+    int i,j;
     /* ALGORITMA */
     if (!isEmptyPRIOQUEUE(q)) {
         printf("Daftar Pesanan yang masuk :\n");
+        j=0;
         for (i = IDX_HEAD_PRIOQUEUE(q); i <= IDX_TAIL_PRIOQUEUE(q); i++) {
             
-            printf("%d. waktuMasuk : %d\n", i+1, q.buffer[i].waktuMasuk);
+            printf("%d. waktuMasuk : %d\n", j+1, q.buffer[i].waktuMasuk);
             printf("   pickUp     : %c\n",  q.buffer[i].pickUp);
             printf("   dropOff    : %c\n",  q.buffer[i].dropOff);
             printf("   jenisItem  : %c\n",  q.buffer[i].jenisItem);
@@ -96,6 +97,7 @@ void displayPRIOQUEUE(PrioQueuePesanan q) {
                 printf("   waktuHangus: %d\n",  q.buffer[i].waktuHangus);
             }
             printf("\n");
+            j++;
         }
     }
 }

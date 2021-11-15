@@ -7,10 +7,11 @@
 #include "boolean.h"
 #include "charmachine.h"
 #include "../ADT Matriks/matrix.h"
-#include "../ADT Point/point.h"
+// #include "../ADT Point/point.h"
 // #include "../ADT List Statis/listpos.h"
 #include "../../Move/listpoint.h"
 #include "../ADT Queue/daftarPesanan.h"
+// #include"../../Move/point.h"
 
 
 
@@ -47,7 +48,7 @@ void startWord();
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void readFile(char *namaFile, Matrix *peta, Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan, Matrix *Adjency);
+void readFile(char *namaFile,  Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan, Matrix *Adjency);
 
 
 void advWord();
@@ -65,6 +66,8 @@ void copyWord();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
 int charToInt(Word C);
-
+char WordtoChar(Word C);
+void printWord(Word C);
+// boolean isKataSama (Word C, char* string);
 #endif
 

@@ -2,13 +2,13 @@
 #include "map.h"
 
 void map(ListPoint map, Point HQ, int N, int M) {
-    Matrix m;
+    Matrix m;int i,j;
     CreateMatrix(N,M,&m);
     int row = ROWS(m)+2;
     int col = COLS(m)+2;
-    for (int i = 0; i < row; i++)
+    for ( i = 0; i < row; i++)
     {
-        for (int j = 0; j < col; j++)
+        for ( j = 0; j < col; j++)
         {
             if (i == 0 || j == 0 || i == row-1 || j == col-1)
             {

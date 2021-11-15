@@ -4,7 +4,7 @@
 
 void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Point HQ) {
     printf("Posisi yang dapat dicapai:\n");
-    int num = 1, row_mobita;
+    int num = 1, row_mobita; int j;
     ListPoint l;
     CreateListPoint(&l);
     int total_building = lengthListPoint(map);
@@ -16,7 +16,7 @@ void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Poin
     {
         row_mobita = (int) Name(*coordinate_mobita) - 64;
     }
-    for (int j = 0; j < COLS(adjacency_matrix); j++)
+    for (j = 0; j < COLS(adjacency_matrix); j++)
     {
         if (ELMT(adjacency_matrix, row_mobita, j) == 1)
         {
