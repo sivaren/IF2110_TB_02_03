@@ -5,13 +5,9 @@
 
 /*  Kamus Umum */
 #define INVENTORY_CAPACITY 5
-/* Kapasitas penyimpanan */
-#define INVENTORY_IDXUNDEF -1
-/* Indeks tak terdefinisi*/
-#define INVENTORY_GADGETUNDEF '-'
-/* Nilai elemen tak terdefinisi*/
+#define INVENTORY_IDXUNDEF -999
 
-typedef char Gadget;  
+typedef int Gadget;  
 typedef struct {
    Gadget contents[INVENTORY_CAPACITY]; 
 } ListInventory;
@@ -26,9 +22,9 @@ boolean isFullInventory(ListInventory l);
 
 void displayInventory(ListInventory l);
 
-void insertGadget(ListInventory *l, Gadget val);
+void insertGadget(ListInventory *l, Gadget id);
 
-void deleteGadget(ListInventory l, Gadget val);
+void deleteGadget(ListInventory *l, int i, Gadget id);
 
 
 #endif

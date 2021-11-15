@@ -2,62 +2,85 @@
 #include "ListInventory.h"
 #include "../Buy/ListGadget.h"
 
-/* Konstruktor : create List kosong  */
+//create list kosong
 void CreateListInventory(ListInventory *l) 
 {
     int i;
     for (i = 0; i < INVENTORY_CAPACITY; i++) 
     {
-        ELMTInventory(*l,i) = INVENTORY_GADGETUNDEF;
+        ELMTInventory(*l,i) = INVENTORY_IDXUNDEF;
     }
 }
 
+//Mengirimkan banyaknya elemen efektif list
 int lengthListInventory(ListInventory l) 
-/* Mengirimkan banyaknya elemen efektif List */
 {
     int i, sum = 0;
     /* ALGORITMA */
     for (i = 0; i < INVENTORY_CAPACITY; i++) {
-        if (ELMTInventory(l,i) != INVENTORY_GADGETUNDEF) {
+        if (ELMTInventory(l,i) != INVENTORY_IDXUNDEF) {
             sum += 1;
         }
     }
     return sum;
 }
 
+//mengirimkan true jika list inventory sudah penuh
 boolean isFullInventory(ListInventory l)
-/* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
 {
     return (lengthListInventory(l) == INVENTORY_CAPACITY);
 }
 
+//menampilkan list gadget yang ada di inventory
 void displayInventory(ListInventory l) 
-/* Menampilkan list gadget yang ada di dalam Inventory */
 {
-    /* KAMUS LOKAL */
-    int i;
-    int num;
-    /* ALGORITMA */
-    for (num = 1; num <= 5; num++)
+    int i, num;
+    for(num = 1; num <= INVENTORY_CAPACITY; num++)
     {
         printf("%d.", num);
         i = num-1;
-        printf("%c\n", ELMTInventory(l,i));
+        if(ELMTInventory(l,i) == 1)
+        {
+            printf("Kain Pembungkus Waktu\n");
+        }
+        else if(ELMTInventory(l,i) == 2)
+        {
+            printf("Senter Pembesar\n");
+        }
+        else if(ELMTInventory(l,i) == 3)
+        {
+            printf("Pintu Kemana Saja\n");
+        }
+        else if(ELMTInventory(l,i) == 4)
+        {
+            printf("Mesin Waktu\n");
+        }
+        else 
+        {
+            printf("-\n");
+        }
     }
-    i++;
 }    
 
-void insertGadget(ListInventory *l, Gadget val) 
-/* Memasukkan Gadget yang telah dibeli ke dalam inventory*/
+
+//insert gadget yang sudah dibeli ke dalam inventory
+void insertGadget(ListInventory *l, Gadget id)
 {
-    if (lengthListInventory(*l) < INVENTORY_CAPACITY) 
+
+    int i;
+    for(i = 0; i < INVENTORY_CAPACITY; i++)
     {
-        ELMTInventory(*l,lengthListInventory(*l)) = val;
+        if(ELMTInventory(*l,i) == INVENTORY_IDXUNDEF)
+        {
+            ELMTInventory(*l,i) = id;
+        }
     }
+
 }
 
-void deleteGadget(ListInventory l, Gadget val) 
-/* Menghapus Gadget yang telah digunakan dari inventory */
+//menghapus gadget dari list inventory
+void deleteGadget(ListInventory *l, int i, Gadget id)
 {
-    val = INVENTORY_GADGETUNDEF;
+    id = ELMTInventory(*l,i);
+    ELMTInventory(*l,i) = INVENTORY_IDXUNDEF;
 }

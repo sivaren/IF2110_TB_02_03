@@ -2,45 +2,64 @@
 #include <stdlib.h>
 #include "buy.h"
 
-void Buy(ListGadget gadget, ListInventory *inventory, ListOfBangunan LB, Point *coordinate_mobita, int *Money)
+void Buy(ListGadget gadget, ListInventory *inventory, Point coordinate_mobita, int *Money)
 {
-    if(PointToNamaBangunan(*coordinate_mobita, LB) != '8')
+    //*coordinate_mobita = posisi Mobita saat ini
+    if (Name(coordinate_mobita) == '8')
     {
         printf("Anda hanya dapat membeli Gadget di Headquarters!");
     }
     else 
     {
         printf("Uang Anda sekarang: %d Yen\n", Money);
+
+        //Menampilkan list Gadget yang dapat dibeli
         displayGadget(gadget);
-        printf("\n");
+        printf("Gadget mana yang ingin kau beli? (ketik 0 jika ingin kembali)\n");
 
         int op;
         scanf("ENTER COMMAND: %d", &op);
-        //meminta inputan yang valid
+        //Meminta inputan yang valid
         while (op < 0 || op > 4)
         {
             printf("Masukkan angka antara 0 - 4!\n");
             scanf("ENTER COMMAND: %d", &op); 
         }
 
-        //hanya bisa membeli item jika inventory belum penuh
         if (op != 0)
         {
-            //hanya dapat membeli gadget apabila inventory gadget belum penuh
+            //Hanya dapat membeli gadget apabila inventory gadget belum penuh
             if(!isFullInventory(*inventory))
             {
                 int idx, currMoney;
                 idx = op-1;
 
-                currMoney = *Money - ELMTListGadget(gadget,idx).price;
+                currMoney = *Money - LISTGADGET_PRICE(gadget,idx);
                 if(currMoney >= 0)
                 {
-                    //uang berkurang
+                    //Uang berkurang
                     *Money = currMoney;
-                    printf("%c berhasil dibeli!\n",ELMTListGadget(gadget,idx).name);
+
+                    if(LISTGADGET_IDNAME(gadget,idx) == 1) 
+                    {
+                        printf("Kain Pembungkus Waktu berhasil dibeli!\n");
+                    }
+                    else if(LISTGADGET_IDNAME(gadget,idx) == 2)
+                    {
+                        printf("Senter Pembesar berhasil dibeli!\n");
+                    }
+                    else if(LISTGADGET_IDNAME(gadget,idx) == 3)
+                    {
+                        printf("Pintu Kemana Saja berhasil dibeli!\n");
+                    }
+                    else if(LISTGADGET_IDNAME(gadget,idx) == 4)
+                    {
+                        printf("Mesin Waktu berhasil dibeli!\n");
+                    }
+                    
                     printf("Uang Anda sekarang: %d Yen", *Money);
-                    //memasukkan Gadget yang dibeli ke dalam list inventory
-                    insertGadget(inventory, ELMTListGadget(gadget,idx).name);
+                    //Memasukkan Gadget yang telah dibeli ke dalam List Inventory
+                    insertGadget(inventory, LISTGADGET_IDNAME(gadget,idx));
                 }
                 else
                 {

@@ -2,16 +2,16 @@
 #include "Inventory.h"
 
 
-void inventory(ListInventory inventory, Tas *tasMobita, ListOfBangunan LB, Point *coordinate_mobita, int *Time)
+void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, Point *coordinate_mobita, int *Time)
 {
-    //menampilkan isi inventory
-    displayInventory(inventory);
+    //Menampilkan isi List Inventory
+    displayInventory(*inventory);
     printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n");
     printf("\n");
 
     int op;
     scanf("ENTER COMMAND: %d\n", &op);
-    //meminta input yang valid
+    //Meminta input yang valid
     while (op < 0 || op > 5)
     {
         printf("Masukkan angka antara 0 - 5!\n");
@@ -21,32 +21,35 @@ void inventory(ListInventory inventory, Tas *tasMobita, ListOfBangunan LB, Point
     if (op != 0)
     {
         int idx = op-1;
-        //tidak ada gadget pada opsi yang dipilih
-        if(ELMTInventory(inventory,idx) == INVENTORY_GADGETUNDEF)
+        //Tidak ada gadget pada opsi yang dipilih (isi list = "-")
+        if(ELMTInventory(*inventory,idx) == INVENTORY_IDXUNDEF)
         {
             printf("Tidak ada Gadget yang dapat digunakan!");
         }
         else 
         {
-            //gadget digunakan, hapus dari list inventory
-            deleteGadget(inventory, ELMTInventory(inventory,idx));
-            printf("%c berhasil digunakan!", ELMTInventory(inventory,idx));
+            //Gadget digunakan, hapus dari list inventory
+            deleteGadget(inventory, idx, ELMTInventory(*inventory,idx));
 
-            //efek dari gadget aktif
-            if(ELMTInventory(inventory,idx) == "Kain Pembungkus Waktu")
+            //Efek dari gadget aktif
+            if(ELMTInventory(*inventory,idx) == 1)
             {
+                printf("Kain Pembungkus Waktu berhasil digunakan!\n");
                 KainPembungkusWaktu(*tasMobita);
             }
-            else if(ELMTInventory(inventory,idx) == "Senter Pembesar")
+            else if(ELMTInventory(*inventory,idx) == 2)
             {
+                printf("Senter Pembesar berhasil digunakan!\n");
                 SenterPembesar(tasMobita);
             }
-            else if(ELMTInventory(inventory,idx) == "Pintu Kemana Saja")
+            else if(ELMTInventory(*inventory,idx) == 3)
             {
-                PintuKemanaSaja(LB, coordinate_mobita);
+                printf("Pintu Kemana Saja berhasil digunakan!\n");
+                PintuKemanaSaja(LP, coordinate_mobita);
             }
-            else if(ELMTInventory(inventory,idx) == "Mesin Waktu")
+            else if(ELMTInventory(*inventory,idx) == 4)
             {
+                printf("Mesin Waktu berhasil digunakan!\n");
                 MesinWaktu(*Time);
             }
         }
@@ -59,7 +62,7 @@ void KainPembungkusWaktu(Tas tasMobita)
 {
     if(TOP_TAS(tasMobita).itemType == 'P')
     {
-        //TOP_TAS(tasMobita).perishTime == waktu hangus di awal daftar pesanan;
+        //TOP_TAS(tasMobita).perishTime = waktu hangus di awal daftar pesanan;
     }
     else
     {
@@ -67,10 +70,9 @@ void KainPembungkusWaktu(Tas tasMobita)
     }
 }
 
-//kapasitas tas menjadi 2 kali lipat
+//Kapasitas tas menjadi 2 kali lipat
 void SenterPembesar(Tas *tasMobita)
 {
-    //sesuain sama file tas
     int newCapacity;
     newCapacity = TAS_CAPACITY(*tasMobita)*2;
     if (newCapacity <= 100)
@@ -84,34 +86,36 @@ void SenterPembesar(Tas *tasMobita)
 }
 
 //Berpindah lokasi tanpa menambah unit waktu
-void PintuKemanaSaja(ListOfBangunan LB, Point *coordinate_mobita)
+void PintuKemanaSaja(ListPoint LP, Point *coordinate_mobita)
 {
-    int num;
-    for (num = 1; num <= lengthListStat(LB); num++)
+    int num, idx;
+    //Menampilkan semua bangunan yang ada
+    for (num = 1; num <= lengthListPoint(LP); num++)
     {
         printf("%d. ", num);
-        //tampilin list semua bangunan yang ada
+        idx = num-1;
+        printOneBangunan(ELMTListPoint(LP,idx));
+        print("\n");
     }
     
     printf("Anda mau pindah ke titik mana?\n");
     int op;
     printf("ENTER COMMAND: ");
     scanf("%d", &op); 
-    while (op < 0 || op > lengthListStat(LB))
+    while (op < 0 || op > lengthListPoint(LP))
     {
         printf("Masukkan angka antara 0-total_point!\n");
         printf("ENTER COMMAND: ");
-        scanf("%d", &op); 
+        scanf("%d\n", &op); 
     }
-    printf("\n");
+
     if (op != 0)
     {
-        ListPoint l;
-        int idx = op-1;
-        //set koordinat mobita = yg dipilih
-        *coordinate_mobita = ELMTListPoint(l, idx);
+        idx = op-1;
+        //Mobita berpindah ke titik yang dipilih
+        *coordinate_mobita = ELMTListPoint(LP, idx);
         printf("Anda telah menggunakan Pintu Kemana Saja! Sekarang Mobita berada di titik ");
-        WritePoint(ELMTListPoint(l, idx));
+        WritePoint(ELMTListPoint(LP, idx));
         printf("!\n");
     }
 
