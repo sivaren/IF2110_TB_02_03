@@ -33,7 +33,6 @@ typedef struct {
 #define     HEAD_PRIOQUEUE(q) (q).buffer[(q).idxHead]
 #define     TAIL_PRIOQUEUE(q) (q).buffer[(q).idxTail]
 
-
 /* *** Kreator *** */
 void CreatePRIOQUEUE(PrioQueuePesanan *q);
 /* I.S. sembarang */
