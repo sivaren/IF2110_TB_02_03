@@ -6,7 +6,7 @@
 boolean isDestination(ListPoint destination, Point building) {
     boolean found = false;
     int i = 0;
-    while (i < lengthListPoint(destination) && !false)
+    while (i < lengthListPoint(destination) && !found)
     {
         if (Name(building) == NameELMTListPoint(destination,i))
         {
@@ -22,11 +22,11 @@ boolean isDestination(ListPoint destination, Point building) {
 
 void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobita, Point HQ, char drop_off, char pick_up, int N, int M) {
     ListPoint destination = adjacent(list_building,adjacency_matrix,coordinate_mobita,HQ);
-    Matrix m;int i,j;
+    Matrix m;
     CreateMatrix(N+2,M+2,&m);
-    for ( i = 0; i < ROWS(m); i++)
+    for (int i = 0; i < ROWS(m); i++)
     {
-        for ( j = 0; j < COLS(m); j++)
+        for (int j = 0; j < COLS(m); j++)
         {
             if (i == 0 || j == 0 || i == ROWS(m)-1 || j == COLS(m)-1)
             {
@@ -36,11 +36,11 @@ void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobi
             {
                 if (Name(coordinate_mobita) = Name(HQ))
                 {
-                    print_yellow("8");
+                    print_yellow('8');
                 }
                 else if (isDestination(destination,HQ))
                 {
-                    print_green("8");
+                    print_green('8');
                 }
                 else
                 {
