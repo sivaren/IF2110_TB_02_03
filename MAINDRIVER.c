@@ -233,6 +233,8 @@ int main() {
             //pindah bangunan
             move(DaftarBangunan, Adjacency, &currentPos, pointHQ);
             
+            /* NOTE: move #1
+            
             Time += 1; // regular
             Time += heavyitems; // heavy items
 
@@ -244,8 +246,34 @@ int main() {
                     Time -= 1;
                 }
                 speedboost -= 1;
+            } 
+            */
+           
+           /* Butuh inisialisasi delValProgType, buat tempat buangan delete value */
+            InProgType delValProgType;
+            if(speedboost == 0 && !isHeavyAvail_inProg(DaftarInprog)){
+                Time++;
+                adjustPerishTime_inProg(&DaftarInprog, &TasNobita);
+                deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
+            } else if (speedboost != 0 && !isHeavyAvail_inProg(DaftarInprog)){
+                speedboost--;
+                if((speedboost%2) == 1){
+                    printf("Bonus 1 Unit waktu, Waktu tidak kurang\n");
+                } 
+                else{
+                    Time++;
+                    adjustPerishTime_inProg(&DaftarInprog, &TasNobita);
+                    deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
+                }        
+            } else if (isHeavyAvail_inProg(DaftarInprog)){
+                speedboost = 0;
+                Time += heavyitems;
+                for(int timePlus = 0; timePlus < heavyitems; timePlus++){
+                    adjustPerishTime_inProg(&DaftarInprog, &TasNobita);
+                    deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
+                }
             }
-        
+	
 
 
             // perish controller
