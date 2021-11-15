@@ -1,22 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "listpoint.h"
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
-void CreateListPoint(ListPoint *l) {
+void CreateListPoint(ListPoint *l, int capacity) {
 /* I.S. l sembarang */
 /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
 /* Proses: Inisialisasi semua elemen List l dengan VAL_UNDEF */
-    /* KAMUS LOKAL */
-    int i;
-    Point P;
     /* ALGORITMA */
-    for (i = 0; i < CAPACITY_LISTPOINT; i++) {
-        Name(P) = NAME_UNDEF;
-        Absis(P) = VAL_UNDEF;
-        Ordinat(P) = VAL_UNDEF;
-        ELMTListPoint(*l,i) = P;
-    }
+    BufferListPoint(*l) = malloc(sizeof(ElTypeListPoint)*capacity);
+    CAPListPoint(*l) = capacity;
+    NEFFListPoint(*l) = 0;
 }
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
@@ -24,15 +19,15 @@ void CreateListPoint(ListPoint *l) {
 int lengthListPoint(ListPoint l) {
 /* Mengirimkan banyaknya elemen efektif List */
 /* Mengirimkan nol jika List kosong */
-    /* KAMUS LOKAL */
-    int i, sum = 0;
     /* ALGORITMA */
-    for (i = 0; i < CAPACITY_LISTPOINT; i++) {
-        if (NameELMTListPoint(l,i) != NAME_UNDEF) {
-            sum += 1;
-        }
+    if (NEFFListPoint(l) > 0)
+    {
+        return NEFFListPoint(l);
     }
-    return sum;
+    else
+    {
+        return 0;
+    }
 }
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
@@ -42,8 +37,9 @@ void insertLastListPoint(ListPoint *l, ElTypeListPoint val) {
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
     /* ALGORITMA */
-    if (lengthListPoint(*l) < CAPACITY_LISTPOINT) {
-        ELMTListPoint(*l,lengthListPoint(*l)) = val;
+    if (lengthListPoint(*l) < CAPListPoint(*l)) {
+        ELMTListPoint(*l, lengthListPoint(*l)) = val;
+        NEFFListPoint(*l) += 1;
     }
 }
 

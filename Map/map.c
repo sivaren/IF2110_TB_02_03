@@ -35,7 +35,7 @@ void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobi
             }
             else if (Absis(HQ) == i && Ordinat(HQ) == j)
             {
-                if (Name(coordinate_mobita) = Name(HQ))
+                if (Name(coordinate_mobita) == Name(HQ))
                 {
                     print_yellow('8');
                 }
