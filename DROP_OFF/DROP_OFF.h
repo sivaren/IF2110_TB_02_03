@@ -4,12 +4,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <math.h>
 
-
-
-#include "../Move/listpoint.h"
+#include "../Map/listpoint.h"
 #include "../toDo/toDo.h"
 #include "../tas/tas.h"
 #include "../inProg/inProg_rev.h"

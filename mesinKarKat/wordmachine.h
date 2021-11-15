@@ -6,14 +6,13 @@
 
 #include "boolean.h"
 #include "charmachine.h"
-#include "../ADT Matriks/matrix.h"
-// #include "../ADT Point/point.h"
+
+#include "../daftarPesanan/daftarPesanan.h"
+#include "../Map/matrix.h"
+#include "../Map/listpoint.h"
+// #include "../Map/point.h"
 // #include "../ADT List Statis/listpos.h"
-#include "../../Move/listpoint.h"
-#include "../ADT Queue/daftarPesanan.h"
-// #include"../../Move/point.h"
-
-
+// #include"../Map/point.h"
 
 #define CAPACITY_WORD 50
 #define BLANK ' '
@@ -30,7 +29,6 @@ typedef struct {
 //    char jenisItem;
 //    int waktuHangus;     //untuk perishable
 // } Pesanan;
-
 
 
 /* Word Engine State */

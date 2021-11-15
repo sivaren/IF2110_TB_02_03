@@ -3,13 +3,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../tas/tas.h"
-#include "../Move/matrix.h"
-#include "../Move/point.h"
-#include "../ADT/ADT Stack/stack.h"
-#include "../Move/listpoint.h"
+
 #include "ListInventory.h"
-#include "../ADT/ADT Queue/daftarPesanan.h"
+#include "../tas/tas.h"
+#include "../Map/matrix.h"
+#include "../Map/point.h"
+#include "../Map/listpoint.h"
+#include "../daftarPesanan/daftarPesanan.h"
 
 void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, PrioQueuePesanan Q, Point *coordinate_mobita, int *Time);
 

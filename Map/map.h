@@ -1,8 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "listpoint.h"
 #include "matrix.h"
+#include "listpoint.h"
 #include "../toDo/toDo.h"
 
 boolean isDestination(ListPoint destination, Point building);

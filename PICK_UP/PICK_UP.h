@@ -4,15 +4,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include "../Move/listpoint.h"
-#include "../toDo/toDo.h"
-#include "../tas/tas.h"
+
 #include "../inProg/inProg_rev.h"
-
-
-
+#include "../Map/listpoint.h"
+#include "../tas/tas.h"
+#include "../toDo/toDo.h"
 
 void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost);
 // prosedur untuk mengambil item dari pickup point

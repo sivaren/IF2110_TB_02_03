@@ -1,26 +1,22 @@
-// pickup & dropoff
-#include "PICK_UP/PICK_UP.h"
-#include "DROP_OFF/DROP_OFF.h"
-#include "toDo/toDo.h"
-
-// move and map
-// #include "Move/listpoint.h"
-// #include "Move/matrix.h"
-#include "Move/move.h"
-// #include "Move/point.h"
-#include "Map/map.h"
-
-
-// read config
-// #include "ADT/ADT Mesin Karakter dan Kata/charmachine.h"
-#include "ADT/ADT Mesin Karakter dan Kata/wordmachine.h"
-
-
-
 #include <stdlib.h>
 #include <stdio.h>
 
+// PICKUP & DROP OFF
+#include "PICK_UP/PICK_UP.h"
+#include "DROP_OFF/DROP_OFF.h"
+#include "toDo/toDo.h"
+/* 
+MOVE & MAP
+#include "Move/listpoint.h"
+#include "Move/matrix.h"
+ */
+#include "Move/move.h"
+#include "Map/map.h"
+// #include "Map/point.h"
 
+// READ CONFIG
+// #include "ADT/ADT Mesin Karakter dan Kata/charmachine.h"
+#include "mesinKarKat/wordmachine.h"
 
 void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, int *speedboost) {
     int capacity;
@@ -212,8 +208,6 @@ int main() {
     readMatrix(&Adjacency,18,18);   
     */
 
-
-
     CreateTas(&TasNobita, currentCapacity);
     CreateToDoList(&Todo);
     CreateInProgList(&DaftarInprog);
@@ -232,22 +226,6 @@ int main() {
         if (opt == 'm') {
             //pindah bangunan
             move(DaftarBangunan, Adjacency, &currentPos, pointHQ);
-            
-            /* NOTE: move #1
-            
-            Time += 1; // regular
-            Time += heavyitems; // heavy items
-
-            //speedboost
-
-            if (speedboost != 0) {
-                printf("BONUS WAKTU\n");
-                if ((speedboost%2) == 0) {
-                    Time -= 1;
-                }
-                speedboost -= 1;
-            } 
-            */
            
            /* Butuh inisialisasi delValProgType, buat tempat buangan delete value */
             InProgType delValProgType;
@@ -287,11 +265,8 @@ int main() {
 
             }
 
-	
-
-
             //
-            }
+        }
         else if (opt == 'M') {
             // map
             map(DaftarBangunan, Adjacency, currentPos, pointHQ, TOP_TAS(TasNobita).dropOff, Todo, rows, cols);
@@ -327,9 +302,6 @@ int main() {
 
     }
     while (opt != 'q');
-
-
-
 
     return 0;
 }
