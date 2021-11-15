@@ -132,3 +132,13 @@ boolean isBangunanInTodo (char namaBangunan, ToDoList DaftarTodo) {
     }
     return found;
 }
+/* Mengirimkan true apabila namaBangunan terdapat pada To Do List */
+
+void daftarPesanan_to_toDo(Pesanan valPesan, ToDoType *todoVal){
+    (*todoVal).timeIn = valPesan.waktuMasuk;
+    (*todoVal).pickUp = valPesan.pickUp;
+    (*todoVal).dropOff = valPesan.dropOff;
+    (*todoVal).itemType = valPesan.jenisItem;
+    (*todoVal).perishTime = valPesan.waktuHangus;
+}
+/* CONVERT DAFTAR PESANAN -> TO DO LIST */
