@@ -64,7 +64,6 @@ void readFile(char *namaFile,  Point *HQ, ListPoint *Listbangunan, PrioQueuePesa
         tempBangunan.Y =  charToInt(currentWord);advWord();
         insertLastListPoint(Listbangunan,tempBangunan);
     }
-    
     for (i=0; i<=jumlahBangunan; i++){
         for (j=0; j<=jumlahBangunan; j++){
             ELMT(*Adjency, i, j) = charToInt(currentWord);advWord();

@@ -41,20 +41,49 @@ void enqueuePRIOQUEUE(PrioQueuePesanan *q, Pesanan val) {
         Jika q penuh semu, maka perlu dilakukan aksi penggeseran "maju" elemen-elemen q
         menjadi rata kiri untuk membuat ruang kosong bagi TAIL baru  */
     /* KAMUS LOKAL */
-    int i, j;
-    /* ALGORITMA */
     if (isEmptyPRIOQUEUE(*q)) {
-        IDX_HEAD_PRIOQUEUE(*q)=0;
-    } else if (IDX_TAIL_PRIOQUEUE(*q) == CAPACITY_PRIOQUEUE-1) {
-        i = IDX_HEAD_PRIOQUEUE(*q); j = 0;
-        do {
-            (*q).buffer[j] = (*q).buffer[i];
-            i++; j++;
-        } while (i <= IDX_TAIL_PRIOQUEUE(*q));
-        IDX_TAIL_PRIOQUEUE(*q) = lengthPRIOQUEUE(*q)-1; IDX_HEAD_PRIOQUEUE(*q) = 0; 
+        IDX_HEAD_PRIOQUEUE(*q) = 0;
+        IDX_TAIL_PRIOQUEUE(*q) = 0;
     }
-    IDX_TAIL_PRIOQUEUE(*q)++;
-    TAIL_PRIOQUEUE(*q) = val;
+    else {
+
+    if (IDX_TAIL_PRIOQUEUE(*q) == CAPACITY_PRIOQUEUE-1) {
+        int geser = IDX_HEAD_PRIOQUEUE(*q);
+        for (int i=IDX_HEAD_PRIOQUEUE(*q); i <= IDX_TAIL_PRIOQUEUE(*q); i++) {
+            (*q).buffer[i-geser] = (*q).buffer[i];
+        }
+        IDX_TAIL_PRIOQUEUE(*q) -= geser;
+        IDX_HEAD_PRIOQUEUE(*q) = 0;
+    }
+    IDX_TAIL_PRIOQUEUE(*q) += 1;
+
+    }
+    boolean found = false;
+    int idxFound = 0;
+
+    int i = IDX_HEAD(*q) + 1;
+    while (!found && i<=IDX_TAIL(*q)) {
+
+        if ((*q).buffer[i].waktuMasuk < val.waktuMasuk) {
+            found = true;
+            idxFound = i;
+        }
+        else {
+            i++;
+        }
+
+    }
+
+    if (!found) {
+        TAIL_PRIOQUEUE(*q) = val;
+    }
+    else {
+        for (int i=idxFound; i<IDX_TAIL(*q); i++) {
+            (*q).buffer[i+1] = (*q).buffer[i];
+        } 
+        (*q).buffer[idxFound] = val;
+
+    }
 }
 
 void dequeuePRIOQUEUE(PrioQueuePesanan *q, Pesanan *val) {

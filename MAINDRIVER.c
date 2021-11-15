@@ -140,12 +140,11 @@ int main() {
     int speedboost = 0;
     Tas TasNobita;
         // baca input tas nobita
-        readTas(&TasNobita, &DaftarInprog, &heavyitems, &speedboost);
+        // readTas(&TasNobita, &DaftarInprog, &heavyitems, &speedboost);
     ToDoList Todo;
         // baca input todo list
-        readTodo(&Todo);
+        // readTodo(&Todo);
 
-    Matrix dummyPeta;
     Point pointHQ;
     ListPoint DaftarBangunan;
     PrioQueuePesanan DaftarPesanan;
@@ -156,21 +155,25 @@ int main() {
     int cols = 15; //DUMMY
 
 
-    // pointHQ = CreatePoint('X', 1, 1);
+    pointHQ = CreatePoint('X', 1, 1);
     printf("AbsisHQ sebelum read: %d\n", pointHQ.X);
-    CreateMatrix(rows, cols, &dummyPeta);
     CreateListPoint(&DaftarBangunan);
     CreateMatrix(lengthListPoint(DaftarBangunan), lengthListPoint(DaftarBangunan), &Adjacency);
-
+    CreatePRIOQUEUE(&DaftarPesanan);
     // readfile kalo udh ada
-    // readFile("config.txt", &dummyPeta, &pointHQ, &DaftarBangunan, &DaftarPesanan, &Adjacency);
+    CreateMatrix(18, 18, &Adjacency);
+    
+    readFile("config.txt", &pointHQ, &DaftarBangunan, &DaftarPesanan, &Adjacency);
     // printf("AbsisHQ setelah read: %d\n", pointHQ.X);
-
+    displayMatrix(Adjacency);
+    currentPos = pointHQ;
+    // copy daftar pesanan
 
     // kalo blm ada read
+    /*
     printf("input adjacency: \n");
     pointHQ = CreatePoint('8',1,1);
-    currentPos = pointHQ;
+    
     Point A = CreatePoint('A',10,1);
     insertLastListPoint(&DaftarBangunan,A);
     Point B = CreatePoint('B',1,15);
@@ -207,34 +210,40 @@ int main() {
     insertLastListPoint(&DaftarBangunan,Q);
     CreateMatrix(18,18,&Adjacency);
     readMatrix(&Adjacency,18,18);   
+    */
 
 
 
-
-
+    CreateTas(&TasNobita, currentCapacity);
+    CreateToDoList(&Todo);
+    CreateInProgList(&DaftarInprog);
+    
 
     displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money);
-
+    displayPRIOQUEUE(DaftarPesanan);
     printf("NAME HQ= %c\n", Name(pointHQ));
     printf("config loaded\n");
    
     do {
         printf("\n=============\n");
-        printf("Masukkan command: (M(map), m(move), p(pickup), d(dropoff), q(quit), t(change todo), i(change inprog/tas), D(display all state), c(change tas capacity): ");
+        printf("Masukkan command: (M(map), m(move), p(pickup), d(dropoff), q(quit), t(change todo), i(change inprog/tas), D(display all state), c(change tas capacity), b(buy), I(inventory): ");
         scanf(" %c", &opt);
         printf("\n=============\n");
         if (opt == 'm') {
             //pindah bangunan
             move(DaftarBangunan, Adjacency, &currentPos, pointHQ);
+            
             Time += 1; // regular
             Time += heavyitems; // heavy items
 
-            if ((speedboost%2) == 1) {
-                Time -= 1;
-                printf("Bonus 1 Unit waktu\n");
-            }
+            //speedboost
+
             if (speedboost != 0) {
-            speedboost -= 1;
+                printf("BONUS WAKTU\n");
+                if ((speedboost%2) == 0) {
+                    Time -= 1;
+                }
+                speedboost -= 1;
             }
         
 
