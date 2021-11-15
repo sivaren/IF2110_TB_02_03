@@ -4,6 +4,7 @@
         "matrix.h": "c",
         "listpoint.h": "c",
         "todo.h": "c",
-        "move.h": "c"
+        "move.h": "c",
+        "daftarpesanan.h": "c"
     }
 }
