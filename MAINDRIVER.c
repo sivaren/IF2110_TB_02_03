@@ -22,7 +22,7 @@
 
 
 
-void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, boolean *speedboost) {
+void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, int *speedboost) {
     int capacity;
     int jumlahPesanan;
     ElTypeTas tempElmt;
@@ -114,7 +114,7 @@ void readTodo(ToDoList *Todo) {
             }
 }
 
-void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, boolean speedboost, int currentCapacity, Point CurrentBangunan, int Money) {
+void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, int speedboost, int currentCapacity, Point CurrentBangunan, int Money) {
     printf("\n=============\n");
     displaytas(TasNobita);
     printf("=============\n");
@@ -143,7 +143,7 @@ int main() {
     char opt;
     InProgList DaftarInprog;
     int heavyitems = 0;
-    boolean speedboost = false;
+    int speedboost = 0;
     Point CurrentBangunan;
     Tas TasNobita;
         // baca input tas nobita

@@ -6,7 +6,7 @@
 
 
 
-void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, boolean *speedboost) {
+void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, int *speedboost) {
     int capacity;
     int jumlahPesanan;
     ElTypeTas tempElmt;
@@ -49,15 +49,10 @@ void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, boolean *speed
             pushTas(Tasnobita, tempElmt);
             insertFirst_InProgList(Inprog, tempElmt2);
         }
-    printf("speedboost (0 = false, 1 = true): ");
+    printf("speedboost Duration:  (0 = no speedboost): ");
         int sb;
         scanf("%d", &sb);
-        if (sb == 0) {
-            *speedboost = false;
-        }
-        else if (sb == 1) {
-            *speedboost = true;
-        }
+        *speedboost = sb;
 }
 void readTodo(ToDoList *Todo) {
     int jumlahPesanan;
@@ -95,7 +90,7 @@ void readTodo(ToDoList *Todo) {
             }
 }
 
-void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, boolean speedboost, int currentCapacity, Point CurrentBangunan, int Money) {
+void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, boolean speedboost, int currentCapacity, Point CurrentBangunan, int Money, int Time) {
     printf("\n=============\n");
     displaytas(TasNobita);
     printf("=============\n");
@@ -105,15 +100,10 @@ void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavy
     printf("=============\n");
     printf("money: %d\n", Money);
     printf("heavyitems: %d\n", heavyitems);
-    printf("speedboost: ");
-    if (speedboost) {
-        printf("true\n");
-    }
-    else {
-        printf("false\n");
-    }
+    printf("speedboost Duration: %d\n", speedboost);
     printf("current capacity: %d\n", currentCapacity);
     printf("currentbangunan: %c\n", CurrentBangunan.name);
+    printf("current Time: %d\n", Time);
     printf("=============\n");
 }
 
@@ -124,18 +114,20 @@ int main() {
     char opt;
     InProgList DaftarInprog;
     int heavyitems = 0;
-    boolean speedboost = false;
+    int speedboost = 0;
+    int Time = 0;
     Point CurrentBangunan;
         // baca input current bangunan
         printf("Masukkan currentbangunan: ");
         scanf(" %c", &CurrentBangunan.name);
+
     Tas TasNobita;
         // baca input tas nobita
         readTas(&TasNobita, &DaftarInprog, &heavyitems, &speedboost);
     ToDoList Todo;
         // baca input todo list
         readTodo(&Todo);
-        displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, CurrentBangunan, Money);
+        displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, CurrentBangunan, Money, Time);
    
     do {
         printf("\n=============\n");
@@ -146,6 +138,25 @@ int main() {
             //pindah bangunan
             printf("Masukkan currentbangunan: ");
             scanf(" %c", &CurrentBangunan.name);
+            Time += 1; // regular
+        Time += heavyitems; // heavy items
+
+        if ((speedboost%2) == 1) {
+            Time -= 1;
+            printf("Bonus 1 Unit waktu\n");
+        }
+        if (speedboost != 0) {
+        speedboost -= 1;
+        }
+        
+
+
+        // perish controller
+
+        //
+        printf("Time = %d\n", Time);
+        printf("Speedboost = %d\n", speedboost);
+
         }
         else if (opt == 'p') {
             //pickup
@@ -166,7 +177,7 @@ int main() {
         }
         else if (opt == 'D') {
             //print all state
-            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, CurrentBangunan, Money);
+            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, CurrentBangunan, Money, Time);
 
         }
         else if (opt == 'c') {

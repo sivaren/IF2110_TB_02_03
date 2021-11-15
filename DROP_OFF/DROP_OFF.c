@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "DROP_OFF.h"
 
-void DROP_OFF(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int *currentTasCapacity, int *Money)
+void DROP_OFF(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *currentTasCapacity, int *Money)
 // prosedur untuk drop item pada drop point
 {
     if (isDropAvailable(CurrentBangunan, *TasNobita, *Todo)) {
@@ -25,7 +25,7 @@ if (TOP_TAS(TasNobita).dropOff == CurrentBangunan.name) {
 else {return false;}
 }
 
-void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost, int *currentTasCapacity, int *Money)
+void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *currentTasCapacity, int *Money)
 // drop item apabila tersedia
 {
     int reward;
@@ -39,7 +39,7 @@ void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, bool
         printf("Pesanan Heavy Item berhasil diantarkan\n");
         *heavyitems -= 1;
         if (*heavyitems == 0) {
-        *speedboost = true;
+        *speedboost = 10;
         }
         reward = 400;
     }

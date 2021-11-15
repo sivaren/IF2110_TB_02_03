@@ -14,13 +14,13 @@
 
 
 
-void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost);
+void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost);
 // prosedur untuk mengambil item dari pickup point
 
 boolean isPickAvailable(Point CurrentBangunan, Tas TasNobita, ToDoList Todo, ToDoType *accPesanan);
 // mengecek apakah ada pesanan pada bangunan tersebut
 
-void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToDoType accPesanan, int *heavyitems, boolean *speedboost);
+void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToDoType accPesanan, int *heavyitems, int *speedboost);
 // apabila pesanan tersedia lakukan pickup
 // apabila pesanan tidak tersedia print "Pesanan tidak ditemukan"
 

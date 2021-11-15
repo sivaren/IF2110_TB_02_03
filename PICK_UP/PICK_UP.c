@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "PICK_UP.h"
 
-void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, boolean *speedboost){
+void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost){
     ToDoType accPesanan;
     if (isPickAvailable(CurrentBangunan, *TasNobita, *Todo, &accPesanan)) {
         if (isFullTas(*TasNobita)) {
@@ -38,7 +38,7 @@ boolean isPickAvailable(Point CurrentBangunan, Tas TasNobita, ToDoList Todo, ToD
     return found;
 }
 
-void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToDoType accPesanan, int *heavyitems, boolean *speedboost)
+void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToDoType accPesanan, int *heavyitems, int *speedboost)
 // I.S pesanan ditemukan
 // F.S pesanan telah berhasil diambil
 {
@@ -50,7 +50,7 @@ void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToD
     // update state heavyItems apabila pickup heavy item serta remove ability speedup
     if (accPesanan.itemType == 'H') {
         *heavyitems+=1;
-        *speedboost = false;
+        *speedboost = 0;
         printf("Heavy item berhasil diambil!\n");
         printf("Tujuan pesanan: %c", accPesanan.dropOff);
     }
