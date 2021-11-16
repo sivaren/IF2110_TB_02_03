@@ -21,8 +21,6 @@
 #include "Inventory/Inventory.h"
 #include "Inventory/ListInventory.h"
 
-
-
 #include <stdlib.h>
 #include <stdio.h>
 

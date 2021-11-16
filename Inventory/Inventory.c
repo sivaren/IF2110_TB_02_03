@@ -61,7 +61,7 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
 void KainPembungkusWaktu(Tas *tasMobita, InProgList *DaftarInprog, PrioQueuePesanan Q)
 {   
     // jika terdapat perishable item pada tas
-    if(isPerishExpiredAvail_inProg(*DaftarInprog)){
+    if(isPerishAvail_inProg(*DaftarInprog)){
         int waktuSemula;
         ElTypeTas targetPerish;
 
