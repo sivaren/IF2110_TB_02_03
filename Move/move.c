@@ -72,7 +72,7 @@ void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Poin
     option = scanINT();
     while (option < 0 || option > total_point)
     {
-        printf("Masukkan angka antara 0-total_point!\n");
+        printf("Masukkan angka antara 0-%d\n", total_point);
         printf("Masukkan pilihan opsi: ");
         option = scanINT();
     }

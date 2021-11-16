@@ -135,7 +135,7 @@ int main() {
     ToDoList Todo;
         // baca input todo list
         // readTodo(&Todo);
-    char *namaFile;
+    char namaFile[50];
     Point pointHQ;
     ListPoint DaftarBangunan;
     PrioQueuePesanan DaftarPesanan;
@@ -342,7 +342,7 @@ int main() {
             inventory(&Inventory, &TasNobita, &DaftarInprog, DaftarBangunan, staticPesananPerish, &currentPos, &Time);
         }
         else{
-            printf("Input tidak valid");
+            printf("Input tidak valid\n");
         }
     }
    while (!isKataSama(currentWord, "QUIT"));

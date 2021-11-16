@@ -28,8 +28,6 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
         else 
         {
             //Gadget digunakan, hapus dari list inventory
-            printf("\n idx = %d\n", idx);
-            printf("\n elmt = %d\n", ELMTInventory(*inventory, idx));
             //Efek dari gadget aktif
             if(ELMTInventory(*inventory,idx) == 1)
             {
