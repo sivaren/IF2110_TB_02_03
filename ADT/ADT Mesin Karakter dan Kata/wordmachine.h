@@ -6,12 +6,9 @@
 
 #include "boolean.h"
 #include "charmachine.h"
-// #include "../ADT Matriks/matrix.h"
-// #include "../ADT Point/point.h"
-// #include "../ADT List Statis/listpos.h"
 #include "../../Map/map.h"
 #include "../ADT Queue/daftarPesanan.h"
-// #include"../../Move/point.h"
+
 
 
 
@@ -65,7 +62,7 @@ void copyWord();
           currentChar = BLANK atau currentChar = MARK; 
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
-int charToInt(Word C);
+int WordToInt(Word C);
 char WordtoSingleChar(Word C);
 void printWord(Word C);
 
@@ -73,5 +70,6 @@ void printWord(Word C);
 void convertWordToString(Word C,  char *string);
 int panjangString (char* string);
 boolean isKataSama (Word C, char* string);
+int scanINT ();
 #endif
 

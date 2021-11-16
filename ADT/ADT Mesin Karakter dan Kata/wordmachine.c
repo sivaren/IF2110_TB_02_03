@@ -31,9 +31,6 @@ void startWord() {
 }
 
 
-//ASUMSI SUDAH ADA TYPESTRUCT BANGUNAN
-//ASUMSI SUDAH ADA TYPESTRUCT PESANAN
-//ASUMSI SUDAH ADA TYPESTRUCT 
 void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbangunan, PrioQueuePesanan *QueuePesanan, PrioQueuePesanan *QueuePerishable, Matrix *Adjency) {
 
     /* KAMUS LOKAL */
@@ -41,75 +38,59 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
     int i,j,k,jumlahBangunan,jumlahPesanan;
     int X,Y;
     char tempName;
-
     Pesanan tempPesanan;
     Point tempBangunan;
     
     /* ALGORITMA */
     startFile(namaFile); copyWord();
     //N dan M digunakan pada map
-    *N = charToInt(currentWord);advWord();
-    *M = charToInt(currentWord);advWord();
+    *N = WordToInt(currentWord);advWord();
+    *M = WordToInt(currentWord);advWord();
     
     //Assign posisi HQ
-    Absis(*HQ)  = charToInt(currentWord);advWord();
-    Ordinat(*HQ)  = charToInt(currentWord);advWord();
+    Absis(*HQ)  = WordToInt(currentWord);advWord();
+    Ordinat(*HQ)  = WordToInt(currentWord);advWord();
     Name(*HQ) = '8';
 
     //Assign jumlah Bangunan dan lokasi
-    jumlahBangunan  = charToInt(currentWord);advWord();
+    jumlahBangunan  = WordToInt(currentWord);advWord();
+    CreateListPoint(Listbangunan,jumlahBangunan);
     for (i=0; i<jumlahBangunan; i++){
         tempBangunan.name= WordtoSingleChar(currentWord);advWord();
-        tempBangunan.X =  charToInt(currentWord);advWord();
-        tempBangunan.Y =  charToInt(currentWord);advWord();
+        tempBangunan.X =  WordToInt(currentWord);advWord();
+        tempBangunan.Y =  WordToInt(currentWord);advWord();
         insertLastListPoint(Listbangunan,tempBangunan);
     }
+
+    //Untuk Matrix adjacency
+    CreateMatrix(jumlahBangunan+1,jumlahBangunan+1,Adjency);
     for (i=0; i<=jumlahBangunan; i++){
         for (j=0; j<=jumlahBangunan; j++){
-            ELMT(*Adjency, i, j) = charToInt(currentWord);advWord();
+            ELMT(*Adjency, i, j) = WordToInt(currentWord);advWord();
         }
     }
     
-    // printf("%d\n", charToInt(currentWord));
-    
-    jumlahPesanan = charToInt(currentWord);
-    // printf("aa%d\n", charToInt(currentWord));
+   
+    //Untuk Queue Pesanan
+    jumlahPesanan = WordToInt(currentWord);
     for (j=0 ; j<jumlahPesanan; j++){
         advWord();
-        // printf("waktumasuk :");printWord(currentWord);
-      
-        // printf("\n");
-        tempPesanan.waktuMasuk = charToInt(currentWord);advWord();
-        // printf("pickUp :");printWord(currentWord);
-        // printf("\n");
+        tempPesanan.waktuMasuk = WordToInt(currentWord);advWord();
         tempPesanan.pickUp = WordtoSingleChar(currentWord);advWord();
-        // printf("dropOFF :");printWord(currentWord);
-        // printf("\n");
         tempPesanan.dropOff = WordtoSingleChar(currentWord);advWord();
-        // printf("kenis :");printWord(currentWord);
-        // printf("\n");
         tempPesanan.jenisItem = WordtoSingleChar(currentWord);
-        // printf("angka %d\n",tempPesanan.waktuMasuk);
-        // printf("pickup %c\n", tempPesanan.pickUp);
-        // printf("dropOff %c\n", tempPesanan.dropOff);
-        // printf("jenis %c\n", tempPesanan.jenisItem);
         
         if (tempPesanan.jenisItem == 'P'){
             advWord();
-            tempPesanan.waktuHangus = charToInt(currentWord);
-            // printf("waktuHangus %d\n", tempPesanan.waktuHangus);
+            tempPesanan.waktuHangus = WordToInt(currentWord);
+            //diEnqueue ke suatu Queue yang nantinya berguna untuk Penggunaan Gadget
             enqueuePRIOQUEUE(QueuePerishable,tempPesanan);
         }    
         
         
         enqueuePRIOQUEUE(QueuePesanan, tempPesanan);
-        // displayPRIOQUEUE(*QueuePesanan);
     }
 
-    // dequeuePRIOQUEUE(QueuePesanan,&tempPesanan);
-    // dequeuePRIOQUEUE(QueuePesanan,&tempPesanan);
-    // displayPRIOQUEUE(*QueuePesanan);
-    
 }    
 
 void advWord() {
@@ -152,7 +133,7 @@ void copyWord() {
     // if(currentChar == MARK_ENGINE):
 }
 
-int charToInt(Word C){
+int WordToInt(Word C){
 // Mengembalikan int dari word
     //KAMUS LOKAL
     int temp;
@@ -174,39 +155,24 @@ char WordtoSingleChar(Word C){
 }
 
 void printWord (Word C){
+//I.S C Terdefinisi
+//F.S Kata C tercetak pada layar
+    /* KAMUS LOKAL */
     int i;
+
+    /* ALGORITMA */
     for (i=0; i<C.length; i++){
         printf("%c", C.contents[i]);
     }
 }
-void convertWordToString(Word C, char *string){
-    int i,j,count;
-    count= C.length+4;
-    char format[] =".txt";
-    j= 0;
-    // printWord(C);
-    for (i=0; i<=count; i++){
-        
-        if (i < C.length){
-            printf("yang keprint %c\n", C.contents[i]);
-            *string = C.contents[i];
-            
-        } else if (i<count){
-            *string = format[j];
-            j++;
-        }else{
-            *string = '\0';
-        }
-        
-        string++;
-    }
-    
-    
-}
+
 
 
 int panjangString (char* string){
+    /* KAMUS LOKAL */
     int count;
+    
+    /* ALGORITMA */    
     count =0;
     while (*(string+count) != '\0') count++;
 
@@ -215,8 +181,11 @@ int panjangString (char* string){
 
 
 boolean isKataSama (Word C, char *string){
+    /* KAMUS LOKAL */
     int i = 0;
     boolean flag;
+    
+    /* ALGORITMA */
     flag = panjangString(string) == C.length;
     while (i<C.length && flag){
         
@@ -225,4 +194,9 @@ boolean isKataSama (Word C, char *string){
     }
 
     return flag;
+}
+
+int scanINT (){
+    startWord();
+    return WordToInt(currentWord);
 }

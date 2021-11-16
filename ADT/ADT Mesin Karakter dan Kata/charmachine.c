@@ -40,9 +40,9 @@ void adv() {
 	/* Algoritma */
 	retval = fscanf(tape,"%c",&currentChar);
 	eot = (currentChar == MARK_ENGINE);
-	if (eot) {
-              fclose(tape);
- 	}
+	// if (eot) {
+   //            fclose(tape);
+ 	// }
 }
 
 void advForFile(){
