@@ -15,6 +15,12 @@
 // #include "ADT/ADT Mesin Karakter dan Kata/charmachine.h"
 #include "ADT/ADT Mesin Karakter dan Kata/wordmachine.h"
 
+// buy, gadget, inventory
+#include "Buy/buy.h"
+#include "Buy/ListGadget.h"
+#include "Inventory/Inventory.h"
+#include "Inventory/ListInventory.h"
+
 
 
 #include <stdlib.h>
@@ -31,7 +37,6 @@ void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, int *speedboos
     char tempPickUp;
     char tempDropOff;
     int tempPerishTime;
-    int i;
     printf("\n=============\n");
     printf("INPUT TAS/INPROG  COPY DARI input todo.txt biar cepet\n");
     printf("masukkan capacity Tas: ");
@@ -42,7 +47,7 @@ void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, int *speedboos
     printf("masukkan jumlah pesanan saat ini: ");
         scanf("%d", &jumlahPesanan);
         // iterasi masukkan elem ke tas
-        for ( i=jumlahPesanan; i>0; i--) {
+        for (int i=jumlahPesanan; i>0; i--) {
             printf("Tas elemen ke-%d\n", i);
             printf("Masukkan item type: ");
             scanf(" %c", &tempItemType);
@@ -84,8 +89,6 @@ void readTodo(ToDoList *Todo) {
     char tempPickUp;
     char tempDropOff;
     int tempPerishTime;
-    int i;
-
     CreateToDoList(Todo);
     printf("\n=============\n");
     printf("INPUT TODO\n");
@@ -93,7 +96,7 @@ void readTodo(ToDoList *Todo) {
     scanf("%d", &jumlahPesanan);
 
     // iterasi masukkan elem ke tas
-        for (i=0; i<jumlahPesanan; i++) {
+        for (int i=0; i<jumlahPesanan; i++) {
             printf("Todo list elemen ke-%d\n", i+1);
             printf("Masukkan time in: ");
             scanf(" %d", &tempTimeIn);
@@ -134,9 +137,8 @@ void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavy
 
 int main() {
     // inisialisasi
-    
     int currentCapacity = 3;
-    int Money = 3000;
+    int Money = 30000;
     char opt;
     InProgList DaftarInprog;
     int heavyitems = 0;
@@ -150,40 +152,36 @@ int main() {
 
     Point pointHQ;
     ListPoint DaftarBangunan;
-    PrioQueuePesanan DaftarPesanan, DaftarPerishable;
+    PrioQueuePesanan DaftarPesanan;
     Matrix Adjacency;
     int Time = 0;
     Point currentPos;
-    int rows;
-    int cols;
-   
+    int rows = 10; // DUMMY
+    int cols = 15; //DUMMY
+
+    // create list gadget
+    ListGadget Gadget;
+    createListGadget(&Gadget);
+    ELMTListGadget(Gadget,0) = setGadget(1, 800);
+    ELMTListGadget(Gadget,1) = setGadget(2, 1200);
+    ELMTListGadget(Gadget,2) = setGadget(3, 1500);
+    ELMTListGadget(Gadget,3) = setGadget(4, 3000);
+    // displayGadget(Gadget);
+    // printf("\nb4here\n");
+    ListInventory Inventory;
+    CreateListInventory(&Inventory);
+    printf("LENGTH = %d", lengthListInventory(Inventory));
+
 
     pointHQ = CreatePoint('X', 1, 1);
+    printf("AbsisHQ sebelum read: %d\n", pointHQ.X);
     CreateListPoint(&DaftarBangunan, 17); // GANTI JUMLAH BANGUNAN YG ADA
-    CreateMatrix(lengthListPoint(DaftarBangunan)+1, lengthListPoint(DaftarBangunan)+1, &Adjacency);
+    CreateMatrix(lengthListPoint(DaftarBangunan), lengthListPoint(DaftarBangunan), &Adjacency);
     CreatePRIOQUEUE(&DaftarPesanan);
-    CreatePRIOQUEUE(&DaftarPerishable);
     // readfile kalo udh ada
     CreateMatrix(18, 18, &Adjacency);
-    char *filename ;
     
-    /* BACA NAMA FILE */
-    printf("Tuliskan nama file (tanpa.txt)\n");
-    // startWord();
-    // if (isKataSama(currentWord, "He")) printf("YEY");
-    startWord();
-    // printWord(currentWord);
-    convertWordToString(currentWord, filename);
-    int i =0;
-    while (*(filename+i) != '\0'){
-        printf("%c", *(filename+i));
-        i++;
-    }
-    printf("\n");
-    
-
-    readFile(filename, &rows, &cols,&pointHQ, &DaftarBangunan, &DaftarPesanan, &DaftarPerishable ,&Adjacency);
-
+    readFile("config.txt", &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &Adjacency);
     // printf("AbsisHQ setelah read: %d\n", pointHQ.X);
     displayMatrix(Adjacency);
     currentPos = pointHQ;
@@ -246,12 +244,10 @@ int main() {
    
     do {
         printf("\n=============\n");
-        // printf("Masukkan command: (M(map), m(move), p(pickup), d(dropoff), q(quit), t(change todo), i(change inprog/tas), D(display all state), c(change tas capacity), b(buy), I(inventory): ");
-        printf("Masukkan command: (MAP, MOVE, PICKUP, DROPOFF, QUIT, t(change todo), i(change inprog/tas), D(display all state), c(change tas capacity), b(buy), I(inventory): ");
-        // scanf(" %c", &opt);
-        startWord();
+        printf("Masukkan command: (M(map), m(move), p(pickup), d(dropoff), q(quit), t(change todo), i(change inprog/tas), D(display all state), c(change tas capacity), b(buy), I(inventory): ");
+        scanf(" %c", &opt);
         printf("\n=============\n");
-        if (isKataSama(currentWord, "MAP")) {
+        if (opt == 'm') {
             //pindah bangunan
             move(DaftarBangunan, Adjacency, &currentPos, pointHQ);
             
@@ -290,8 +286,7 @@ int main() {
             } else if (isHeavyAvail_inProg(DaftarInprog)){
                 speedboost = 0;
                 Time += heavyitems;
-                int timePlus;
-                for( timePlus = 0; timePlus < heavyitems; timePlus++){
+                for(int timePlus = 0; timePlus < heavyitems; timePlus++){
                     adjustPerishTime_inProg(&DaftarInprog, &TasNobita);
                     deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
                 }
@@ -353,6 +348,16 @@ int main() {
             printf("Masukkan kapasitas baru tas: ");
             scanf(" %d", &currentCapacity);
             upgradeTasCapacity(&TasNobita, currentCapacity);
+        }
+        else if (opt == 'b') {
+            // buy
+            Buy(Gadget, &Inventory, currentPos, &Money);
+            printf("LENGTH = %d\n", lengthListInventory(Inventory));
+            
+        }
+        else if (opt == 'I') {
+            // inventory
+            inventory(&Inventory, &TasNobita, DaftarBangunan, DaftarPesanan, &currentPos, &Time);
         }
 
     }

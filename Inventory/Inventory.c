@@ -9,13 +9,13 @@ void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, PrioQueue
     printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n");
     printf("\n");
 
-    int op;
+    int op=-1;
     scanf("ENTER COMMAND: %d\n", &op);
     //Meminta input yang valid
     while (op < 0 || op > 5)
     {
         printf("Masukkan angka antara 0 - 5!\n");
-        scanf("ENTER COMMAND: %d", &op); 
+        scanf("%d", &op); 
     }
 
     if (op != 0)
@@ -112,7 +112,7 @@ void PintuKemanaSaja(ListPoint LP, Point *coordinate_mobita)
         printf("%d. ", num);
         idx = num-1;
         printOneBangunan(ELMTListPoint(LP,idx));
-        print("\n");
+        printf("\n");
     }
     
     printf("Anda mau pindah ke titik mana?\n");

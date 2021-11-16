@@ -67,7 +67,7 @@ void displayInventory(ListInventory l)
 void insertGadget(ListInventory *l, Gadget id)
 {
 
-    int i;
+    int i = 0;
     boolean flag = true;
     while(i < INVENTORY_CAPACITY && flag)
     {
