@@ -7,7 +7,7 @@ void Buy(ListGadget gadget, ListInventory *inventory, Point coordinate_mobita, i
     //*coordinate_mobita = posisi Mobita saat ini
     if (Name(coordinate_mobita) != '8')
     {
-        printf("Anda hanya dapat membeli Gadget di Headquarters!");
+        printf("Anda hanya dapat membeli Gadget di Headquarters!\n");
     }
     else 
     {
@@ -57,18 +57,18 @@ void Buy(ListGadget gadget, ListInventory *inventory, Point coordinate_mobita, i
                         printf("Mesin Waktu berhasil dibeli!\n");
                     }
                     
-                    printf("Uang Anda sekarang: %d Yen", *Money);
+                    printf("Uang Anda sekarang: %d Yen. \n", *Money);
                     //Memasukkan Gadget yang telah dibeli ke dalam List Inventory
                     insertGadget(inventory, LISTGADGET_IDNAME(gadget,idx));
                 }
                 else
                 {
-                    printf("Uang tidak cukup untuk membeli gadget!");
+                    printf("Uang tidak cukup untuk membeli gadget!\n");
                 }
             }
             else
             {
-                printf("Inventory Gadget Anda sudah penuh!");
+                printf("Inventory Gadget Anda sudah penuh!\n");
             }
         }
     }

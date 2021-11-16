@@ -23,7 +23,7 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
         //Tidak ada gadget pada opsi yang dipilih (isi list = "-")
         if(ELMTInventory(*inventory,idx) == INVENTORY_IDXUNDEF)
         {
-            printf("Tidak ada Gadget yang dapat digunakan!");
+            printf("Tidak ada Gadget yang dapat digunakan!\n");
         }
         else 
         {
@@ -31,7 +31,6 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
             //Efek dari gadget aktif
             if(ELMTInventory(*inventory,idx) == 1)
             {
-                printf("Kain Pembungkus Waktu berhasil digunakan!\n");
                 KainPembungkusWaktu(tasMobita, DaftarInprog, Q);
             }
             else if(ELMTInventory(*inventory,idx) == 2)
@@ -60,6 +59,7 @@ void KainPembungkusWaktu(Tas *tasMobita, InProgList *DaftarInprog, PrioQueuePesa
 {   
     // jika terdapat perishable item pada tas
     if(isPerishAvail_inProg(*DaftarInprog)){
+        printf("Kain Pembungkus Waktu berhasil digunakan!\n");
         int waktuSemula;
         ElTypeTas targetPerish;
 
@@ -83,7 +83,7 @@ void SenterPembesar(Tas *tasMobita)
     }
     else //Melebihi 100
     {
-        printf("Kapasitas tas melebihi maksimum!");
+        printf("Kapasitas tas melebihi maksimum!\n");
     }
 }
 
