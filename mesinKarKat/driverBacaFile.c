@@ -3,7 +3,7 @@
 
 int main(){
     /* KAMUS LOKAL */
-    char *filename;
+    char *namaFile;
     int N,M;
     Matrix map,map1;
     Point HQ;
@@ -12,39 +12,35 @@ int main(){
     
     /* ALGORITMA */
     printf("input Nama file\n");
-    CreateListPoint(&ListOfBangunan,17); 
-    CreateMatrix(18,18,&map);
+    CreateListPoint(&ListOfBangunan,1); 
+    CreateMatrix(1,1,&map);
     CreatePRIOQUEUE(&daftarPesanMasuk);
     CreatePRIOQUEUE(&daftarP);
 
-    startWord();
-    // printWord(currentWord);
-    convertWordToString(currentWord, filename);
-    
-    int i =0;
-    while (*(filename+i) != '\0'){
-        printf("%c", *(filename+i));
-        i++;
-    }
+
+    /* */
     printf("\n");
-
-    readFile(filename,&N, &M,&HQ, &ListOfBangunan, &daftarPesanMasuk, &daftarP, &map);
+    printf("hello");
+    readFile("config.txt",&N, &M,&HQ, &ListOfBangunan, &daftarPesanMasuk, &daftarP, &map);
+    closeFile();
+    displayMatrix(map);
+    displayPRIOQUEUE(daftarPesanMasuk);
     
-    // displayMatrix(map);
-    // displayPRIOQUEUE(daftarPesanMasuk);
-    displayPRIOQUEUE(daftarP);
-    // displayListStat(ListOfBangunan);
-    
-    // printWord(currentWord);
 
-    // if (isKataSama(currentWord, "MOVE")) printf("BENAR");
-    // else printf("SALAH");
+    /*UJI KEYBOARD*/
+    int X,Y;
+    printf("Input nilai int X : "); X = scanINT();
+    printf("Input nilai int Y : ");  Y = scanINT();
+    printf("Hasil dari X + Y = %d\n", X+Y);
 
-    // if (currentWord == 'HELLO') printf("yey");
-    // startFile("a.txt"); copyWord();
-    // printf("%d ", ROWS(map1));advWord();
-    // printf("%d\n", COLS(map1));advWord();
-    // printf("%d ", charToInt(currentWord));advWord();
-    // printf("%d\n", charToInt(currentWord));advWord();
-    // printf("%d", charToInt(currentWord));advWord();
+    int len;
+    printf("Ketikkan suata kata dengan huruf kapital : ");  startWord();
+    printf("Kata yang anda masukkan adalah : "); printWord(currentWord);
+    printf("\n Kata yang ingin diuji adalah : COBA \n");
+    if (isKataSama(currentWord, "COBA")){
+        printf("isKataSama == True");
+    } else{
+        printf("isKataSama == False");
+    }
+
 }
