@@ -2,7 +2,7 @@
 #include "Inventory.h"
 
 
-void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, PrioQueuePesanan Q, Point *coordinate_mobita, int *Time)
+void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInprog, ListPoint LP, PrioQueuePesanan Q, Point *coordinate_mobita, int *Time)
 {
     //Menampilkan isi List Inventory
     displayInventory(*inventory);
@@ -29,13 +29,13 @@ void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, PrioQueue
         else 
         {
             //Gadget digunakan, hapus dari list inventory
-            deleteGadget(inventory, idx, ELMTInventory(*inventory,idx));
-
+            printf("\n idx = %d\n", idx);
+            printf("\n elmt = %d\n", ELMTInventory(*inventory, idx));
             //Efek dari gadget aktif
             if(ELMTInventory(*inventory,idx) == 1)
             {
                 printf("Kain Pembungkus Waktu berhasil digunakan!\n");
-                KainPembungkusWaktu(*tasMobita, Q);
+                KainPembungkusWaktu(tasMobita, DaftarInprog, Q);
             }
             else if(ELMTInventory(*inventory,idx) == 2)
             {
@@ -52,20 +52,21 @@ void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, PrioQueue
                 printf("Mesin Waktu berhasil digunakan!\n");
                 MesinWaktu(*Time);
             }
+            deleteGadget(inventory, idx, ELMTInventory(*inventory,idx));
         }
     }
 }
 
 
 //Waktu item perishable di TOP tas kembali ke semula
-void KainPembungkusWaktu(Tas tasMobita, PrioQueuePesanan Q)
+void KainPembungkusWaktu(Tas *tasMobita, InProgList *DaftarInprog ,PrioQueuePesanan Q)
 {
-    if(TOP_TAS(tasMobita).itemType == 'P')
+    if(TOP_TAS(*tasMobita).itemType == 'P')
     {
         int i;
         char pickUpTOP, dropOffTOP, itemTypeTOP;
-        pickUpTOP = TOP_TAS(tasMobita).pickUp;
-        dropOffTOP = TOP_TAS(tasMobita).dropOff;
+        pickUpTOP = TOP_TAS(*tasMobita).pickUp;
+        dropOffTOP = TOP_TAS(*tasMobita).dropOff;
 
         for(i = IDX_HEAD_PRIOQUEUE(Q); i <= IDX_TAIL_PRIOQUEUE(Q); i++)
         {
@@ -75,7 +76,11 @@ void KainPembungkusWaktu(Tas tasMobita, PrioQueuePesanan Q)
                 {
                     if(Q.buffer[i].jenisItem == 'P')
                     {
-                        TOP_TAS(tasMobita).perishTime = Q.buffer[i].waktuHangus;
+                        printf("HERE, %d\n", Q.buffer[i].waktuHangus);
+                        TOP_TAS(*tasMobita).perishTime = Q.buffer[i].waktuHangus;
+                        FIRST_INPROG(*DaftarInprog)->info.perishTime = Q.buffer[i].waktuHangus;
+                        
+                        
                     }
                 }
             }

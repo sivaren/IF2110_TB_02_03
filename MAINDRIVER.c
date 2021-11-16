@@ -130,14 +130,14 @@ void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavy
     printf("\n=============\n");
     printf("Time = : %d\n", Time);
     printf("Speedboost = : %d\n", speedboost);
-    printf("current capacity: %d\n", currentCapacity);
+    printf("current capacity: %d\n", TAS_CAPACITY(TasNobita));
     printf("currentPos: %c\n", currentPos.name);
+    printf("heavyitems: %d\n", heavyitems);
     printf("\n=============\n");
 }
 
 int main() {
     // inisialisasi
-    int currentCapacity = 3;
     int Money = 30000;
     char opt;
     InProgList DaftarInprog;
@@ -171,18 +171,18 @@ int main() {
     ListInventory Inventory;
     CreateListInventory(&Inventory);
     printf("LENGTH = %d", lengthListInventory(Inventory));
-    PrioQueuePesanan staticDaftarPesanan;
+    PrioQueuePesanan staticPesananPerish;
 
     pointHQ = CreatePoint('X', 1, 1);
     printf("AbsisHQ sebelum read: %d\n", pointHQ.X);
     CreateListPoint(&DaftarBangunan, 17); // GANTI JUMLAH BANGUNAN YG ADA
     CreateMatrix(lengthListPoint(DaftarBangunan), lengthListPoint(DaftarBangunan), &Adjacency);
     CreatePRIOQUEUE(&DaftarPesanan);
-    CreatePRIOQUEUE(&staticDaftarPesanan);
+    CreatePRIOQUEUE(&staticPesananPerish);
     // readfile kalo udh ada
     CreateMatrix(18, 18, &Adjacency);
     
-    readFile("config.txt", &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticDaftarPesanan, &Adjacency);
+    readFile("config.txt", &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticPesananPerish, &Adjacency);
     // printf("AbsisHQ setelah read: %d\n", pointHQ.X);
     displayMatrix(Adjacency);
     currentPos = pointHQ;
@@ -233,12 +233,12 @@ int main() {
 
 
 
-    CreateTas(&TasNobita, currentCapacity);
+    CreateTas(&TasNobita, 3);
     CreateToDoList(&Todo);
     CreateInProgList(&DaftarInprog);
     
 
-    displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money, Time);
+    displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, TAS_CAPACITY(TasNobita), currentPos, Money, Time);
     displayPRIOQUEUE(DaftarPesanan);
     printf("NAME HQ= %c\n", Name(pointHQ));
     printf("config loaded\n");
@@ -251,7 +251,26 @@ int main() {
         if (opt == 'm') {
             //pindah bangunan
             move(DaftarBangunan, Adjacency, &currentPos, pointHQ);
-            
+            int addition = 0;
+            addition += 1; //regular addition
+            addition += heavyitems; // heavy items addition
+            if (speedboost != 0) {
+                if((speedboost%2) == 0){
+                    addition -= 1;
+                    printf("Bonus 1 Unit waktu, Waktu tidak kurang\n"); }
+                speedboost -= 1;
+            }
+            // adjust perish
+            int x;
+            InProgType delValProgType;
+            for (x = 0; x<addition; x++) {
+                adjustPerishTime_inProg(&DaftarInprog, &TasNobita);
+                deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
+            }
+
+            // time adjust
+            Time += addition;
+
             /* NOTE: move #1
             
             Time += 1; // regular
@@ -269,6 +288,7 @@ int main() {
             */
            
            /* Butuh inisialisasi delValProgType, buat tempat buangan delete value */
+           /* MOVE 2
             InProgType delValProgType;
             if(speedboost == 0 && !isHeavyAvail_inProg(DaftarInprog)){
                 Time++;
@@ -292,6 +312,7 @@ int main() {
                     deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
                 }
             }
+            */
 
             // daftar pesanan to todo
             while (!isEmptyPRIOQUEUE(DaftarPesanan) && Time >= HEAD_PRIOQUEUE(DaftarPesanan).waktuMasuk) {
@@ -328,7 +349,7 @@ int main() {
         }
         else if (opt == 'd') {
             //dropoff
-            DROP_OFF(currentPos, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost, &currentCapacity, &Money);
+            DROP_OFF(currentPos, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost, &Money);
             
         }
         else if (opt == 't') {
@@ -341,14 +362,12 @@ int main() {
         }
         else if (opt == 'D') {
             //print all state
-            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money, Time);
+            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, TAS_CAPACITY(TasNobita), currentPos, Money, Time);
 
         }
         else if (opt == 'c') {
             // ganti kapasitas tas
             printf("Masukkan kapasitas baru tas: ");
-            scanf(" %d", &currentCapacity);
-            upgradeTasCapacity(&TasNobita, currentCapacity);
         }
         else if (opt == 'b') {
             // buy
@@ -358,7 +377,7 @@ int main() {
         }
         else if (opt == 'I') {
             // inventory
-            inventory(&Inventory, &TasNobita, DaftarBangunan, DaftarPesanan, &currentPos, &Time);
+            inventory(&Inventory, &TasNobita, &DaftarInprog, DaftarBangunan, staticPesananPerish, &currentPos, &Time);
         }
 
     }

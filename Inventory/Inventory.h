@@ -10,11 +10,12 @@
 #include "../Move/listpoint.h"
 #include "ListInventory.h"
 #include "../ADT/ADT Queue/daftarPesanan.h"
+#include "../inProg/inProg_rev.h"
 
-void inventory(ListInventory *inventory, Tas *tasMobita, ListPoint LP, PrioQueuePesanan Q, Point *coordinate_mobita, int *Time);
+void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInprog, ListPoint LP, PrioQueuePesanan Q, Point *coordinate_mobita, int *Time);
 
 //Waktu item perishable di TOP tas kembali ke semula
-void KainPembungkusWaktu(Tas tasMobita, PrioQueuePesanan Q);
+void KainPembungkusWaktu(Tas *tasMobita, InProgList *DaftarInprog ,PrioQueuePesanan Q);
 
 //Kapasitas tas menjadi 2 kali lipat
 void SenterPembesar(Tas *tasMobita);
