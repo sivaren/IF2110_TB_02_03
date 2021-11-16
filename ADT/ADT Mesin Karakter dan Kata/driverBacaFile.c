@@ -8,13 +8,14 @@ int main(){
     Matrix map,map1;
     Point HQ;
     ListPoint ListOfBangunan;
-    PrioQueuePesanan daftarPesanMasuk;
+    PrioQueuePesanan daftarPesanMasuk,daftarP;
     
     /* ALGORITMA */
     printf("input Nama file\n");
-    CreateListPoint(&ListOfBangunan); 
+    CreateListPoint(&ListOfBangunan,17); 
     CreateMatrix(18,18,&map);
     CreatePRIOQUEUE(&daftarPesanMasuk);
+    CreatePRIOQUEUE(&daftarP);
 
     startWord();
     // printWord(currentWord);
@@ -26,18 +27,12 @@ int main(){
         i++;
     }
     printf("\n");
-    // filename= "a.txt";
 
-    // int i;
-   
-    // for (i=0; i<currentWord.length; i++){
-    //     *(filename+i) = currentWord.contents[i];
-    // }
-
-    readFile(filename,&N, &M,&HQ, &ListOfBangunan, &daftarPesanMasuk, &map);
+    readFile(filename,&N, &M,&HQ, &ListOfBangunan, &daftarPesanMasuk, &daftarP, &map);
     
     // displayMatrix(map);
-    displayPRIOQUEUE(daftarPesanMasuk);
+    // displayPRIOQUEUE(daftarPesanMasuk);
+    displayPRIOQUEUE(daftarP);
     // displayListStat(ListOfBangunan);
     
     // printWord(currentWord);

@@ -6,10 +6,10 @@
 
 #include "boolean.h"
 #include "charmachine.h"
-#include "../ADT Matriks/matrix.h"
+// #include "../ADT Matriks/matrix.h"
 // #include "../ADT Point/point.h"
 // #include "../ADT List Statis/listpos.h"
-#include "../../Move/listpoint.h"
+#include "../../Map/map.h"
 #include "../ADT Queue/daftarPesanan.h"
 // #include"../../Move/point.h"
 
@@ -48,7 +48,7 @@ void startWord();
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan, Matrix *Adjency);
+void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan,PrioQueuePesanan *QueuePerishable ,Matrix *Adjency);
 
 
 void advWord();

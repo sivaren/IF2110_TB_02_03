@@ -34,7 +34,7 @@ void startWord() {
 //ASUMSI SUDAH ADA TYPESTRUCT BANGUNAN
 //ASUMSI SUDAH ADA TYPESTRUCT PESANAN
 //ASUMSI SUDAH ADA TYPESTRUCT 
-void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbangunan, PrioQueuePesanan *QueuePesanan, Matrix *Adjency) {
+void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbangunan, PrioQueuePesanan *QueuePesanan, PrioQueuePesanan *QueuePerishable, Matrix *Adjency) {
 
     /* KAMUS LOKAL */
     Word kata;
@@ -98,7 +98,7 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
             advWord();
             tempPesanan.waktuHangus = charToInt(currentWord);
             // printf("waktuHangus %d\n", tempPesanan.waktuHangus);
-            
+            enqueuePRIOQUEUE(QueuePerishable,tempPesanan);
         }    
         
         
@@ -183,11 +183,14 @@ void convertWordToString(Word C, char *string){
     int i,j,count;
     count= C.length+4;
     char format[] =".txt";
-    // char hasil[10];
     j= 0;
+    // printWord(C);
     for (i=0; i<=count; i++){
+        
         if (i < C.length){
+            printf("yang keprint %c\n", C.contents[i]);
             *string = C.contents[i];
+            
         } else if (i<count){
             *string = format[j];
             j++;
