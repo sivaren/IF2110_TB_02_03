@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "boolean.h"
 #include "move.h"
+#include "../mesinKarKat/wordmachine.h"
 
 ListPoint adjacent(ListPoint map, Matrix adjacency_matrix, Point coordinate_mobita, Point HQ) {
     int num = 1, row_mobita; int j;
@@ -68,12 +69,12 @@ void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Poin
     printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n");
     int option;
     printf("Masukkan pilihan opsi: ");
-    scanf("%d", &option); // Pilih angka antara 0-total_point
+    option = scanINT();
     while (option < 0 || option > total_point)
     {
         printf("Masukkan angka antara 0-total_point!\n");
         printf("Masukkan pilihan opsi: ");
-        scanf("%d", &option); // Pilih angka antara 0-total_point
+        option = scanINT();
     }
     printf("\n");
     if (option != 0)

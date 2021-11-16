@@ -32,7 +32,8 @@ void readTas(Tas *Tasnobita, InProgList *Inprog, int *heavyitems, int *speedboos
     printf("masukkan jumlah pesanan saat ini: ");
         scanf("%d", &jumlahPesanan);
         // iterasi masukkan elem ke tas
-        for (int i=jumlahPesanan; i>0; i--) {
+        int i;
+        for ( i=jumlahPesanan; i>0; i--) {
             printf("Tas elemen ke-%d\n", i);
             printf("Masukkan item type: ");
             scanf(" %c", &tempItemType);
@@ -79,9 +80,9 @@ void readTodo(ToDoList *Todo) {
     printf("INPUT TODO\n");
     printf("Masukkan jumlah pesanan: ");
     scanf("%d", &jumlahPesanan);
-
+    int i;
     // iterasi masukkan elem ke tas
-        for (int i=0; i<jumlahPesanan; i++) {
+        for ( i=0; i<jumlahPesanan; i++) {
             printf("Todo list elemen ke-%d\n", i+1);
             printf("Masukkan time in: ");
             scanf(" %d", &tempTimeIn);
@@ -134,7 +135,7 @@ int main() {
     ToDoList Todo;
         // baca input todo list
         // readTodo(&Todo);
-
+    char *namaFile;
     Point pointHQ;
     ListPoint DaftarBangunan;
     PrioQueuePesanan DaftarPesanan;
@@ -166,58 +167,34 @@ int main() {
     CreatePRIOQUEUE(&staticPesananPerish);
     // readfile kalo udh ada
     CreateMatrix(18, 18, &Adjacency);
+    printf("nama FILE : " );
+    startWord();
+    // printWord(currentWord);
+    int ii,jj,count;
+    count= currentWord.length+4;
+    char format[] =".txt";
+    jj= 0;
     
-    readFile("config.txt", &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticPesananPerish, &Adjacency);
-    // printf("AbsisHQ setelah read: %d\n", pointHQ.X);
+    for (ii=0; ii<=count; ii++){
+        // printf("yang keprint %c\n", currentWord.contents[ii]);
+        if (ii < currentWord.length){
+            
+            namaFile[ii] = currentWord.contents[ii];
+            
+        } else if (ii<count){
+            namaFile[ii] = format[jj];
+            jj++;
+        }else{
+            namaFile[ii] = '\0';
+        }
+    }
+
+
+    readFile(namaFile, &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticPesananPerish, &Adjacency);
+    closeFile();
     displayMatrix(Adjacency);
     currentPos = pointHQ;
-    // copy daftar pesanan
-
-    // kalo blm ada read
-    /*
-    printf("input adjacency: \n");
-    pointHQ = CreatePoint('8',1,1);
     
-    Point A = CreatePoint('A',10,1);
-    insertLastListPoint(&DaftarBangunan,A);
-    Point B = CreatePoint('B',1,15);
-    insertLastListPoint(&DaftarBangunan,B);
-    Point C = CreatePoint('C',1,9);
-    insertLastListPoint(&DaftarBangunan,C);
-    Point D = CreatePoint('D',1,13);
-    insertLastListPoint(&DaftarBangunan,D);
-    Point E = CreatePoint('E',2,3);
-    insertLastListPoint(&DaftarBangunan,E);
-    Point F = CreatePoint('F',3,1);
-    insertLastListPoint(&DaftarBangunan,F);
-    Point G = CreatePoint('G',3,8);
-    insertLastListPoint(&DaftarBangunan,G);
-    Point H = CreatePoint('H',3,14);
-    insertLastListPoint(&DaftarBangunan,H);
-    Point I = CreatePoint('I',4,5);
-    insertLastListPoint(&DaftarBangunan,I);
-    Point J = CreatePoint('J',5,12);
-    insertLastListPoint(&DaftarBangunan,J);
-    Point K = CreatePoint('K',6,3);
-    insertLastListPoint(&DaftarBangunan,K);
-    Point L = CreatePoint('L',7,10);
-    insertLastListPoint(&DaftarBangunan,L);
-    Point M = CreatePoint('M',8,2);
-    insertLastListPoint(&DaftarBangunan,M);
-    Point N = CreatePoint('N',8,6);
-    insertLastListPoint(&DaftarBangunan,N);
-    Point O = CreatePoint('O',8,15);
-    insertLastListPoint(&DaftarBangunan,O);
-    Point P = CreatePoint('P',9,13);
-    insertLastListPoint(&DaftarBangunan,P);
-    Point Q = CreatePoint('Q',10,3);
-    insertLastListPoint(&DaftarBangunan,Q);
-    CreateMatrix(18,18,&Adjacency);
-    readMatrix(&Adjacency,18,18);   
-    */
-
-
-
     CreateTas(&TasNobita, 3);
     CreateToDoList(&Todo);
     CreateInProgList(&DaftarInprog);
@@ -231,9 +208,9 @@ int main() {
     do {
         printf("\n=============\n");
         printf("Masukkan command: (M(map), m(move), p(pickup), d(dropoff), q(quit), t(change todo), i(change inprog/tas), D(display all state), c(change tas capacity), b(buy), I(inventory): ");
-        scanf(" %c", &opt);
+        startWord();
         printf("\n=============\n");
-        if (opt == 'm') {
+        if (isKataSama(currentWord, "MOVE"))  {
             //pindah bangunan
             move(DaftarBangunan, Adjacency, &currentPos, pointHQ);
             int addition = 0;
@@ -324,28 +301,28 @@ int main() {
 
             //
             }
-        else if (opt == 'M') {
+        else if (isKataSama(currentWord, "MAP"))  {
             // map
             map(DaftarBangunan, Adjacency, currentPos, pointHQ, TOP_TAS(TasNobita).dropOff, Todo, rows, cols);
         }
-        else if (opt == 'p') {
+        else if  (isKataSama(currentWord, "PICK_UP")) {
             //pickup
             PICK_UP(currentPos, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost);
         }
-        else if (opt == 'd') {
+        else if (isKataSama(currentWord, "DROP_OFF")) {
             //dropoff
             DROP_OFF(currentPos, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost, &Money);
             
         }
-        else if (opt == 't') {
+        else if (isKataSama(currentWord, "TO_DO")) {
             //change todo
             readTodo(&Todo);
         }
-        else if (opt == 'i') {
+        else if (isKataSama(currentWord, "IN_PROGRESS"))  {
             //change inprog and tas
             readTas(&TasNobita, &DaftarInprog, &heavyitems, &speedboost);
         }
-        else if (opt == 'D') {
+        else if (isKataSama(currentWord, "DISPLAY")) {
             //print all state
             displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, TAS_CAPACITY(TasNobita), currentPos, Money, Time);
 
@@ -354,19 +331,22 @@ int main() {
             // ganti kapasitas tas
             printf("Masukkan kapasitas baru tas: ");
         }
-        else if (opt == 'b') {
+        else if ((isKataSama(currentWord, "BUY")))  {
             // buy
             Buy(Gadget, &Inventory, currentPos, &Money);
             printf("LENGTH = %d\n", lengthListInventory(Inventory));
             
         }
-        else if (opt == 'I') {
+        else if (isKataSama(currentWord, "INVENTORY")) {
             // inventory
             inventory(&Inventory, &TasNobita, &DaftarInprog, DaftarBangunan, staticPesananPerish, &currentPos, &Time);
         }
-
+        else{
+            printf("Input tidak valid");
+        }
     }
-    while (opt != 'q');
-    
+   while (!isKataSama(currentWord, "QUIT"));
+    printf("GAME SELESAI");
+    closeKata();
     return 0;
 }
