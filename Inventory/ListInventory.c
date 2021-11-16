@@ -66,17 +66,18 @@ void displayInventory(ListInventory l)
 //insert gadget yang sudah dibeli ke dalam inventory
 void insertGadget(ListInventory *l, Gadget id)
 {
-
-    int i = 0;
-    boolean flag = true;
-    while(i < INVENTORY_CAPACITY && flag)
-    {
-        if (ELMTInventory(*l,i) == INVENTORY_IDXUNDEF)
+    if(!isFullInventory(*l)){
+        int i = 0;
+        boolean flag = true;
+        while(i < INVENTORY_CAPACITY && flag)
         {
-            ELMTInventory(*l,i) = id;
-            flag = false;
+            if (ELMTInventory(*l,i) == INVENTORY_IDXUNDEF)
+            {
+                ELMTInventory(*l,i) = id;
+                flag = false;
+            }
+            i += 1;
         }
-        i += 1;
     }
 }
 
