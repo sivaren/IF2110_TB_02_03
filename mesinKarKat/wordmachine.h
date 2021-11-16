@@ -11,7 +11,9 @@
 // #include "../ADT List Statis/listpos.h"
 #include "../daftarPesanan/daftarPesanan.h"
 #include "../Map/map.h"
-// #include"../../Move/point.h"
+
+
+
 
 #define CAPACITY_WORD 50
 #define BLANK ' '
@@ -45,31 +47,31 @@ void startWord();
    F.S. : endWord = true, dan currentChar = MARK; 
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
-
+void copyWordKeyboard();
 void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan,PrioQueuePesanan *QueuePerishable ,Matrix *Adjency);
 
 
-void advWord();
+void advWord(boolean flag);
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi 
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi, 
           currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
           Jika currentChar = MARK, endWord = true.		  
    Proses : Akuisisi kata menggunakan procedure copyWord */
 
-void copyWord();
+void copyWord(boolean flag);
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
    F.S. : currentWord berisi kata yang sudah diakuisisi; 
           currentChar = BLANK atau currentChar = MARK; 
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
-int charToInt(Word C);
+int WordToInt(Word C);
 char WordtoSingleChar(Word C);
 void printWord(Word C);
 
 // void convertWordToString(Word C,  char *string);
-void convertWordToString(Word C,  char *string);
 int panjangString (char* string);
 boolean isKataSama (Word C, char* string);
+int scanINT ();
 #endif
 

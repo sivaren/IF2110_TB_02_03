@@ -8,7 +8,9 @@ char currentChar;
 boolean eot;
 
 static FILE * tape;
+static FILE * tapeFile;
 static int retval;
+static int retvalFile;
 
 void start() {
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -26,7 +28,7 @@ void start() {
 void startFile(char *fileName){
 /* start baca dari file,mirip start()*/
   /* Algoritma */
-  tape = fopen(fileName,"r");
+  tapeFile = fopen(fileName,"r");
   advForFile();
 }
 
@@ -39,23 +41,20 @@ void adv() {
 
 	/* Algoritma */
 	retval = fscanf(tape,"%c",&currentChar);
-	eot = (currentChar == MARK_ENGINE);
-	if (eot) {
-              fclose(tape);
- 	}
 }
+
+
+
 
 void advForFile(){
-   retval = fscanf(tape,"%c",&currentChar);
-   // if (currentChar == '\n') fscanf(tape,"%c",&currentChar);
-	eot = (currentChar == MARK_FILE);
-	if (eot) {
-         fclose(tape);
- 	}
-
+   retvalFile = fscanf(tapeFile,"%c",&currentChar);
 }
 
 
-// void advNewline(){
-//    retval = fscanf(tape,"\n",&currentChar)
-// }
+void closeFile(){
+   fclose(tapeFile);
+}
+
+void closeKata(){
+    fclose(tape);
+}

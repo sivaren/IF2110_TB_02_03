@@ -7,7 +7,7 @@
 #include "boolean.h"
 
 #define MARK_ENGINE '\n'
-#define MARK_FILE '.'
+#define MARK_FILE EOF
 // #define MARK_FILE '\0'
 /* Char Engine State */
 extern char currentChar;
@@ -30,4 +30,8 @@ void adv();
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 void advForFile();
+
+void closeFile();
+
+void closeKata();
 #endif
