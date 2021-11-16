@@ -26,12 +26,16 @@ typedef struct {
 	int idxTail;
 } PrioQueuePesanan;
 
+
+
+
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
 #define IDX_HEAD_PRIOQUEUE(q) (q).idxHead
 #define IDX_TAIL_PRIOQUEUE(q) (q).idxTail
 #define     HEAD_PRIOQUEUE(q) (q).buffer[(q).idxHead]
 #define     TAIL_PRIOQUEUE(q) (q).buffer[(q).idxTail]
+
 
 /* *** Kreator *** */
 void CreatePRIOQUEUE(PrioQueuePesanan *q);

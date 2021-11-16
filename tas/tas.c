@@ -111,13 +111,15 @@ void copyTas(Tas t1, Tas *t2){
 }
 /* Tas t2 berisi copy dari Tas t1 */
 
-void upgradeTasCapacity(Tas *s, int capacity){
-    Tas temp;
-    CreateTas(&temp, capacity);
-    copyTas(*s, &temp);
+void upgradeTasCapacity(Tas *s, int newCapacity){
+    if(newCapacity <= MAX_TAS_CAPACITY){
+        Tas temp;
+        CreateTas(&temp, newCapacity);
+        copyTas(*s, &temp);
 
-    CreateTas(&(*s), capacity);
-    copyTas(temp, &(*s));
+        CreateTas(&(*s), newCapacity);
+        copyTas(temp, &(*s));
+    }
 }
 /* Upgrade tas dengan capacity yang baru */
 
@@ -136,3 +138,44 @@ void displaytas(Tas s){
     }
 }
 /* Display isi tas (hanya untuk debugging) */
+
+void activated_kainWaktu_inTas(Tas *s, PrioQueuePesanan Q, ElTypeTas *targetPerish, int *waktuSemula){
+    Tas temp;
+    ElTypeTas popVal;
+    int i;
+    boolean found;
+    
+    found = false;
+    CreateTas(&temp, TAS_CAPACITY(*s));
+
+    while(!isEmptyTas(*s) && !found){
+        if(TOP_TAS(*s).itemType == 'P'){
+            popTas(&(*s), &popVal);
+            found = true;
+        } else {
+            popTas(&(*s), &popVal);
+            pushTas(&(temp), popVal);
+        }
+    }
+    // perishable item ditemukan
+    *targetPerish = popVal;
+
+    // mencari data perishable item yang sama pada PrioQueuePesanan
+    for(i = IDX_HEAD_PRIOQUEUE(Q); i <= IDX_TAIL_PRIOQUEUE(Q); i++){
+        if(Q.buffer[i].pickUp == popVal.pickUp && Q.buffer[i].dropOff == popVal.dropOff && Q.buffer[i].jenisItem == 'P'){
+            *waktuSemula = Q.buffer[i].waktuHangus; 
+            popVal.perishTime = *waktuSemula; 
+        }
+    }
+    // sisa waktu perishable item teratas TAS telah di refresh
+
+    // masukkan kembali perishable item yang telah di adjust waktu hangus-nya
+    pushTas(&(*s), popVal);
+
+    // mengisi kembali sisa item yang ada di tas sebelumnya
+    while(!isEmptyTas(temp)){
+        popTas(&temp, &popVal);
+        pushTas(&(*s), popVal);
+    }
+}
+/* Mengembalikan sisa waktu hangus perishable item teratas TAS, sudah dijamin terdapat perishable item */

@@ -83,4 +83,7 @@ void deletePerishItem_inProg(InProgList *l, Tas *s, InProgType *delVal);
 void displayInProg(InProgList l);
 /* Menampilkan isi inprogresslist */
 
+void activated_kainWaktu_inProg(InProgList *l, int waktuSemula);
+/* Mengembalikan sisa waktu hangus perishable item teratas TAS, sudah dijamin terdapat perishable item */
+
 #endif

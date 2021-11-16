@@ -2,12 +2,13 @@
 #include <stdio.h>
 #include "DROP_OFF.h"
 
-void DROP_OFF(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *currentTasCapacity, int *Money)
+void DROP_OFF(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *Money)
 // prosedur untuk drop item pada drop point
 {
-    if (isDropAvailable(CurrentBangunan, *TasNobita, *Todo)) {
-        drop_action(TasNobita, DaftarInprog, heavyitems, speedboost, currentTasCapacity, Money);
-    }
+        if (isDropAvailable(CurrentBangunan, *TasNobita, *Todo)){
+        drop_action(TasNobita, DaftarInprog, heavyitems, speedboost, Money);
+        }
+    
     else {
         printf("Tidak dapat pesanan yang dapat diantarkan!\n");
     }
@@ -25,7 +26,7 @@ if (TOP_TAS(TasNobita).dropOff == CurrentBangunan.name) {
 else {return false;}
 }
 
-void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *currentTasCapacity, int *Money)
+void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *Money)
 // drop item apabila tersedia
 {
     int reward;
@@ -50,13 +51,12 @@ void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, int 
     }
     else if (accPesanan.itemType == 'P') {
         printf("Pesanan Perishable Item berhasil diantarkan\n");
-        reward = 400;
-        *currentTasCapacity += 1;
-        upgradeTasCapacity(TasNobita, *currentTasCapacity);
+        reward = 400;;
+        upgradeTasCapacity(TasNobita, TAS_CAPACITY(*TasNobita)+1);
         
     }
 
-    printf("Uang yang didapatkan: %d", reward);
+    printf("Uang yang didapatkan: %d\n", reward);
     // update state uang
     *Money += reward;
 }

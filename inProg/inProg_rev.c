@@ -121,7 +121,6 @@ void adjustPerishTime_inProg(InProgList *l, Tas *s){
         do{
             if(ITEMTYPE_INPROG(p) == 'P'){
                 PERISHTIME_INPROG(p) = PERISHTIME_INPROG(p) - 1;
-                printf("waktu perish tujuan %c = %d\n", DROPOFF_INPROG(p), PERISHTIME_INPROG(p));
             }
             p = NEXT_INPROG(p);
         } while(p != NULL);
@@ -176,18 +175,30 @@ void displayInProg(InProgList l){
             printf("%d. ", count+1);
             if(ITEMTYPE_INPROG(p) == 'N'){
                 printf("Normal Item ");
+                printf("(Tujuan: %c)\n", DROPOFF_INPROG(p));
             }
             else if(ITEMTYPE_INPROG(p) == 'H'){
                 printf("Heavy Item ");
+                printf("(Tujuan: %c)\n", DROPOFF_INPROG(p));
             }
             else if(ITEMTYPE_INPROG(p) == 'P'){
                 printf("Perishable Item ");
+                printf("(Tujuan: %c, Sisa waktu: %d)\n", DROPOFF_INPROG(p), PERISHTIME_INPROG(p));
             }
-
-            printf("(Tujuan: %c)\n", DROPOFF_INPROG(p));
+            
             p = NEXT_INPROG(p);
             count++;
         } while(p != NULL);
     }
 }
 /* Menampilkan isi inprogresslist */
+
+void activated_kainWaktu_inProg(InProgList *l, int waktuSemula){
+    AddressInProg p = FIRST_INPROG(*l);
+    while(p != NULL && ITEMTYPE_INPROG(p) != 'P'){
+        p = NEXT_INPROG(p);
+    }
+    // ITEMTYPE_INPROG(p) = 'P'
+    PERISHTIME_INPROG(p) = waktuSemula;
+}
+/* Mengembalikan sisa waktu hangus perishable item teratas TAS, sudah dijamin terdapat perishable item */

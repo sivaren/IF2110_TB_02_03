@@ -6,13 +6,12 @@
 
 #include "boolean.h"
 #include "charmachine.h"
-
-#include "../daftarPesanan/daftarPesanan.h"
-#include "../Map/matrix.h"
-#include "../Map/listpoint.h"
-// #include "../Map/point.h"
+// #include "../ADT Matriks/matrix.h"
+// #include "../ADT Point/point.h"
 // #include "../ADT List Statis/listpos.h"
-// #include"../Map/point.h"
+#include "../daftarPesanan/daftarPesanan.h"
+#include "../Map/map.h"
+// #include"../../Move/point.h"
 
 #define CAPACITY_WORD 50
 #define BLANK ' '
@@ -31,6 +30,7 @@ typedef struct {
 // } Pesanan;
 
 
+
 /* Word Engine State */
 extern boolean endWord;
 extern Word currentWord;
@@ -46,7 +46,7 @@ void startWord();
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void readFile(char *namaFile,  Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan, Matrix *Adjency);
+void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan,PrioQueuePesanan *QueuePerishable ,Matrix *Adjency);
 
 
 void advWord();
@@ -64,8 +64,12 @@ void copyWord();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
 int charToInt(Word C);
-char WordtoChar(Word C);
+char WordtoSingleChar(Word C);
 void printWord(Word C);
-// boolean isKataSama (Word C, char* string);
+
+// void convertWordToString(Word C,  char *string);
+void convertWordToString(Word C,  char *string);
+int panjangString (char* string);
+boolean isKataSama (Word C, char* string);
 #endif
 

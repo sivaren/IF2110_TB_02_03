@@ -4,6 +4,7 @@
 
 void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost){
     ToDoType accPesanan;
+    
     if (isPickAvailable(CurrentBangunan, *TasNobita, *Todo, &accPesanan)) {
         if (isFullTas(*TasNobita)) {
             printf("Tas penuh\n");
@@ -12,6 +13,7 @@ void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *
         pickup_action(TasNobita, Todo, DaftarInprog, accPesanan, heavyitems, speedboost);
         }
     }
+    
     else {
         printf("Pesanan tidak ditemukan!\n");
     }
@@ -52,11 +54,11 @@ void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToD
         *heavyitems+=1;
         *speedboost = 0;
         printf("Heavy item berhasil diambil!\n");
-        printf("Tujuan pesanan: %c", accPesanan.dropOff);
+        printf("Tujuan pesanan: %c\n", accPesanan.dropOff);
     }
     else if (accPesanan.itemType == 'N') {
         printf("Normal item berhasil diambil!\n");
-        printf("Tujuan pesanan: %c", accPesanan.dropOff);
+        printf("Tujuan pesanan: %c\n", accPesanan.dropOff);
 
     }
     else if (accPesanan.itemType == 'P') {
@@ -106,9 +108,9 @@ void ElmtTransfer_PICK_UP(ToDoType accPesanan, ToDoList *Todo, Tas *Tasnobita, I
     // F.S. elemen dalam todo list dihapus dan dipindahkan ke dalma tas dan in progress list
     ElTypeTas elmtTas = TodoType_to_ElTypeTas(accPesanan);
     InProgType elmtInprog = TodoType_to_InProgType(accPesanan);
-
+    ToDoType delval;
     // delete dari todo
-    delete_ToDoList(Todo, accPesanan, &accPesanan);
+    delete_ToDoList(Todo, accPesanan, &delval);
 
     // push ke tas
     pushTas(Tasnobita, elmtTas);

@@ -5,25 +5,25 @@
 void Buy(ListGadget gadget, ListInventory *inventory, Point coordinate_mobita, int *Money)
 {
     //*coordinate_mobita = posisi Mobita saat ini
-    if (Name(coordinate_mobita) == '8')
+    if (Name(coordinate_mobita) != '8')
     {
         printf("Anda hanya dapat membeli Gadget di Headquarters!");
     }
     else 
     {
-        printf("Uang Anda sekarang: %d Yen\n", Money);
+        printf("Uang Anda sekarang: %d Yen\n", *Money);
 
         //Menampilkan list Gadget yang dapat dibeli
         displayGadget(gadget);
         printf("Gadget mana yang ingin kau beli? (ketik 0 jika ingin kembali)\n");
 
-        int op;
+        int op = -1;
         scanf("ENTER COMMAND: %d", &op);
         //Meminta inputan yang valid
-        while (op < 0 || op > 4)
+        while (op != 0 && op != 1 && op != 2 && op != 3 && op != 4)
         {
             printf("Masukkan angka antara 0 - 4!\n");
-            scanf("ENTER COMMAND: %d", &op); 
+            scanf("%d", &op); 
         }
 
         if (op != 0)

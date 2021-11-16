@@ -3,23 +3,42 @@
 
 int main(){
     /* KAMUS LOKAL */
-    char* filename;
+    char *filename;
+    int N,M;
     Matrix map,map1;
     Point HQ;
     ListPoint ListOfBangunan;
-    PrioQueuePesanan daftarPesanMasuk;
+    PrioQueuePesanan daftarPesanMasuk,daftarP;
     
     /* ALGORITMA */
-    CreateListPoint(&ListOfBangunan); 
+    printf("input Nama file\n");
+    CreateListPoint(&ListOfBangunan,17); 
     CreateMatrix(18,18,&map);
     CreatePRIOQUEUE(&daftarPesanMasuk);
-    readFile("a.txt", &HQ, &ListOfBangunan, &daftarPesanMasuk, &map);
+    CreatePRIOQUEUE(&daftarP);
+
+    startWord();
+    // printWord(currentWord);
+    convertWordToString(currentWord, filename);
+    
+    int i =0;
+    while (*(filename+i) != '\0'){
+        printf("%c", *(filename+i));
+        i++;
+    }
+    printf("\n");
+
+    readFile(filename,&N, &M,&HQ, &ListOfBangunan, &daftarPesanMasuk, &daftarP, &map);
     
     // displayMatrix(map);
-    displayPRIOQUEUE(daftarPesanMasuk);
+    // displayPRIOQUEUE(daftarPesanMasuk);
+    displayPRIOQUEUE(daftarP);
     // displayListStat(ListOfBangunan);
-    startWord();
-    printWord(currentWord);
+    
+    // printWord(currentWord);
+
+    // if (isKataSama(currentWord, "MOVE")) printf("BENAR");
+    // else printf("SALAH");
 
     // if (currentWord == 'HELLO') printf("yey");
     // startFile("a.txt"); copyWord();

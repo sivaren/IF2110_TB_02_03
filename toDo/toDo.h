@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
-#include "daftarPesanan/daftarPesanan.h"
+#include "../daftarPesanan/daftarPesanan.h"
 
 typedef struct {
     int timeIn;
@@ -78,5 +78,8 @@ boolean isBangunanInTodo (char namaBangunan, ToDoList DaftarTodo);
 
 void daftarPesanan_to_toDo(Pesanan valPesan, ToDoType *todoVal);
 /* CONVERT DAFTAR PESANAN -> TO DO LIST */
+
+boolean isTodoTypeSama(ToDoType td1, ToDoType td2);
+/* Mengembalikan true bila ToDoType sama */
 
 #endif

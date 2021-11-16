@@ -68,8 +68,7 @@ void delete_ToDoList(ToDoList *td, ToDoType delTarget, ToDoType *delVal){
     AddressTodo p = FIRST_TODO(*td);
     AddressTodo prev = NULL;
 
-    while(TIMEIN_TODO(p) != delTarget.timeIn || PICKUP_TODO(p) != delTarget.pickUp 
-        || DROPOFF_TODO(p) != delTarget.dropOff || ITEMTYPE_TODO(p) != delTarget.itemType){
+    while(!isTodoTypeSama(delTarget, INFO_TODO(p))){
         prev = p;
         p = NEXT_TODO(p);
     }
@@ -106,7 +105,7 @@ void displayToDoList(ToDoList td){
                 printf("(Heavy Item)\n");
             }
             else if(ITEMTYPE_TODO(loc) == 'P'){
-                printf("(Perishable Item)\n");
+                printf("(Perishable Item, Waktu hangus:%d)\n", PERISHTIME_TODO(loc));
             }
 
             loc = NEXT_TODO(loc);
@@ -142,3 +141,8 @@ void daftarPesanan_to_toDo(Pesanan valPesan, ToDoType *todoVal){
     (*todoVal).perishTime = valPesan.waktuHangus;
 }
 /* CONVERT DAFTAR PESANAN -> TO DO LIST */
+
+boolean isTodoTypeSama(ToDoType td1, ToDoType td2) {
+    return (td1.dropOff == td2.dropOff) && (td1.itemType == td2.itemType) && (td1.pickUp == td2.pickUp) && (td1.timeIn == td2.timeIn);
+}
+/* Mengembalikan true bila ToDoType sama */

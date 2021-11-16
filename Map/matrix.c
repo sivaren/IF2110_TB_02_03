@@ -76,32 +76,32 @@ void readMatrix(Matrix *m, int nRow, int nCol) {
         }
     }  
 }
-// void displayMatrix(Matrix m) {
-// /* I.S. m terdefinisi */
-// /* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris 
-//    dipisahkan sebuah spasi */
-// /* Proses: Menulis nilai setiap elemen m ke layar dengan traversal per baris dan per kolom */
-// /* Contoh: Menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
-// 1 2 3
-// 4 5 6
-// 8 9 10
-// */
-//     /* KAMUS LOKAL */
-//     IndexMatrix i,j;
-//     /* ALGORITMA */
-//     for (i = 0; i < ROWS(m); i++) {
-//         for (j = 0; j < COLS(m); j++) {
-//             if (j == COLS(m)-1) {
-//                 printf("%d", ELMT(m, i, j));
-//             } else {
-//                 printf("%d ", ELMT(m, i, j));
-//             }
-//         }
-//         if (i != ROWS(m)-1) {
-//             printf("\n");
-//         }
-//     }
-// }
+void displayMatrix(Matrix m) {
+/* I.S. m terdefinisi */
+/* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris 
+   dipisahkan sebuah spasi */
+/* Proses: Menulis nilai setiap elemen m ke layar dengan traversal per baris dan per kolom */
+/* Contoh: Menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
+1 2 3
+4 5 6
+8 9 10
+*/
+    /* KAMUS LOKAL */
+    IndexMatrix i,j;
+    /* ALGORITMA */
+    for (i = 0; i < ROWS(m); i++) {
+        for (j = 0; j < COLS(m); j++) {
+            if (j == COLS(m)-1) {
+                printf("%d", ELMT(m, i, j));
+            } else {
+                printf("%d ", ELMT(m, i, j));
+            }
+        }
+        if (i != ROWS(m)-1) {
+            printf("\n");
+        }
+    }
+}
 
 // /* ********** KELOMPOK OPERASI ARITMATIKA TERHADAP TYPE ********** */
 // Matrix addMatrix(Matrix m1, Matrix m2) {

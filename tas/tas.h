@@ -5,8 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
+#include "../daftarPesanan/daftarPesanan.h"
 
 #define IDX_TAS_UNDEF -1
+#define MAX_TAS_CAPACITY 100
 
 typedef struct {
 	char pickUp;
@@ -73,10 +75,13 @@ void deletePerishItem_inTas(Tas *s);
 void copyTas(Tas t1, Tas *t2);
 /* Tas t2 berisi copy dari Tas t1 */
 
-void upgradeTasCapacity(Tas *s, int capacity);
+void upgradeTasCapacity(Tas *s, int newCapacity);
 /* Upgrade tas dengan capacity yang baru */
 
 void displaytas(Tas s);
 /* Display isi tas (hanya untuk debugging) */
+
+void activated_kainWaktu_inTas(Tas *s, PrioQueuePesanan Q, ElTypeTas *targetPerish, int *waktuSemula);
+/* Mengembalikan sisa waktu hangus perishable item teratas TAS, sudah dijamin terdapat perishable item */
 
 #endif
