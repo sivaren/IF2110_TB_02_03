@@ -105,7 +105,7 @@ void displayToDoList(ToDoList td){
                 printf("(Heavy Item)\n");
             }
             else if(ITEMTYPE_TODO(loc) == 'P'){
-                printf("(Perishable Item, sisa waktu %d)\n", PERISHTIME_TODO(loc));
+                printf("(Perishable Item, Waktu hangus:%d)\n", PERISHTIME_TODO(loc));
             }
 
             loc = NEXT_TODO(loc);

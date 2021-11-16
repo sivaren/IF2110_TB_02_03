@@ -4,8 +4,8 @@
 
 void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost){
     ToDoType accPesanan;
+    
     if (isPickAvailable(CurrentBangunan, *TasNobita, *Todo, &accPesanan)) {
-    while (isPickAvailable(CurrentBangunan, *TasNobita, *Todo, &accPesanan)) {
         if (isFullTas(*TasNobita)) {
             printf("Tas penuh\n");
         }
@@ -13,7 +13,7 @@ void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *
         pickup_action(TasNobita, Todo, DaftarInprog, accPesanan, heavyitems, speedboost);
         }
     }
-    }
+    
     else {
         printf("Pesanan tidak ditemukan!\n");
     }
