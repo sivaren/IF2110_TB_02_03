@@ -23,7 +23,8 @@ void Buy(ListGadget gadget, ListInventory *inventory, Point coordinate_mobita, i
         //Meminta inputan yang valid
         while (op < 0 || op > 4)
         {
-            printf("Masukkan angka antara 0 - 4!\n");
+            printf("Masukkan angka antara 0 - 4!\n\n");
+            printf("ENTER COMMAND: ");
             scanf("%d", &op); 
         }
 
@@ -71,6 +72,8 @@ void Buy(ListGadget gadget, ListInventory *inventory, Point coordinate_mobita, i
             {
                 printf("Inventory Gadget Anda sudah penuh!\n\n");
             }
+        } else {
+            printf("\n");
         }
     }
     

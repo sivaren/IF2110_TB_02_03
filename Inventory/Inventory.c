@@ -9,11 +9,12 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
 
     int op;
     printf("ENTER COMMAND: ");
-    scanf("%d\n", &op);
+    scanf("%d", &op);
     //Meminta input yang valid
     while (op < 0 || op > 5)
     {
-        printf("Masukkan angka antara 0 - 5!\n");
+        printf("Masukkan angka antara 0 - 5!\n\n");
+        printf("ENTER COMMAND: ");
         scanf("%d", &op); 
     }
 
@@ -23,7 +24,7 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
         //Tidak ada gadget pada opsi yang dipilih (isi list = "-")
         if(ELMTInventory(*inventory,idx) == INVENTORY_IDXUNDEF)
         {
-            printf("Tidak ada Gadget yang dapat digunakan!\n");
+            printf("Tidak ada Gadget yang dapat digunakan!\n\n");
         }
         else 
         {
@@ -50,6 +51,8 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
             }
             deleteGadget(inventory, idx, ELMTInventory(*inventory,idx));
         }
+    } else {
+        printf("\n");
     }
 }
 
