@@ -62,11 +62,10 @@ int main() {
     CreateListPoint(&DaftarBangunan, 26);
     CreateMatrix(27, 27, &Adjacency);
     
-    /* ASSIGNMENT HEADQUARTER & CURRENT POSITION */
+    /* ASSIGNMENT HEADQUARTER */
     pointHQ = CreatePoint('X', 1, 1);
-    currentPos = pointHQ;
     
-    printf("nama FILE : " );
+    printf("Masukkan nama file konfigurasi (config): " );
 
     startWord();
     count = currentWord.length + 4;
@@ -86,8 +85,13 @@ int main() {
     readFile(namaFile, &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticPesananPerish, &Adjacency);
     closeFile();
 
+    // Assignment current position setelah baca file konfigurasi
+    currentPos = pointHQ; 
+
+    printf("===================\n");
     printf("Loading...\n");
     printf("Config file loaded.\n");
+    printf("===================\n");
 
     /* LOOP MAIN PROGRAM */
     while (run) {
@@ -143,7 +147,7 @@ int main() {
                 printf("Speedboost      : %d\n", speedboost);
 
             } else { // Jika Mobita Diam di tempat
-                printf("MOVE dibatalkan!\n");
+                printf("MOVE dibatalkan!\n\n");
             }
         }
         else if  (isKataSama(currentWord, "PICK_UP")) {
@@ -182,7 +186,7 @@ int main() {
             run = false;
         }
         else{
-            printf("Input tidak valid");
+            printf("Input tidak valid\n");
         }
     }
 

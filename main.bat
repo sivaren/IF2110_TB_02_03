@@ -1,2 +1,2 @@
-gcc main.c PICK_UP/PICK_UP.c Tas/Tas.c inProg/inProg_rev.c toDo/toDo.c DROP_OFF/DROP_OFF.c Map/Listpoint.c Map/matrix.c Map/point.c move/move.c Map/map.c "mesinKarKat/wordmachine.c" "mesinKarKat/charmachine.c" "daftarPesanan/daftarpesanan.c"  pcolor/pcolor.c Buy/buy.c Buy/ListGadget.c Inventory/Inventory.c Inventory/ListInventory.c -o main
+gcc main.c Buy/buy.c Buy/ListGadget.c daftarPesanan/daftarpesanan.c DROP_OFF/DROP_OFF.c help/help.c inProg/inProg_rev.c Inventory/Inventory.c Inventory/ListInventory.c Map/Listpoint.c Map/matrix.c Map/point.c  Map/map.c mesinKarKat/wordmachine.c mesinKarKat/charmachine.c Move/move.c pcolor/pcolor.c PICK_UP/PICK_UP.c tas/tas.c toDo/toDo.c -o mainOutput
 pause
