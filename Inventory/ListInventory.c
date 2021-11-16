@@ -37,7 +37,7 @@ void displayInventory(ListInventory l)
     int i, num;
     for(num = 1; num <= INVENTORY_CAPACITY; num++)
     {
-        printf("%d.", num);
+        printf("%d. ", num);
         i = num-1;
         if(ELMTInventory(l,i) == 1)
         {
@@ -68,15 +68,18 @@ void insertGadget(ListInventory *l, Gadget id)
 {
 
     int i;
-    for(i = 0; i < INVENTORY_CAPACITY; i++)
+    boolean flag = true;
+    while(i < INVENTORY_CAPACITY && flag)
     {
-        if(ELMTInventory(*l,i) == INVENTORY_IDXUNDEF)
+        if (ELMTInventory(*l,i) == INVENTORY_IDXUNDEF)
         {
             ELMTInventory(*l,i) = id;
+            flag = false;
         }
+        i += 1;
     }
-
 }
+
 
 //menghapus gadget dari list inventory
 void deleteGadget(ListInventory *l, int i, Gadget id)
