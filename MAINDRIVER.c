@@ -180,27 +180,26 @@ int main() {
     // readfile kalo udh ada
     CreateMatrix(18, 18, &Adjacency);
     
-    startWord();
-    int ii,jj,count;
-    count= currentWord.length+4;
-    char format[] =".txt";
-    jj= 0;
-    // printWord(C);
-    for (ii=0; ii<=count; ii++){
-        // printf("yang keprint %c\n", currentWord.contents[ii]);
-        if (ii < currentWord.length){
+    // startWord();
+    // int ii,jj,count;
+    // count= currentWord.length+4;
+    // char format[] =".txt";
+    // jj = 0;
+    // // printWord(C);
+    // for (ii=0; ii<=count; ii++){
+    //     // printf("yang keprint %c\n", currentWord.contents[ii]);
+    //     if (ii < currentWord.length){
             
-            namaFile[ii] = currentWord.contents[ii];
+    //         namaFile[ii] = currentWord.contents[ii];
             
-        } else if (ii<count){
-            namaFile[ii] = format[jj];
-            jj++;
-        }else{
-            namaFile[ii] = '\0';
-        }
-
-
-    readFile(namaFile, &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticPesananPerish, &Adjacency);
+    //     } else if (ii<count){
+    //         namaFile[ii] = format[jj];
+    //         jj++;
+    //     }else{
+    //         namaFile[ii] = '\0';
+    //     }
+    // }
+    readFile("config.txt", &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticPesananPerish, &Adjacency);
     // printf("AbsisHQ setelah read: %d\n", pointHQ.X);
     displayMatrix(Adjacency);
     currentPos = pointHQ;
@@ -248,8 +247,6 @@ int main() {
     CreateMatrix(18,18,&Adjacency);
     readMatrix(&Adjacency,18,18);   
     */
-
-
 
     CreateTas(&TasNobita, 3);
     CreateToDoList(&Todo);
