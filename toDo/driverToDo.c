@@ -31,6 +31,15 @@ int main(){
     insert_ToDoList(&td, todoType);
     printf("===\n");
 
+    /* NOTE: testing isTodoTypeSama
+    todoType.timeIn = 3;
+    if(isTodoTypeSama(todoType, INFO_TODO(td))){
+        printf("sama cuk\n");
+    } else {
+        printf("beda cuk\n");
+    } 
+    */
+    
     displayToDoList(td);
 
     printf("===\n");

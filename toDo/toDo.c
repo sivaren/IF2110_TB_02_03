@@ -143,6 +143,6 @@ void daftarPesanan_to_toDo(Pesanan valPesan, ToDoType *todoVal){
 /* CONVERT DAFTAR PESANAN -> TO DO LIST */
 
 boolean isTodoTypeSama(ToDoType td1, ToDoType td2) {
-    return (td1.dropOff == td2.dropOff) && (td1.itemType == td2.itemType) && (td1.pickUp == td2.pickUp) && (td1.timeIn == td1.timeIn);
-
+    return (td1.dropOff == td2.dropOff) && (td1.itemType == td2.itemType) && (td1.pickUp == td2.pickUp) && (td1.timeIn == td2.timeIn);
 }
+/* Mengembalikan true bila ToDoType sama */

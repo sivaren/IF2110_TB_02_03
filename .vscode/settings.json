@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "listpos.h": "c",
-        "listofbangunan.h": "c"
+        "listofbangunan.h": "c",
+        "daftarpesanan.h": "c"
     }
 }
