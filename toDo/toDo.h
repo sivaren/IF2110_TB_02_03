@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
+#include "../ADT/ADT Queue/daftarPesanan.h"
 
 typedef struct {
     int timeIn;
@@ -71,5 +72,13 @@ void delete_ToDoList(ToDoList *td, ToDoType delTarget, ToDoType *delVal);
 
 void displayToDoList(ToDoList td);
 /* Menampilkan isi To Do List */
+
+boolean isBangunanInTodo (char namaBangunan, ToDoList DaftarTodo);
+/* Mengirimkan true apabila namaBangunan terdapat pada To Do List */
+
+void daftarPesanan_to_toDo(Pesanan valPesan, ToDoType *todoVal);
+/* CONVERT DAFTAR PESANAN -> TO DO LIST */
+
+boolean isTodoTypeSama(ToDoType td1, ToDoType td2);
 
 #endif

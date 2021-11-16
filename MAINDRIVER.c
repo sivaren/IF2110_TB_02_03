@@ -114,20 +114,19 @@ void readTodo(ToDoList *Todo) {
             }
 }
 
-void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, int speedboost, int currentCapacity, Point currentPos, int Money) {
+void displayAll(Tas TasNobita, InProgList DaftarInprog, ToDoList Todo, int heavyitems, int speedboost, int currentCapacity, Point currentPos, int Money, int Time) {
     printf("\n=============\n");
     displaytas(TasNobita);
-    printf("=============\n");
+    printf("\n=============\n");
     displayInProg(DaftarInprog);
-    printf("=============\n");
+    printf("\n=============\n");
     displayToDoList(Todo);
-    printf("=============\n");
-    printf("money: %d\n", Money);
-    printf("heavyitems: %d\n", heavyitems);
-    printf("speedboost: %d\n", speedboost);
+    printf("\n=============\n");
+    printf("Time = : %d\n", Time);
+    printf("Speedboost = : %d\n", speedboost);
     printf("current capacity: %d\n", currentCapacity);
     printf("currentPos: %c\n", currentPos.name);
-    printf("=============\n");
+    printf("\n=============\n");
 }
 
 int main() {
@@ -140,12 +139,11 @@ int main() {
     int speedboost = 0;
     Tas TasNobita;
         // baca input tas nobita
-        readTas(&TasNobita, &DaftarInprog, &heavyitems, &speedboost);
+        // readTas(&TasNobita, &DaftarInprog, &heavyitems, &speedboost);
     ToDoList Todo;
         // baca input todo list
-        readTodo(&Todo);
+        // readTodo(&Todo);
 
-    Matrix dummyPeta;
     Point pointHQ;
     ListPoint DaftarBangunan;
     PrioQueuePesanan DaftarPesanan;
@@ -156,21 +154,25 @@ int main() {
     int cols = 15; //DUMMY
 
 
-    // pointHQ = CreatePoint('X', 1, 1);
+    pointHQ = CreatePoint('X', 1, 1);
     printf("AbsisHQ sebelum read: %d\n", pointHQ.X);
-    CreateMatrix(rows, cols, &dummyPeta);
-    CreateListPoint(&DaftarBangunan);
+    CreateListPoint(&DaftarBangunan, 17); // GANTI JUMLAH BANGUNAN YG ADA
     CreateMatrix(lengthListPoint(DaftarBangunan), lengthListPoint(DaftarBangunan), &Adjacency);
-
+    CreatePRIOQUEUE(&DaftarPesanan);
     // readfile kalo udh ada
-    // readFile("config.txt", &dummyPeta, &pointHQ, &DaftarBangunan, &DaftarPesanan, &Adjacency);
+    CreateMatrix(18, 18, &Adjacency);
+    
+    readFile("config.txt", &pointHQ, &DaftarBangunan, &DaftarPesanan, &Adjacency);
     // printf("AbsisHQ setelah read: %d\n", pointHQ.X);
-
+    displayMatrix(Adjacency);
+    currentPos = pointHQ;
+    // copy daftar pesanan
 
     // kalo blm ada read
+    /*
     printf("input adjacency: \n");
     pointHQ = CreatePoint('8',1,1);
-    currentPos = pointHQ;
+    
     Point A = CreatePoint('A',10,1);
     insertLastListPoint(&DaftarBangunan,A);
     Point B = CreatePoint('B',1,15);
@@ -207,47 +209,98 @@ int main() {
     insertLastListPoint(&DaftarBangunan,Q);
     CreateMatrix(18,18,&Adjacency);
     readMatrix(&Adjacency,18,18);   
+    */
 
 
 
+    CreateTas(&TasNobita, currentCapacity);
+    CreateToDoList(&Todo);
+    CreateInProgList(&DaftarInprog);
+    
 
-
-
-    displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money);
-
+    displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money, Time);
+    displayPRIOQUEUE(DaftarPesanan);
     printf("NAME HQ= %c\n", Name(pointHQ));
     printf("config loaded\n");
    
     do {
         printf("\n=============\n");
-        printf("Masukkan command: (M(map), m(move), p(pickup), d(dropoff), q(quit), t(change todo), i(change inprog/tas), D(display all state), c(change tas capacity): ");
+        printf("Masukkan command: (M(map), m(move), p(pickup), d(dropoff), q(quit), t(change todo), i(change inprog/tas), D(display all state), c(change tas capacity), b(buy), I(inventory): ");
         scanf(" %c", &opt);
         printf("\n=============\n");
         if (opt == 'm') {
             //pindah bangunan
             move(DaftarBangunan, Adjacency, &currentPos, pointHQ);
+            
+            /* NOTE: move #1
+            
             Time += 1; // regular
             Time += heavyitems; // heavy items
 
-            if ((speedboost%2) == 1) {
-                Time -= 1;
-                printf("Bonus 1 Unit waktu\n");
-            }
+            //speedboost
+
             if (speedboost != 0) {
-            speedboost -= 1;
+                printf("BONUS WAKTU\n");
+                if ((speedboost%2) == 0) {
+                    Time -= 1;
+                }
+                speedboost -= 1;
+            } 
+            */
+           
+           /* Butuh inisialisasi delValProgType, buat tempat buangan delete value */
+            InProgType delValProgType;
+            if(speedboost == 0 && !isHeavyAvail_inProg(DaftarInprog)){
+                Time++;
+                adjustPerishTime_inProg(&DaftarInprog, &TasNobita);
+                deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
+            } else if (speedboost != 0 && !isHeavyAvail_inProg(DaftarInprog)){
+                speedboost--;
+                if((speedboost%2) == 1){
+                    printf("Bonus 1 Unit waktu, Waktu tidak kurang\n");
+                } 
+                else{
+                    Time++;
+                    adjustPerishTime_inProg(&DaftarInprog, &TasNobita);
+                    deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
+                }        
+            } else if (isHeavyAvail_inProg(DaftarInprog)){
+                speedboost = 0;
+                Time += heavyitems;
+                for(int timePlus = 0; timePlus < heavyitems; timePlus++){
+                    adjustPerishTime_inProg(&DaftarInprog, &TasNobita);
+                    deletePerishItem_inProg(&DaftarInprog, &TasNobita, &delValProgType);
+                }
             }
-        
+
+            // daftar pesanan to todo
+            while (!isEmptyPRIOQUEUE(DaftarPesanan) && Time >= HEAD_PRIOQUEUE(DaftarPesanan).waktuMasuk) {
+                Pesanan tempPesanan;
+                ToDoType tempTodo;
+                dequeuePRIOQUEUE(&DaftarPesanan, &tempPesanan);
+                tempTodo.timeIn = tempPesanan.waktuMasuk;
+                tempTodo.pickUp = tempPesanan.pickUp;
+                tempTodo.dropOff = tempPesanan.dropOff;
+                tempTodo.perishTime = tempPesanan.waktuHangus;
+                tempTodo.itemType = tempPesanan.jenisItem;
+                insert_ToDoList(&Todo, tempTodo);
+
+            }
+
+            printf("Time = : %d\n", Time);
+            printf("CurrBangunan = : %c\n", currentPos.name);
+            printf("Speedboost = : %d\n", speedboost);
+            
 
 
-            // perish controller
+	
+
 
             //
-            printf("Time = %d\n", Time);
-            printf("Speedboost = %d\n", speedboost);
             }
         else if (opt == 'M') {
             // map
-            map(DaftarBangunan, pointHQ, rows, cols);
+            map(DaftarBangunan, Adjacency, currentPos, pointHQ, TOP_TAS(TasNobita).dropOff, Todo, rows, cols);
         }
         else if (opt == 'p') {
             //pickup
@@ -268,7 +321,7 @@ int main() {
         }
         else if (opt == 'D') {
             //print all state
-            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money);
+            displayAll(TasNobita, DaftarInprog, Todo, heavyitems, speedboost, currentCapacity, currentPos, Money, Time);
 
         }
         else if (opt == 'c') {

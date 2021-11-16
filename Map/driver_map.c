@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "map.h"
+#include "../Move/move.h"
 
 int main() {
     int row = 10, col = 15;
@@ -41,6 +42,9 @@ int main() {
     insertLastListPoint(&l,P);
     Point Q = CreatePoint('Q',10,3);
     insertLastListPoint(&l,Q);
-    map(l,HQ,row,col);
+    Matrix adjacency;
+    CreateMatrix(18,18,&adjacency);
+    readMatrix(&adjacency,1,18); 
+    map(l,adjacency,mobita,HQ,'H','M',row,col);
     return 0;
 }

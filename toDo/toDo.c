@@ -68,8 +68,7 @@ void delete_ToDoList(ToDoList *td, ToDoType delTarget, ToDoType *delVal){
     AddressTodo p = FIRST_TODO(*td);
     AddressTodo prev = NULL;
 
-    while(TIMEIN_TODO(p) != delTarget.timeIn && PICKUP_TODO(p) != delTarget.pickUp 
-        && DROPOFF_TODO(p) != delTarget.dropOff && ITEMTYPE_TODO(p) != delTarget.itemType){
+    while(!isTodoTypeSama(delTarget, INFO_TODO(p))){
         prev = p;
         p = NEXT_TODO(p);
     }
@@ -117,3 +116,33 @@ void displayToDoList(ToDoList td){
     }
 }
 /* Menampilkan isi To Do List */
+
+boolean isBangunanInTodo (char namaBangunan, ToDoList DaftarTodo) {
+    boolean found = false;
+    AddressTodo p;
+    p = FIRST_TODO(DaftarTodo);
+    while (p != NULL && !found) {
+        if (PICKUP_TODO(p) == namaBangunan) {
+            found = true;
+        }
+        else {
+            p = NEXT_TODO(p);
+        }
+    }
+    return found;
+}
+/* Mengirimkan true apabila namaBangunan terdapat pada To Do List */
+
+void daftarPesanan_to_toDo(Pesanan valPesan, ToDoType *todoVal){
+    (*todoVal).timeIn = valPesan.waktuMasuk;
+    (*todoVal).pickUp = valPesan.pickUp;
+    (*todoVal).dropOff = valPesan.dropOff;
+    (*todoVal).itemType = valPesan.jenisItem;
+    (*todoVal).perishTime = valPesan.waktuHangus;
+}
+/* CONVERT DAFTAR PESANAN -> TO DO LIST */
+
+boolean isTodoTypeSama(ToDoType td1, ToDoType td2) {
+    return (td1.dropOff == td2.dropOff) && (td1.itemType == td2.itemType) && (td1.pickUp == td2.pickUp) && (td1.timeIn == td1.timeIn);
+
+}
