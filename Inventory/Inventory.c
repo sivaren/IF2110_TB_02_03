@@ -7,8 +7,9 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
     displayInventory(*inventory);
     printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n\n");
 
-    int op=-1;
-    scanf("ENTER COMMAND: %d\n", &op);
+    int op;
+    printf("ENTER COMMAND: ");
+    scanf("%d\n", &op);
     //Meminta input yang valid
     while (op < 0 || op > 5)
     {

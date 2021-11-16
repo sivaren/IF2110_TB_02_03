@@ -4,6 +4,7 @@
         "listpoint.h": "c",
         "matrix.h": "c",
         "point.h": "c",
-        "drop_off.h": "c"
+        "drop_off.h": "c",
+        "listinventory.h": "c"
     }
 }

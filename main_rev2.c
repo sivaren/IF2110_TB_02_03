@@ -62,7 +62,7 @@ int main() {
     CreateListPoint(&DaftarBangunan, 26);
     CreateMatrix(27, 27, &Adjacency);
     
-    /* ASSIGNMENT HEADQUARTER */
+    /* ASSIGNMENT HEADQUARTERS */
     pointHQ = CreatePoint('X', 1, 1);
     
     printf("Masukkan nama file konfigurasi (config): " );
@@ -144,7 +144,7 @@ int main() {
 
                 printf("Time            : %d\n", Time);
                 printf("CurrBangunan    : %c\n", currentPos.name);
-                printf("Speedboost      : %d\n", speedboost);
+                printf("Speedboost      : %d\n\n", speedboost);
 
             } else { // Jika Mobita Diam di tempat
                 printf("MOVE dibatalkan!\n\n");
@@ -184,18 +184,12 @@ int main() {
         }
         else if (isKataSama(currentWord, "QUIT")) {
             run = false;
+            printf("(^///^) Selamat tinggal (^///^)\n\n");
         }
         else{
-            printf("Input tidak valid\n");
+            printf("Input tidak valid!\n\n");
         }
     }
-
-
-
-
-
-
-
 
     return 0;
 }

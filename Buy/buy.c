@@ -15,12 +15,13 @@ void Buy(ListGadget gadget, ListInventory *inventory, Point coordinate_mobita, i
 
         //Menampilkan list Gadget yang dapat dibeli
         displayGadget(gadget);
-        printf("Gadget mana yang ingin kau beli? (ketik 0 jika ingin kembali)\n");
+        printf("Gadget mana yang ingin kau beli? (ketik 0 jika ingin kembali)\n\n");
 
-        int op = -1;
-        scanf("ENTER COMMAND: %d", &op);
+        int op;
+        printf("ENTER COMMAND: ");
+        scanf("%d", &op);
         //Meminta inputan yang valid
-        while (op != 0 && op != 1 && op != 2 && op != 3 && op != 4)
+        while (op < 0 || op > 4)
         {
             printf("Masukkan angka antara 0 - 4!\n");
             scanf("%d", &op); 
