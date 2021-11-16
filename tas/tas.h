@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
+#include "../ADT/ADT Queue/daftarPesanan.h"
 
 #define IDX_TAS_UNDEF -1
 #define MAX_TAS_CAPACITY 100
@@ -79,5 +80,8 @@ void upgradeTasCapacity(Tas *s, int newCapacity);
 
 void displaytas(Tas s);
 /* Display isi tas (hanya untuk debugging) */
+
+void activated_kainWaktu_inTas(Tas *s, PrioQueuePesanan Q, ElTypeTas *targetPerish, int *waktuSemula);
+/* Mengembalikan sisa waktu hangus perishable item teratas TAS, sudah dijamin terdapat perishable item */
 
 #endif

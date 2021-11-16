@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "Inventory.h"
 
-
 void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInprog, ListPoint LP, PrioQueuePesanan Q, Point *coordinate_mobita, int *Time)
 {
     //Menampilkan isi List Inventory
@@ -50,7 +49,7 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
             else if(ELMTInventory(*inventory,idx) == 4)
             {
                 printf("Mesin Waktu berhasil digunakan!\n");
-                MesinWaktu(*Time);
+                MesinWaktu(&(*Time));
             }
             deleteGadget(inventory, idx, ELMTInventory(*inventory,idx));
         }
@@ -59,36 +58,19 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
 
 
 //Waktu item perishable di TOP tas kembali ke semula
-void KainPembungkusWaktu(Tas *tasMobita, InProgList *DaftarInprog ,PrioQueuePesanan Q)
-{
-    if(TOP_TAS(*tasMobita).itemType == 'P')
-    {
-        int i;
-        char pickUpTOP, dropOffTOP, itemTypeTOP;
-        pickUpTOP = TOP_TAS(*tasMobita).pickUp;
-        dropOffTOP = TOP_TAS(*tasMobita).dropOff;
+void KainPembungkusWaktu(Tas *tasMobita, InProgList *DaftarInprog, PrioQueuePesanan Q)
+{   
+    // jika terdapat perishable item pada tas
+    if(isPerishAvail_inProg(*DaftarInprog)){
+        int waktuSemula;
+        ElTypeTas targetPerish;
 
-        for(i = IDX_HEAD_PRIOQUEUE(Q); i <= IDX_TAIL_PRIOQUEUE(Q); i++)
-        {
-            if(Q.buffer[i].pickUp == pickUpTOP)
-            {
-                if(Q.buffer[i].dropOff == dropOffTOP)
-                {
-                    if(Q.buffer[i].jenisItem == 'P')
-                    {
-                        printf("HERE, %d\n", Q.buffer[i].waktuHangus);
-                        TOP_TAS(*tasMobita).perishTime = Q.buffer[i].waktuHangus;
-                        FIRST_INPROG(*DaftarInprog)->info.perishTime = Q.buffer[i].waktuHangus;
-                        
-                        
-                    }
-                }
-            }
-        }
-    }
-    else
-    {
-        printf("Item teratas bukan perishable item.");
+        activated_kainWaktu_inTas(&(*tasMobita), Q, &targetPerish, &waktuSemula);
+        activated_kainWaktu_inProg(&(*DaftarInprog), waktuSemula);
+    } 
+    // jika tidak ada perishable item pada tas
+    else {
+        printf("Tidak terdapat perishable item pada tas!\n");
     }
 }
 

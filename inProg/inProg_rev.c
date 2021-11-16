@@ -192,3 +192,13 @@ void displayInProg(InProgList l){
     }
 }
 /* Menampilkan isi inprogresslist */
+
+void activated_kainWaktu_inProg(InProgList *l, int waktuSemula){
+    AddressInProg p = FIRST_INPROG(*l);
+    while(p != NULL && ITEMTYPE_INPROG(p) != 'P'){
+        p = NEXT_INPROG(p);
+    }
+    // ITEMTYPE_INPROG(p) = 'P'
+    PERISHTIME_INPROG(p) = waktuSemula;
+}
+/* Mengembalikan sisa waktu hangus perishable item teratas TAS, sudah dijamin terdapat perishable item */
