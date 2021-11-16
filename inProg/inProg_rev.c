@@ -141,7 +141,7 @@ void deletePerishItem_inProg(InProgList *l, Tas *s, InProgType *delVal){
         p = FIRST_INPROG(*l);
         prev = NULL;
 
-        while(p != NULL && ITEMTYPE_INPROG(p) != 'P' && PERISHTIME_INPROG(p) > 0){
+        while(p != NULL && (ITEMTYPE_INPROG(p) != 'P' || PERISHTIME_INPROG(p) > 0)){
             prev = p;
             p = NEXT_INPROG(p);
         };

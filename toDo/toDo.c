@@ -68,8 +68,8 @@ void delete_ToDoList(ToDoList *td, ToDoType delTarget, ToDoType *delVal){
     AddressTodo p = FIRST_TODO(*td);
     AddressTodo prev = NULL;
 
-    while(TIMEIN_TODO(p) != delTarget.timeIn && PICKUP_TODO(p) != delTarget.pickUp 
-        && DROPOFF_TODO(p) != delTarget.dropOff && ITEMTYPE_TODO(p) != delTarget.itemType){
+    while(TIMEIN_TODO(p) != delTarget.timeIn || PICKUP_TODO(p) != delTarget.pickUp 
+        || DROPOFF_TODO(p) != delTarget.dropOff || ITEMTYPE_TODO(p) != delTarget.itemType){
         prev = p;
         p = NEXT_TODO(p);
     }
