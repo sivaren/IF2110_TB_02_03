@@ -80,5 +80,6 @@ void daftarPesanan_to_toDo(Pesanan valPesan, ToDoType *todoVal);
 /* CONVERT DAFTAR PESANAN -> TO DO LIST */
 
 boolean isTodoTypeSama(ToDoType td1, ToDoType td2);
+/* Mengembalikan true bila ToDoType sama */
 
 #endif
