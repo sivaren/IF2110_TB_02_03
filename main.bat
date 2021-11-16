@@ -6,4 +6,3 @@ gcc main_rev2.c Buy/buy.c Buy/ListGadget.c daftarPesanan/daftarpesanan.c DROP_OF
 ECHO ~~~~~~~~~~~~~~~~~~~~~~~
 ECHO Compilation successful!
 ECHO.
-pause
