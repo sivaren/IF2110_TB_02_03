@@ -23,6 +23,6 @@ void SenterPembesar(Tas *tasMobita);
 void PintuKemanaSaja(ListPoint LP, Point *coordinate_mobita);
 
 //Mengurangi waktu sebanyak 50 unit
-void MesinWaktu(int Time);
+void MesinWaktu(int *Time);
 
 #endif

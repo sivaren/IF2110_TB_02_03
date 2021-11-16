@@ -5,6 +5,7 @@
         "daftarpesanan.h": "c",
         "listinventory.h": "c",
         "matrix.h": "c",
-        "boolean.h": "c"
+        "boolean.h": "c",
+        "stack.h": "c"
     }
 }

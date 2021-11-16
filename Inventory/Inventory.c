@@ -139,16 +139,16 @@ void PintuKemanaSaja(ListPoint LP, Point *coordinate_mobita)
 }
 
 //Mengurangi waktu sebanyak 50 unit
-void MesinWaktu(int Time)
+void MesinWaktu(int *Time)
 {
     int currTime;
-    currTime = Time - 50;
+    currTime = *Time - 50;
     if (currTime < 0)
     {
-        Time = 0;
+        *Time = 0;
     }
     else
     {
-        Time = currTime;
+        *Time = currTime;
     }
 }
