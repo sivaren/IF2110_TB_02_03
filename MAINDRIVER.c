@@ -171,17 +171,18 @@ int main() {
     ListInventory Inventory;
     CreateListInventory(&Inventory);
     printf("LENGTH = %d", lengthListInventory(Inventory));
-
+    PrioQueuePesanan staticDaftarPesanan;
 
     pointHQ = CreatePoint('X', 1, 1);
     printf("AbsisHQ sebelum read: %d\n", pointHQ.X);
     CreateListPoint(&DaftarBangunan, 17); // GANTI JUMLAH BANGUNAN YG ADA
     CreateMatrix(lengthListPoint(DaftarBangunan), lengthListPoint(DaftarBangunan), &Adjacency);
     CreatePRIOQUEUE(&DaftarPesanan);
+    CreatePRIOQUEUE(&staticDaftarPesanan);
     // readfile kalo udh ada
     CreateMatrix(18, 18, &Adjacency);
     
-    readFile("config.txt", &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &Adjacency);
+    readFile("config.txt", &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticDaftarPesanan, &Adjacency);
     // printf("AbsisHQ setelah read: %d\n", pointHQ.X);
     displayMatrix(Adjacency);
     currentPos = pointHQ;
