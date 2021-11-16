@@ -34,12 +34,12 @@ void startWord() {
 //ASUMSI SUDAH ADA TYPESTRUCT BANGUNAN
 //ASUMSI SUDAH ADA TYPESTRUCT PESANAN
 //ASUMSI SUDAH ADA TYPESTRUCT 
-void readFile(char *namaFile,  Point *HQ, ListPoint *Listbangunan, PrioQueuePesanan *QueuePesanan, Matrix *Adjency) {
+void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbangunan, PrioQueuePesanan *QueuePesanan, Matrix *Adjency) {
 
     /* KAMUS LOKAL */
     Word kata;
     int i,j,k,jumlahBangunan,jumlahPesanan;
-    int X,Y,N,M;
+    int X,Y;
     char tempName;
 
     Pesanan tempPesanan;
@@ -48,8 +48,8 @@ void readFile(char *namaFile,  Point *HQ, ListPoint *Listbangunan, PrioQueuePesa
     /* ALGORITMA */
     startFile(namaFile); copyWord();
     //N dan M digunakan pada map
-    N = charToInt(currentWord);advWord();
-    M = charToInt(currentWord);advWord();
+    *N = charToInt(currentWord);advWord();
+    *M = charToInt(currentWord);advWord();
     
     //Assign posisi HQ
     Absis(*HQ)  = charToInt(currentWord);advWord();
@@ -59,7 +59,7 @@ void readFile(char *namaFile,  Point *HQ, ListPoint *Listbangunan, PrioQueuePesa
     //Assign jumlah Bangunan dan lokasi
     jumlahBangunan  = charToInt(currentWord);advWord();
     for (i=0; i<jumlahBangunan; i++){
-        tempBangunan.name= WordtoChar(currentWord);advWord();
+        tempBangunan.name= WordtoSingleChar(currentWord);advWord();
         tempBangunan.X =  charToInt(currentWord);advWord();
         tempBangunan.Y =  charToInt(currentWord);advWord();
         insertLastListPoint(Listbangunan,tempBangunan);
@@ -83,13 +83,13 @@ void readFile(char *namaFile,  Point *HQ, ListPoint *Listbangunan, PrioQueuePesa
         tempPesanan.waktuMasuk = charToInt(currentWord);advWord();
         // printf("pickUp :");printWord(currentWord);
         // printf("\n");
-        tempPesanan.pickUp = WordtoChar(currentWord);advWord();
+        tempPesanan.pickUp = WordtoSingleChar(currentWord);advWord();
         // printf("dropOFF :");printWord(currentWord);
         // printf("\n");
-        tempPesanan.dropOff = WordtoChar(currentWord);advWord();
+        tempPesanan.dropOff = WordtoSingleChar(currentWord);advWord();
         // printf("kenis :");printWord(currentWord);
         // printf("\n");
-        tempPesanan.jenisItem = WordtoChar(currentWord);
+        tempPesanan.jenisItem = WordtoSingleChar(currentWord);
         // printf("angka %d\n",tempPesanan.waktuMasuk);
         // printf("pickup %c\n", tempPesanan.pickUp);
         // printf("dropOff %c\n", tempPesanan.dropOff);
@@ -170,7 +170,7 @@ int charToInt(Word C){
     return bilangan;
 }
 
-char WordtoChar(Word C){
+char WordtoSingleChar(Word C){
     return C.contents[0];
 }
 
@@ -180,11 +180,47 @@ void printWord (Word C){
         printf("%c", C.contents[i]);
     }
 }
+void convertWordToString(Word C, char *string){
+    int i,j,count;
+    count= C.length+4;
+    char format[] =".txt";
+    // char hasil[10];
+    j= 0;
+    for (i=0; i<=count; i++){
+        if (i < C.length){
+            *string = C.contents[i];
+        } else if (i<count){
+            *string = format[j];
+            j++;
+        }else{
+            *string = '\0';
+        }
+        
+        string++;
+    }
+    
+    
+}
 
-// boolean isKataSama (Word C, char* string){
-//     int i;
-//     boolean flag = true;
-//     for (i=0; i<C.length; i++){
 
-//     }
-// }
+int panjangString (char* string){
+    int count;
+    count =0;
+    while (*(string+count) != '\0') count++;
+
+    return count;
+}
+
+
+boolean isKataSama (Word C, char *string){
+    int i = 0;
+    boolean flag;
+    flag = panjangString(string) == C.length;
+    while (i<C.length && flag){
+        
+        if (C.contents[i] != *(string +i)) flag = false;
+        else i++;
+    }
+
+    return flag;
+}
