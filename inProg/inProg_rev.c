@@ -121,7 +121,6 @@ void adjustPerishTime_inProg(InProgList *l, Tas *s){
         do{
             if(ITEMTYPE_INPROG(p) == 'P'){
                 PERISHTIME_INPROG(p) = PERISHTIME_INPROG(p) - 1;
-                printf("waktu perish tujuan %c = %d\n", DROPOFF_INPROG(p), PERISHTIME_INPROG(p));
             }
             p = NEXT_INPROG(p);
         } while(p != NULL);
