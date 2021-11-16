@@ -111,13 +111,15 @@ void copyTas(Tas t1, Tas *t2){
 }
 /* Tas t2 berisi copy dari Tas t1 */
 
-void upgradeTasCapacity(Tas *s, int capacity){
-    Tas temp;
-    CreateTas(&temp, capacity);
-    copyTas(*s, &temp);
+void upgradeTasCapacity(Tas *s, int newCapacity){
+    if(newCapacity <= MAX_TAS_CAPACITY){
+        Tas temp;
+        CreateTas(&temp, newCapacity);
+        copyTas(*s, &temp);
 
-    CreateTas(&(*s), capacity);
-    copyTas(temp, &(*s));
+        CreateTas(&(*s), newCapacity);
+        copyTas(temp, &(*s));
+    }
 }
 /* Upgrade tas dengan capacity yang baru */
 
