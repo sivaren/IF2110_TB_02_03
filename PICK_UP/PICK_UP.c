@@ -7,15 +7,14 @@ void PICK_UP(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *
     
     if (isPickAvailable(CurrentBangunan, *TasNobita, *Todo, &accPesanan)) {
         if (isFullTas(*TasNobita)) {
-            printf("Tas penuh\n");
+            printf("Tas penuh!\n\n");
         }
         else {
-        pickup_action(TasNobita, Todo, DaftarInprog, accPesanan, heavyitems, speedboost);
+            pickup_action(TasNobita, Todo, DaftarInprog, accPesanan, heavyitems, speedboost);
         }
     }
-    
     else {
-        printf("Pesanan tidak ditemukan!\n");
+        printf("Pesanan tidak ditemukan!\n\n");
     }
 }
 // prosedur untuk mengambil item dari pickup point
@@ -46,25 +45,22 @@ void pickup_action(Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, ToD
 {
     // transfer elemen tadi todo list ke inprogress list dan tas
     ElmtTransfer_PICK_UP(accPesanan, Todo, TasNobita, DaftarInprog);
-    
-
 
     // update state heavyItems apabila pickup heavy item serta remove ability speedup
     if (accPesanan.itemType == 'H') {
         *heavyitems+=1;
         *speedboost = 0;
-        printf("Heavy item berhasil diambil!\n");
-        printf("Tujuan pesanan: %c\n", accPesanan.dropOff);
+        printf("Pesanan berupa Heavy item berhasil diambil!\n");
+        printf("Tujuan pesanan: %c\n\n", accPesanan.dropOff);
     }
     else if (accPesanan.itemType == 'N') {
-        printf("Normal item berhasil diambil!\n");
-        printf("Tujuan pesanan: %c\n", accPesanan.dropOff);
-
+        printf("Pesanan berupa Normal item berhasil diambil!\n");
+        printf("Tujuan pesanan: %c\n\n", accPesanan.dropOff);
     }
     else if (accPesanan.itemType == 'P') {
-        printf("Perishable item berhasil diambil!\n");
-        printf("Tujuan pesanan: %c\n", accPesanan.dropOff);
-        printf("Sisa waktu hangus: %d\n", accPesanan.perishTime);
+        printf("Pesanan berupa Perishable item berhasil diambil!\n");
+        printf("Tujuan pesanan      : %c\n", accPesanan.dropOff);
+        printf("Sisa waktu hangus   : %d\n\n", accPesanan.perishTime);
     }
 }
 

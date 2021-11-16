@@ -105,14 +105,15 @@ void displayToDoList(ToDoList td){
                 printf("(Heavy Item)\n");
             }
             else if(ITEMTYPE_TODO(loc) == 'P'){
-                printf("(Perishable Item, Waktu hangus:%d)\n", PERISHTIME_TODO(loc));
+                printf("(Perishable Item, Waktu hangus: %d)\n", PERISHTIME_TODO(loc));
             }
 
             loc = NEXT_TODO(loc);
             count++;
         } while (loc != NULL);
+        printf("\n");
     } else {
-        printf("To Do List Kosong!\n");
+        printf("To Do List Kosong!\n\n");
     }
 }
 /* Menampilkan isi To Do List */

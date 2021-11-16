@@ -6,12 +6,11 @@ void DROP_OFF(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList 
 // prosedur untuk drop item pada drop point
 {
         if (isDropAvailable(CurrentBangunan, *TasNobita, *Todo)){
-        drop_action(TasNobita, DaftarInprog, heavyitems, speedboost, Money);
+            drop_action(TasNobita, DaftarInprog, heavyitems, speedboost, Money);
         }
-    
-    else {
-        printf("Tidak dapat pesanan yang dapat diantarkan!\n");
-    }
+        else {
+            printf("Tidak dapat pesanan yang dapat diantarkan!\n\n");
+        }
 }
 
 boolean isDropAvailable(Point CurrentBangunan, Tas TasNobita, ToDoList Todo)
@@ -56,7 +55,7 @@ void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, int 
         
     }
 
-    printf("Uang yang didapatkan: %d\n", reward);
+    printf("Uang yang didapatkan: %d Yen\n\n", reward);
     // update state uang
     *Money += reward;
 }

@@ -5,8 +5,7 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
 {
     //Menampilkan isi List Inventory
     displayInventory(*inventory);
-    printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n");
-    printf("\n");
+    printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n\n");
 
     int op=-1;
     scanf("ENTER COMMAND: %d\n", &op);
@@ -35,17 +34,17 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
             }
             else if(ELMTInventory(*inventory,idx) == 2)
             {
-                printf("Senter Pembesar berhasil digunakan!\n");
+                printf("Senter Pembesar berhasil digunakan!\n\n");
                 SenterPembesar(tasMobita);
             }
             else if(ELMTInventory(*inventory,idx) == 3)
             {
-                printf("Pintu Kemana Saja berhasil digunakan!\n");
+                printf("Pintu Kemana Saja berhasil digunakan!\n\n");
                 PintuKemanaSaja(LP, coordinate_mobita);
             }
             else if(ELMTInventory(*inventory,idx) == 4)
             {
-                printf("Mesin Waktu berhasil digunakan!\n");
+                printf("Mesin Waktu berhasil digunakan!\n\n");
                 MesinWaktu(&(*Time));
             }
             deleteGadget(inventory, idx, ELMTInventory(*inventory,idx));
@@ -59,7 +58,7 @@ void KainPembungkusWaktu(Tas *tasMobita, InProgList *DaftarInprog, PrioQueuePesa
 {   
     // jika terdapat perishable item pada tas
     if(isPerishAvail_inProg(*DaftarInprog)){
-        printf("Kain Pembungkus Waktu berhasil digunakan!\n");
+        printf("Kain Pembungkus Waktu berhasil digunakan!\n\n");
         int waktuSemula;
         ElTypeTas targetPerish;
 
@@ -68,7 +67,7 @@ void KainPembungkusWaktu(Tas *tasMobita, InProgList *DaftarInprog, PrioQueuePesa
     } 
     // jika tidak ada perishable item pada tas
     else {
-        printf("Tidak terdapat perishable item pada tas!\n");
+        printf("Tidak terdapat perishable item pada tas!\n\n");
     }
 }
 
@@ -83,7 +82,7 @@ void SenterPembesar(Tas *tasMobita)
     }
     else //Melebihi 100
     {
-        printf("Kapasitas tas melebihi maksimum!\n");
+        printf("Kapasitas tas melebihi maksimum!\n\n");
     }
 }
 
@@ -106,7 +105,7 @@ void PintuKemanaSaja(ListPoint LP, Point *coordinate_mobita)
     scanf("%d", &op); 
     while (op < 0 || op > lengthListPoint(LP))
     {
-        printf("Masukkan angka antara 0-total_point!\n");
+        printf("Masukkan angka antara 0 - %d!\n", lengthListPoint(LP));
         printf("ENTER COMMAND: ");
         scanf("%d\n", &op); 
     }

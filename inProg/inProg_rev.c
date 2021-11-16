@@ -163,14 +163,13 @@ void deletePerishItem_inProg(InProgList *l, Tas *s, InProgType *delVal){
 /* jika tidak ada maka F.S. = I.S.*/
 
 void displayInProg(InProgList l){
-    printf("Pesanan yang sedang diantarkan:\n");
-
     if(isEmpty_InProg(l)){
-        printf("Tidak ada pesanan yang sedang diantar!\n");
+        printf("Tidak ada pesanan yang sedang diantar!\n\n");
     } else {
         AddressInProg p = FIRST_INPROG(l);
         int count = 0;
 
+        printf("Pesanan yang sedang diantarkan:\n");
         do{
             printf("%d. ", count+1);
             if(ITEMTYPE_INPROG(p) == 'N'){
@@ -189,6 +188,7 @@ void displayInProg(InProgList l){
             p = NEXT_INPROG(p);
             count++;
         } while(p != NULL);
+        printf("\n");
     }
 }
 /* Menampilkan isi inprogresslist */
