@@ -25,9 +25,10 @@ void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobi
     ListPoint destination = adjacent(list_building,adjacency_matrix,coordinate_mobita,HQ);
     Matrix m;
     CreateMatrix(N+2,M+2,&m);
-    for (int i = 0; i < ROWS(m); i++)
+    int i,j;
+    for ( i = 0; i < ROWS(m); i++)
     {
-        for (int j = 0; j < COLS(m); j++)
+        for (j = 0; j < COLS(m); j++)
         {
             if (i == 0 || j == 0 || i == ROWS(m)-1 || j == COLS(m)-1)
             {

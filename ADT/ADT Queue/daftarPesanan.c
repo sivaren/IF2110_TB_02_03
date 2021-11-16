@@ -66,7 +66,7 @@ void enqueuePRIOQUEUE(PrioQueuePesanan *q, Pesanan val) {
         TAIL_PRIOQUEUE(*q) = val;
     }
     else {
-        for (int i=IDX_TAIL_PRIOQUEUE(*q); i>idxFound; i--) {
+        for ( i=IDX_TAIL_PRIOQUEUE(*q); i>idxFound; i--) {
             (*q).buffer[i] = (*q).buffer[i-1];
         } 
         (*q).buffer[idxFound] = val;

@@ -50,7 +50,8 @@ ListPoint adjacent(ListPoint map, Matrix adjacency_matrix, Point coordinate_mobi
 void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Point HQ) {
     printf("Posisi yang dapat dicapai:\n");
     ListPoint list_adjacent = adjacent(map,adjacency_matrix,*coordinate_mobita,HQ);
-    for (int i = 0; i < lengthListPoint(list_adjacent); i++)
+    int i;
+    for ( i = 0; i < lengthListPoint(list_adjacent); i++)
     {
         if (NameELMTListPoint(list_adjacent,i) == Name(HQ))
         {
