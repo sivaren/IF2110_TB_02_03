@@ -24,7 +24,7 @@ void displayInventory(ListInventory l);
 
 void insertGadget(ListInventory *l, Gadget id);
 
-void deleteGadget(ListInventory *l, int i, Gadget *id);
+void deleteGadget(ListInventory *l, int i, Gadget id);
 
 
 #endif

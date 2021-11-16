@@ -83,8 +83,8 @@ void insertGadget(ListInventory *l, Gadget id)
 
 
 //menghapus gadget dari list inventory
-void deleteGadget(ListInventory *l, int i, Gadget *id)
+void deleteGadget(ListInventory *l, int i, Gadget id)
 {
-    *id = ELMTInventory(*l,i);
+    id = ELMTInventory(*l,i);
     ELMTInventory(*l,i) = INVENTORY_IDXUNDEF;
 }

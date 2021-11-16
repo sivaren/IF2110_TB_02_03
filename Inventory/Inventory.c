@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "Inventory.h"
 
-
 void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInprog, ListPoint LP, PrioQueuePesanan Q, Point *coordinate_mobita, int *Time)
 {
     //Menampilkan isi List Inventory
@@ -50,7 +49,7 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
             else if(ELMTInventory(*inventory,idx) == 4)
             {
                 printf("Mesin Waktu berhasil digunakan!\n");
-                MesinWaktu(*Time);
+                MesinWaktu(&(*Time));
             }
             deleteGadget(inventory, idx, ELMTInventory(*inventory,idx));
         }
