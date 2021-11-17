@@ -66,9 +66,6 @@ void map(ListPoint list_building, Matrix adjacency_matrix, Point coordinate_mobi
                 }   
                 if (found)
                 {
-                    // list pickup
-
-
                     if (NameELMTListPoint(list_building,k) == Name(coordinate_mobita))
                     {
                         print_yellow(NameELMTListPoint(list_building,k));
