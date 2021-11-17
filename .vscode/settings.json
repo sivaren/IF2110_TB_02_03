@@ -6,6 +6,8 @@
         "point.h": "c",
         "drop_off.h": "c",
         "listinventory.h": "c",
-        "daftarpesanan.h": "c"
+        "daftarpesanan.h": "c",
+        "charmachine.h": "c",
+        "stdlib.h": "c"
     }
 }

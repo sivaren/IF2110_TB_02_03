@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "Buy/buy.h"
 #include "Buy/ListGadget.h"
@@ -8,7 +8,7 @@
 #include "Inventory/Inventory.h"
 #include "Inventory/ListInventory.h"
 #include "Map/map.h"
-#include "mesinKarKat/wordmachine.h"
+#include "mesinKarKat/wordmachine.h"  /* Abaikan error di vscode (because dirent.h doesn't come with VC6) */
 #include "Move/move.h"
 #include "PICK_UP/PICK_UP.h"
 #include "toDo/toDo.h"
@@ -67,22 +67,33 @@ int main() {
     /* ASSIGNMENT HEADQUARTERS */
     pointHQ = CreatePoint('X', 1, 1);
     
-    printf("Masukkan nama file konfigurasi (config): " );
-
-    startWord();
-    count = currentWord.length + 4;
-    jj = 0;
-    
-    for (ii = 0; ii <= count; ii++){
-        if (ii < currentWord.length){
-            namaFile[ii] = currentWord.contents[ii];
-        } else if (ii < count){
-            namaFile[ii] = format[jj];
-            jj++;
-        } else{
-            namaFile[ii] = '\0';
+    /* Loop untuk input file konfigurasi */
+    do{ 
+        /* Hanya memasukan nama file, extension auto .txt */
+        printf("Masukkan nama file konfigurasi (.txt): " );
+        startWord();
+        
+        count = currentWord.length + 4;
+        jj = 0;
+        
+        for (ii = 0; ii <= count; ii++){
+            if (ii < currentWord.length){
+                namaFile[ii] = currentWord.contents[ii];
+            } else if (ii < count){
+                namaFile[ii] = format[jj];
+                currentWord.length++;
+                currentWord.contents[ii] = format[jj];
+                jj++;
+            } else{
+                namaFile[ii] = '\0';
+            }
         }
-    }
+
+        if(!isFile_inDir(currentWord)){
+            printWord(currentWord);
+            printf(" tidak terdapat di directory, ulangi masukan!\n\n");
+        }
+    } while (!isFile_inDir(currentWord));
 
     readFile(namaFile, &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticPesananPerish, &Adjacency);
     closeFile();

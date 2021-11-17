@@ -4,6 +4,8 @@
 #ifndef WORD_ENGINE_H
 #define WORD_ENGINE_H
 
+ /* Abaikan error di vscode (because dirent.h doesn't come with VC6) */
+#include <dirent.h>
 #include "boolean.h"
 #include "charmachine.h"
 // #include "../ADT Matriks/matrix.h"
@@ -73,5 +75,8 @@ void printWord(Word C);
 int panjangString (char* string);
 boolean isKataSama (Word C, char* string);
 int scanINT ();
-#endif
 
+boolean isFile_inDir(Word kata);
+/* cek apakah ada nama file di dalam directory */
+
+#endif

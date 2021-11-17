@@ -249,3 +249,23 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
     }
 
 }    
+
+boolean isFile_inDir(Word kata){
+    DIR *d;
+    struct dirent *dir;
+    boolean found;
+
+    d = opendir(".");
+    found = false;
+    
+    while ((dir = readdir(d)) != NULL && (!found))
+    {   
+        if(isKataSama(currentWord, dir->d_name)){
+            found = true;
+        }
+    }
+    closedir(d);
+
+    return found;
+}
+/* cek apakah ada nama file di dalam directory */
