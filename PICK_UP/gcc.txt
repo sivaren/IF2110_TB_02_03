@@ -1,1 +1,0 @@
-gcc mPICK_UP.c PICK_UP.c ../Tas/Tas.c ../inProg/inProg_rev.c ../toDo/toDo.c
