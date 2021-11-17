@@ -67,13 +67,14 @@ void move(ListPoint map, Matrix adjacency_matrix, Point *coordinate_mobita, Poin
     }
     int total_point = lengthListPoint(list_adjacent);
     printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n");
+    printf("\n");
     int option;
-    printf("Masukkan pilihan opsi: ");
+    printf("ENTER COMMAND: ");
     option = scanINT();
     while (option < 0 || option > total_point)
     {
         printf("Masukkan angka antara 0-%d\n", total_point);
-        printf("Masukkan pilihan opsi: ");
+        printf("ENTER COMMAND: ");
         option = scanINT();
     }
     printf("\n");
