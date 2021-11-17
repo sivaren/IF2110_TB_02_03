@@ -44,8 +44,8 @@ void insertLastListPoint(ListPoint *l, ElTypeListPoint val) {
 }
 
 void printOneBangunan(Point b) {
+    printf("%c ", b.name);
     printf("(");
-    printf("%c:", b.name);
     printf("%d,", Absis(b));
     printf("%d", Ordinat(b));
     printf(")");
