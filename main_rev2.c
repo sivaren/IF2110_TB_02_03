@@ -44,7 +44,7 @@ int main() {
     int ii, jj, count;
     char format[] = ".txt";
 
-    /* Controler Main Program */
+    /* Controller Main Program */
     boolean run = true;
 
     /* Set Up List Gadget */
