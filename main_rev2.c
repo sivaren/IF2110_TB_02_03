@@ -18,7 +18,9 @@ int main() {
 boolean quit = false;
 Word temp;
 while (!quit) {
-    printf("SELAMAT DATANG DI MOBILITA\n");
+    printf("==========================================\n");
+    printf("(^///^) SELAMAT DATANG DI MOBILITA (^///^)\n");
+    printf("==========================================\n");
     printf("1. START_GAME untuk memulai game baru\n");
     printf("2. LOAD_GAME untuk load game sebelumnya\n");
     printf("3. EXIT untuk keluar dari game\n");
@@ -118,8 +120,6 @@ else if (isKataSama(temp, "START_GAME") || isKataSama(temp, "LOAD_GAME")) {
     PesananDiantar = 0;
     currentPos = pointHQ; 
     }
-
-    
     // LOAD GAME
     else {
         LoadFile(&staticPesananPerish,&PesananDiantar,&currentPos,&Money,&Time,&speedboost,&heavyitems,&TasNobita,&DaftarInprog,&Todo, &Inventory);
@@ -129,9 +129,6 @@ else if (isKataSama(temp, "START_GAME") || isKataSama(temp, "LOAD_GAME")) {
     printf("Loading...\n");
     printf("Config file loaded.\n");
     printf("===================\n");
-
-    
-
 
     /* LOOP MAIN PROGRAM */
     while (run) {
@@ -228,7 +225,7 @@ else if (isKataSama(temp, "START_GAME") || isKataSama(temp, "LOAD_GAME")) {
         else if (isKataSama(currentWord, "SAVE_GAME")) {
             run = false;
             // MEKANISME SAVE
-            printf("Masukkan nama file konfigurasi (.txt): " );
+            printf("Masukkan nama save file permainan (.txt): " );
             startWord();
             
             count = currentWord.length + 4;
@@ -249,20 +246,23 @@ else if (isKataSama(temp, "START_GAME") || isKataSama(temp, "LOAD_GAME")) {
             
             saveFile(namaFile,rows,cols,pointHQ,DaftarBangunan,DaftarPesanan,staticPesananPerish, Adjacency,PesananDiantar,currentPos,Money,Time,speedboost,heavyitems,
             TasNobita,DaftarInprog,Todo,Inventory);
+            printf("Save file berhasil terbuat!\n");
         }
         else{
-            printf("COMMAND SALAH! ketik HELP untuk melihat command\n\n");
+            printf("COMMAND SALAH! Ketik HELP untuk melihat command\n\n");
         }
     }
 
 }
 else {
-    printf("COMMAND SALAH\n\n");
+    printf("COMMAND SALAH!\n\n");
 }
 
 }
 
-printf("\n\n(^///^) Selamat tinggal (^///^)\n\n");
+printf("\n=============================================\n");
+printf("(^///^) SELAMAT TINGGAL DARI MOBILITA (^///^)\n");
+printf("=============================================\n\n");
 
     return 0;
 }
