@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include "DROP_OFF.h"
 
-void DROP_OFF(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *Money)
+void DROP_OFF(Point CurrentBangunan, Tas *TasNobita, ToDoList *Todo, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *Money, int *PesananDiantar)
 // prosedur untuk drop item pada drop point
 {
         if (isDropAvailable(CurrentBangunan, *TasNobita, *Todo)){
-            drop_action(TasNobita, DaftarInprog, heavyitems, speedboost, Money);
+            drop_action(TasNobita, DaftarInprog, heavyitems, speedboost, Money, PesananDiantar);
         }
         else {
             printf("Tidak dapat pesanan yang dapat diantarkan!\n\n");
@@ -25,7 +25,7 @@ if (TOP_TAS(TasNobita).dropOff == CurrentBangunan.name) {
 else {return false;}
 }
 
-void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *Money)
+void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, int *speedboost, int *Money, int *PesananDiantar)
 // drop item apabila tersedia
 {
     int reward;
@@ -56,8 +56,10 @@ void drop_action(Tas *TasNobita, InProgList *DaftarInprog, int *heavyitems, int 
     }
 
     printf("Uang yang didapatkan: %d Yen\n\n", reward);
-    // update state uang
+    // update state uang dan pesanan diantar
     *Money += reward;
+    *PesananDiantar += 1;
+
 }
 
 void ElmtDelete_DROP_OFF(Tas *Tasnobita, InProgList *DaftarInprog)

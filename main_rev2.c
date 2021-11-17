@@ -12,6 +12,7 @@
 #include "Move/move.h"
 #include "PICK_UP/PICK_UP.h"
 #include "toDo/toDo.h"
+#include "END_GAME/END_GAME.h"
 
 int main() {   
     /* INISIALISASI */
@@ -38,6 +39,7 @@ int main() {
     int Time = 0;
     int heavyitems = 0;
     int speedboost = 0;
+    int PesananDiantar = 0;
     
     int ii, jj, count;
     char format[] = ".txt";
@@ -143,12 +145,15 @@ int main() {
                 }
 
                 printf("Time            : %d\n", Time);
-                printf("CurrBangunan    : %c\n", currentPos.name);
+                printf("Posisi sekarang : %c\n", currentPos.name);
                 printf("Speedboost      : %d\n\n", speedboost);
 
             } else { // Jika Mobita Diam di tempat
                 printf("MOVE dibatalkan!\n\n");
             }
+
+            // cek end game
+            END_GAME(Time, PesananDiantar, pointHQ, currentPos, DaftarPesanan, Todo, DaftarInprog, TasNobita, &run);
         }
         else if  (isKataSama(currentWord, "PICK_UP")) {
             // PICK_UP
@@ -156,7 +161,7 @@ int main() {
         }
         else if (isKataSama(currentWord, "DROP_OFF")) {
             // DROP_OFF
-            DROP_OFF(currentPos, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost, &Money); 
+            DROP_OFF(currentPos, &TasNobita, &Todo, &DaftarInprog, &heavyitems, &speedboost, &Money, &PesananDiantar); 
         }
         else if (isKataSama(currentWord, "MAP"))  {
             // MAP
