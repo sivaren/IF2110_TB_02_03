@@ -9,7 +9,7 @@ void END_GAME(int Time, int PesananDiantar, Point pointHQ, Point currentPos, Pri
 
         // tampilkan score
         printf("Jumlah pesanan diantar   : %d\n", PesananDiantar);
-        printf("Waktu                    : %d\n", Time);
+        printf("Waktu                    : %d\n\n", Time);
 
         // ubah state run
         *run = false;

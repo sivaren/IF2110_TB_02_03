@@ -108,11 +108,12 @@ else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_
     readFile(namaFile, &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticPesananPerish, &Adjacency);
     closeFile();
 
-    // Assignment current position setelah baca file konfigurasi
+    // Assignment variabel setelah baca file konfigurasi
     Time = 0;
     heavyitems = 0;
     speedboost = 0;
     Money = 3000;
+    PesananDiantar = 0;
     currentPos = pointHQ; 
 
     printf("===================\n");
@@ -219,10 +220,10 @@ else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_
             // HELP
             displayHelp();
         }
-        else if (isKataSama(currentWord, "QUIT")) {
+        else if (isKataSama(currentWord, "SAVE_GAME")) {
             run = false;
             quit = true;
-            printf("(^///^) Selamat tinggal (^///^)\n\n");
+            // MEKANISME SAVE
         }
         else{
             printf("COMMAND SALAH! ketik HELP untuk melihat command\n\n");
