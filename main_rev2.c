@@ -14,32 +14,40 @@
 #include "toDo/toDo.h"
 #include "END_GAME/END_GAME.h"
 
-int main() {   
-    /* INISIALISASI */
+int main() {
+boolean quit = false;
+while (!quit) {
+    printf("SELAMAT DATANG DI MOBILITA\n");
+    printf("1. START_GAME untuk memulai game baru\n");
+    printf("2. LOAD_GAME untuk load game sebelumnya\n");
+    printf("3. EXIT untuk keluar dari game\n");
+    printf("ENTER COMMAND: ");
+    startWord();
+if (isKataSama(currentWord, "EXIT")) {
+    quit = true;
+}
+else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_GAME")) {
+
     PrioQueuePesanan DaftarPesanan;
     PrioQueuePesanan staticPesananPerish;
     ToDoList Todo;
     InProgList DaftarInprog;
     Tas TasNobita;
-
     ListGadget Gadget;
-    ListInventory Inventory;
-    
+    ListInventory Inventory;  
     Point pointHQ;
     Point currentPos;
     Point tempcurrentPos;
-    ListPoint DaftarBangunan;
-    
+    ListPoint DaftarBangunan; 
     Matrix Adjacency;
     int rows;
-    int cols;
-    
+    int cols;   
     char namaFile[50];
-    int Money = 3000;
-    int Time = 0;
-    int heavyitems = 0;
-    int speedboost = 0;
-    int PesananDiantar = 0;
+    int Money;
+    int Time;
+    int heavyitems;
+    int speedboost;
+    int PesananDiantar;
     
     int ii, jj, count;
     char format[] = ".txt";
@@ -67,6 +75,8 @@ int main() {
     /* ASSIGNMENT HEADQUARTERS */
     pointHQ = CreatePoint('X', 1, 1);
     
+    // START GAME
+    if (isKataSama(currentWord, "START_GAME")) {
     /* Loop untuk input file konfigurasi */
     do{ 
         /* Hanya memasukan nama file, extension auto .txt */
@@ -105,6 +115,13 @@ int main() {
     printf("Loading...\n");
     printf("Config file loaded.\n");
     printf("===================\n");
+
+    }
+
+    // LOAD GAME
+    else {
+
+    }
 
     /* LOOP MAIN PROGRAM */
     while (run) {
@@ -200,12 +217,22 @@ int main() {
         }
         else if (isKataSama(currentWord, "QUIT")) {
             run = false;
+            quit = true;
             printf("(^///^) Selamat tinggal (^///^)\n\n");
         }
         else{
-            printf("Input tidak valid!\n\n");
+            printf("COMMAND SALAH! ketik HELP untuk melihat command\n\n");
         }
     }
+
+}
+else {
+    printf("COMMAND SALAH\n\n");
+}
+
+}
+
+printf("\n\n(^///^) Selamat tinggal (^///^)\n\n");
 
     return 0;
 }
