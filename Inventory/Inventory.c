@@ -99,7 +99,7 @@ void PintuKemanaSaja(ListPoint LP, Point *coordinate_mobita)
     {
         printf("%d. ", num);
         idx = num-1;
-        printOneBangunan(ELMTListPoint(LP,idx));
+        WritePoint(ELMTListPoint(LP,idx));
         printf("\n");
     }
     
