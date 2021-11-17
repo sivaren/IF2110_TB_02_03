@@ -8,6 +8,8 @@
         "listinventory.h": "c",
         "daftarpesanan.h": "c",
         "charmachine.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "listgadget.h": "c",
+        "inventory.h": "c"
     }
 }

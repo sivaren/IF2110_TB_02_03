@@ -13,7 +13,8 @@ void displayHelp(){
     // BUY hanya dapat dipanggil di Headquarters
     printf("7. BUY          -> Untuk menampilkan gadget yang dapat dibeli lalu membelinya\n");
     printf("8. INVENTORY    -> Untuk melihat gadget yang dimiliki dan menggunakannya\n");
-    printf("9. HELP         -> Untuk mengeluarkan list command dan kegunaannya\n\n");
+    printf("9. SAVE_GAME    -> Untuk menyimpan state dari permainan yang sedang dijalankan\n\n");
+    printf("10. HELP        -> Untuk mengeluarkan list command dan kegunaannya\n\n");
 }
 /*  Menampilkan seluruh command pada permainan
     beserta deskripsi dari command tersebut. */

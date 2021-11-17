@@ -18,7 +18,7 @@ void displayHelp();
     1. MOVE -> Untuk berpindah ke lokasi selanjutnya
     2. PICK_UP -> Untuk mengambil item di lokasi terkini
     …
-    8. INVENTORY -> Untuk melihat gadget yang dimiliki dan menggunakannya
-    9. HELP -> Untuk mengeluarkan list command dan kegunaannya  */
+    9. SAVE_GAME -> Untuk menyimpan state dari permainan yang sedang dijalankan
+    10. HELP -> Untuk mengeluarkan list command dan kegunaannya  */
     
 #endif
