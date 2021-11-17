@@ -227,7 +227,6 @@ else if (isKataSama(temp, "START_GAME") || isKataSama(temp, "LOAD_GAME")) {
         }
         else if (isKataSama(currentWord, "SAVE_GAME")) {
             run = false;
-            quit = true;
             // MEKANISME SAVE
             printf("Masukkan nama file konfigurasi (.txt): " );
             startWord();
