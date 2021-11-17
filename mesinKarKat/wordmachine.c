@@ -285,12 +285,13 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
             tempPesanan.waktuHangus = WordToInt(currentWord);
             //diEnqueue ke suatu Queue yang nantinya berguna untuk Penggunaan Gadget
             enqueuePRIOQUEUE(QueuePerishable,tempPesanan);
+            
         }    
-        
+        // advWord(false);
         
         enqueuePRIOQUEUE(QueuePesanan, tempPesanan);
     }
-
+    // displayPRIOQUEUE(*QueuePesanan);
 }
 
 void saveFile(char *namaFile,int N,int M, Point HQ, ListPoint Listbangunan, PrioQueuePesanan QueuePesanan,PrioQueuePesanan staticPerishQueue, Matrix Adjency,int pesananDiantar, Point PosisiMobita, int Money, int time, int speedboost, int heavyitem, Tas tasMobita, InProgList progress, ToDoList Todo, ListInventory inventory){
@@ -408,7 +409,7 @@ void saveFile(char *namaFile,int N,int M, Point HQ, ListPoint Listbangunan, Prio
     
     WriteIntToFile(length_ToDoList(Todo));advWrite('\n');
     while (!isEmpty_ToDo(Todo)){
-        WriteIntToFile(TIMEIN_TODO(Todo)); advWrite(BLANK);
+        // WriteIntToFile(TIMEIN_TODO(Todo)); advWrite(BLANK);
         advWrite(PICKUP_TODO(Todo)); advWrite(BLANK);
         advWrite(DROPOFF_TODO(Todo)); advWrite(BLANK);
         advWrite(ITEMTYPE_TODO(Todo)); 
@@ -434,6 +435,7 @@ void saveFile(char *namaFile,int N,int M, Point HQ, ListPoint Listbangunan, Prio
 void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *PosisiMobita, int *Money, int *time, int *speedboost, int *heavyitem, Tas *tasMobita, InProgList *progress, ToDoList *Todo, ListInventory *inventory){
     
     /* KAMUS LOKAL */
+    
     int lenTas;
     int lenToDo;
     int lenInven;
@@ -448,7 +450,10 @@ void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *P
     char tempName;
     Pesanan tempPesanan;
     Point tempBangunan;
+    advWord(true);
+    // printWord(currentWord);
     lenPerish = WordToInt(currentWord);advWord(true);
+    
     for (i = 0; i<lenPerish; i++){
         tempPesanan.waktuMasuk =  WordToInt(currentWord);advWord(true);
         tempPesanan.pickUp =  WordtoSingleChar(currentWord);advWord(true);
@@ -538,14 +543,14 @@ void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *P
         tempElToDo.itemType =  WordtoSingleChar(currentWord);
 
         if (WordtoSingleChar(currentWord) == 'P'){
-            advWord(false);
+            advWord(true);
             tempElToDo.perishTime = WordToInt(currentWord); 
         }
 
         insert_ToDoList(Todo,tempElToDo);
         
     }
-    displayToDoList(*Todo);    
+    // displayToDoList(*Todo);    
     //ListInventory *inventory)
     
     ListGadget kumpulanGadget;
@@ -554,14 +559,18 @@ void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *P
     ELMTListGadget(kumpulanGadget,1) = setGadget(2, 1200);
     ELMTListGadget(kumpulanGadget,2) = setGadget(3, 1500);
     ELMTListGadget(kumpulanGadget,3) = setGadget(4, 3000);
-    advWord(true);
-    
+
+    copyWord(true);
+   
     lenInven = WordToInt(currentWord);
-    
+    // advWord(true);
+    advForFile();
     for (i = 0; i<lenInven; i++){
-        
-        advWord(false);
-        insertGadget(inventory, LISTGADGET_IDNAME(kumpulanGadget,WordToInt(currentWord)-1));
+        printf("ini i: %d\n huruf 1 : %c\n",i, currentChar);
+        insertGadget(inventory, LISTGADGET_IDNAME(kumpulanGadget,currentChar-'0'-1));
+        advForFile();
+        advForFile();
     }
+    
     closeFile();
 }
