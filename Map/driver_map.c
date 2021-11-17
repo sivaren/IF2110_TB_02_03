@@ -1,11 +1,22 @@
 #include <stdio.h>
 #include "map.h"
 #include "../Move/move.h"
+#include "../toDo/toDo.h"
 
 int main() {
     int row = 10, col = 15;
     ListPoint l;
-    CreateListPoint(&l);
+    CreateListPoint(&l,20);
+    ToDoList td;
+    ToDoType val;
+    CreateToDoList(&td);
+    // Misal ada satu item toDO
+    val.timeIn = 0;
+    val.pickUp = 'F';
+    val.dropOff = 'G';
+    val.perishTime = 0;
+    val.itemType = 'N';
+    insert_ToDoList(&td,val);
     Point HQ = CreatePoint('8',1,1);
     Point mobita = HQ;
     Point A = CreatePoint('A',10,1);
@@ -45,6 +56,6 @@ int main() {
     Matrix adjacency;
     CreateMatrix(18,18,&adjacency);
     readMatrix(&adjacency,1,18); 
-    map(l,adjacency,mobita,HQ,'H','M',row,col);
+    map(l,adjacency,mobita,HQ,'H',td,row,col);
     return 0;
 }
