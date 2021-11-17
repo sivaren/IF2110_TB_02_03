@@ -9,13 +9,13 @@ void inventory(ListInventory *inventory, Tas *tasMobita, InProgList *DaftarInpro
     printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n\n");
 
     int op;
-    printf("ENTER COMMAND: ");
+    printf("ENTER NUMBER: ");
     op = scanINT();
     //Meminta input yang valid
     while (!(op>=0 && op<=5))
     {
         printf("Masukkan angka antara 0 - 5!\n\n");
-        printf("ENTER COMMAND: ");
+        printf("ENTER NUMBER: ");
         op = scanINT();
     }
 
@@ -106,12 +106,12 @@ void PintuKemanaSaja(ListPoint LP, Point *coordinate_mobita)
     
     printf("Anda mau pindah ke titik mana?\n");
     int op;
-    printf("ENTER COMMAND: ");
+    printf("ENTER NUMBER: ");
     op = scanINT(); 
     while (op < 0 || op > lengthListPoint(LP))
     {
         printf("Masukkan angka antara 0 - %d!\n", lengthListPoint(LP));
-        printf("ENTER COMMAND: ");
+        printf("ENTER NUMBER: ");
         op = scanINT();
     }
 
