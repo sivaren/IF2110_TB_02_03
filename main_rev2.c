@@ -16,6 +16,7 @@
 
 int main() {
 boolean quit = false;
+Word temp;
 while (!quit) {
     printf("SELAMAT DATANG DI MOBILITA\n");
     printf("1. START_GAME untuk memulai game baru\n");
@@ -23,10 +24,11 @@ while (!quit) {
     printf("3. EXIT untuk keluar dari game\n");
     printf("ENTER COMMAND: ");
     startWord();
+    temp = currentWord;
 if (isKataSama(currentWord, "EXIT")) {
     quit = true;
 }
-else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_GAME")) {
+else if (isKataSama(temp, "START_GAME") || isKataSama(temp, "LOAD_GAME")) {
 
     PrioQueuePesanan DaftarPesanan;
     PrioQueuePesanan staticPesananPerish;
@@ -61,7 +63,7 @@ else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_
     ELMTListGadget(Gadget,1) = setGadget(2, 1200);
     ELMTListGadget(Gadget,2) = setGadget(3, 1500);
     ELMTListGadget(Gadget,3) = setGadget(4, 3000);
-
+    
     /* Create a couple set of data */
     CreatePRIOQUEUE(&DaftarPesanan);
     CreatePRIOQUEUE(&staticPesananPerish);
@@ -76,7 +78,7 @@ else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_
     pointHQ = CreatePoint('X', 1, 1);
     
     // START GAME
-    if (isKataSama(currentWord, "START_GAME")) {
+    
     /* Loop untuk input file konfigurasi */
     do{ 
         /* Hanya memasukan nama file, extension auto .txt */
@@ -98,16 +100,16 @@ else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_
                 namaFile[ii] = '\0';
             }
         }
-
+        
         if(!isFile_inDir(currentWord)){
             printWord(currentWord);
             printf(" tidak terdapat di directory, ulangi masukan!\n\n");
         }
     } while (!isFile_inDir(currentWord));
-
+    
     readFile(namaFile, &rows, &cols, &pointHQ, &DaftarBangunan, &DaftarPesanan, &staticPesananPerish, &Adjacency);
-    closeFile();
-
+    if (isKataSama(temp, "START_GAME")) {
+        closeFile();
     // Assignment variabel setelah baca file konfigurasi
     Time = 0;
     heavyitems = 0;
@@ -115,18 +117,21 @@ else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_
     Money = 3000;
     PesananDiantar = 0;
     currentPos = pointHQ; 
+    }
+
+    
+    // LOAD GAME
+    else {
+        LoadFile(&staticPesananPerish,&PesananDiantar,&currentPos,&Money,&Time,&speedboost,&heavyitems,&TasNobita,&DaftarInprog,&Todo, &Inventory);
+    }
 
     printf("===================\n");
     printf("Loading...\n");
     printf("Config file loaded.\n");
     printf("===================\n");
 
-    }
+    
 
-    // LOAD GAME
-    else {
-
-    }
 
     /* LOOP MAIN PROGRAM */
     while (run) {
@@ -224,6 +229,27 @@ else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_
             run = false;
             quit = true;
             // MEKANISME SAVE
+            printf("Masukkan nama file konfigurasi (.txt): " );
+            startWord();
+            
+            count = currentWord.length + 4;
+            jj = 0;
+            
+            for (ii = 0; ii <= count; ii++){
+                if (ii < currentWord.length){
+                    namaFile[ii] = currentWord.contents[ii];
+                } else if (ii < count){
+                    namaFile[ii] = format[jj];
+                    currentWord.length++;
+                    currentWord.contents[ii] = format[jj];
+                    jj++;
+                } else{
+                    namaFile[ii] = '\0';
+                }
+            }
+            
+            saveFile(namaFile,rows,cols,pointHQ,DaftarBangunan,DaftarPesanan,staticPesananPerish, Adjacency,PesananDiantar,currentPos,Money,Time,speedboost,heavyitems,
+            TasNobita,DaftarInprog,Todo,Inventory);
         }
         else{
             printf("COMMAND SALAH! ketik HELP untuk melihat command\n\n");

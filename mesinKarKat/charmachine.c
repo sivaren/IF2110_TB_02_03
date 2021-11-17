@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 char currentChar;
+char currentCharForSave;
 boolean eot;
 
 static FILE * tape;
@@ -30,6 +31,16 @@ void startFile(char *fileName){
   /* Algoritma */
   tapeFile = fopen(fileName,"r");
   advForFile();
+}
+
+void writeFile(char *fileName){
+   tapeFile = fopen(fileName,"w");
+   // advWrite(fileName);
+}
+
+void advWrite(char anything){
+   retval = fputc(anything,tapeFile);
+//   retval = fprintf(tapeFile,"%c",&currentCharForSave);
 }
 
 void adv() {

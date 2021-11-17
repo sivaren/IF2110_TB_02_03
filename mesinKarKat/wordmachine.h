@@ -4,7 +4,6 @@
 #ifndef WORD_ENGINE_H
 #define WORD_ENGINE_H
 
- /* Abaikan error di vscode (because dirent.h doesn't come with VC6) */
 #include <dirent.h>
 #include "boolean.h"
 #include "charmachine.h"
@@ -13,8 +12,11 @@
 // #include "../ADT List Statis/listpos.h"
 #include "../daftarPesanan/daftarPesanan.h"
 #include "../Map/map.h"
-
-
+#include "../toDo/toDo.h"
+#include "../inProg/inProg_rev.h"
+#include "../Inventory/ListInventory.h"
+#include "../tas/tas.h"
+#include "../Buy/ListGadget.h"
 
 
 #define CAPACITY_WORD 50
@@ -50,7 +52,7 @@ void startWord();
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 void copyWordKeyboard();
-void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan,PrioQueuePesanan *QueuePerishable ,Matrix *Adjency);
+
 
 
 void advWord(boolean flag);
@@ -75,8 +77,12 @@ void printWord(Word C);
 int panjangString (char* string);
 boolean isKataSama (Word C, char* string);
 int scanINT ();
-
+int pangkat (int number, int derajat);
+void WriteIntToFile(int number);
 boolean isFile_inDir(Word kata);
-/* cek apakah ada nama file di dalam directory */
+void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *bangunan, PrioQueuePesanan *Queuepesanan,PrioQueuePesanan *QueuePerishable ,Matrix *Adjency);
+void saveFile(char *namaFile,int N,int M, Point HQ, ListPoint Listbangunan, PrioQueuePesanan QueuePesanan,PrioQueuePesanan staticPerishQueue, Matrix Adjency, int pesananDiantar, Point PosisiMobita, int Money, int time, int speedboost, int heavyitem, Tas tasMobita, InProgList progress, ToDoList Todo, ListInventory inventory);
+void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *PosisiMobita, int *Money, int *time, int *speedboost, int *heavyitem, Tas *tasMobita, InProgList *progress, ToDoList *Todo, ListInventory *inventory);
 
 #endif
+

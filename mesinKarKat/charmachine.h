@@ -11,6 +11,7 @@
 // #define MARK_FILE '\0'
 /* Char Engine State */
 extern char currentChar;
+extern char currentCharForSave;
 extern boolean eot;
 
 void start();
@@ -22,6 +23,9 @@ void start();
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
 void startFile(char *fileName);
+void writeFile(char *fileName);
+// void advWrite();
+void advWrite(char anything);
 
 void adv();
 /* Pita dimajukan satu karakter. 
@@ -34,4 +38,6 @@ void advForFile();
 void closeFile();
 
 void closeKata();
+
+
 #endif

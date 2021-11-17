@@ -89,8 +89,6 @@ void copyWord(boolean flag) {
     // MARK_ENGINE = "\n" blank =""   MARK_FILE = "."
     if (flag){
         while (currentChar != MARK_ENGINE && currentChar != BLANK &&  currentChar != MARK_FILE) {
-            // printf("saat ini %c \n", currentChar);
-            // printf(" %c", currentChar);
             currentWord.contents[i] = currentChar;
             advForFile();
             i++;
@@ -103,7 +101,7 @@ void copyWord(boolean flag) {
     else{
         currentWord.contents[i] = currentChar;
         advForFile();
-        // printf(" %c", currentChar);
+       
     }
 }
 
@@ -172,7 +170,60 @@ int scanINT (){
     return WordToInt(currentWord);
 }
 
+
+int pangkat (int number, int derajat){
+    int i;
+    int result;
+    result =1;
+    for (i=0; i<derajat; i++){
+        result *= number;
+    }
+    return result;
+}
+
+void WriteIntToFile(int number){
+    char string[10];
+    int digit,i,j;
+    digit = 1;
+    while (number % pangkat(10,digit) != number)
+    {
+        digit++;
+    }
+    j=0;
+    for (i=digit-1; i>=0; i--){
+        *(string+j) = (number /  pangkat(10,i)) + '0';
+        number = number % pangkat(10,i);
+        j++;
+    }
+    *(string+digit) = '\0'; 
+
+    for (j = 0; j<panjangString(string); j++){
+            advWrite(string[j]);
+    }
+} 
+
+boolean isFile_inDir(Word kata){
+    DIR *d;
+    struct dirent *dir;
+    boolean found;
+
+    d = opendir(".");
+    found = false;
+    
+    while ((dir = readdir(d)) != NULL && (!found))
+    {   
+        if(isKataSama(currentWord, dir->d_name)){
+            found = true;
+        }
+    }
+    closedir(d);
+
+    return found;
+}
+
 void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbangunan, PrioQueuePesanan *QueuePesanan, PrioQueuePesanan *QueuePerishable, Matrix *Adjency) {
+
+
 
    /* KAMUS LOKAL */
     Word kata;
@@ -219,21 +270,13 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
     //Untuk Queue Pesanan
     
     jumlahPesanan = WordToInt(currentWord);
+    if (jumlahPesanan ==0) advWord(false);
     for (j=0 ; j<jumlahPesanan; j++){
         advWord(true);
         
         tempPesanan.waktuMasuk = WordToInt(currentWord);advWord(true);
         tempPesanan.pickUp = WordtoSingleChar(currentWord);advWord(false);
         tempPesanan.dropOff = WordtoSingleChar(currentWord);advWord(false);
-        // if (j!= jumlahPesanan-1){
-        //     printf("\n");
-        //     advWord();
-        // }
-        // else{
-        //     advWord();
-        // }
-        
-        // printWord(currentWord);printf("\n");
         tempPesanan.jenisItem = WordtoSingleChar(currentWord);
         
         
@@ -248,24 +291,277 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
         enqueuePRIOQUEUE(QueuePesanan, tempPesanan);
     }
 
-}    
-
-boolean isFile_inDir(Word kata){
-    DIR *d;
-    struct dirent *dir;
-    boolean found;
-
-    d = opendir(".");
-    found = false;
-    
-    while ((dir = readdir(d)) != NULL && (!found))
-    {   
-        if(isKataSama(currentWord, dir->d_name)){
-            found = true;
-        }
-    }
-    closedir(d);
-
-    return found;
 }
-/* cek apakah ada nama file di dalam directory */
+
+void saveFile(char *namaFile,int N,int M, Point HQ, ListPoint Listbangunan, PrioQueuePesanan QueuePesanan,PrioQueuePesanan staticPerishQueue, Matrix Adjency,int pesananDiantar, Point PosisiMobita, int Money, int time, int speedboost, int heavyitem, Tas tasMobita, InProgList progress, ToDoList Todo, ListInventory inventory){
+    
+    /* KAMUS LOKAL */
+    Point temp;
+    int i,j;
+    char stringTemp[10];
+    Pesanan trashPesanan;
+    ElTypeTas trashTas;
+    InProgType trashProg;
+    ToDoType trashTodo;
+    Gadget trashGadget;
+    /* ALGORITMA */
+    writeFile(namaFile);
+    //Ukuran Peta
+    WriteIntToFile(N); advWrite(BLANK);
+    WriteIntToFile(M);
+    advWrite('\n');
+
+    //HQ
+    WriteIntToFile(HQ.X); advWrite(BLANK);
+    WriteIntToFile(HQ.Y);
+    advWrite('\n');
+
+    //Bangunan
+    WriteIntToFile(lengthListPoint(Listbangunan)); advWrite('\n');
+    for (i = 0 ; i< lengthListPoint(Listbangunan); i++){
+        advWrite(NameELMTListPoint(Listbangunan, i)); advWrite(BLANK);
+        WriteIntToFile(AbsisELMTListPoint(Listbangunan, i)); advWrite(BLANK);
+        WriteIntToFile(OrdinatELMTListPoint(Listbangunan, i)); 
+        advWrite('\n');
+    }
+    
+    for (i=0; i<=lengthListPoint(Listbangunan); i++){
+        for (j=0; j<=lengthListPoint(Listbangunan); j++){
+            WriteIntToFile(ELMT(Adjency,i,j)); 
+            if (j!= lengthListPoint(Listbangunan)) advWrite(BLANK);
+        }
+        advWrite('\n');
+    }
+   
+   // PRIOQUEUE PESANAN (Mungkin kosong)
+    WriteIntToFile(lengthPRIOQUEUE(QueuePesanan)); advWrite('\n');
+    int len  = lengthPRIOQUEUE(QueuePesanan);
+    for (i=0; i<len; i++){
+
+        WriteIntToFile(HEAD_PRIOQUEUE(QueuePesanan).waktuMasuk); advWrite(BLANK);
+        advWrite (HEAD_PRIOQUEUE(QueuePesanan).pickUp); advWrite(BLANK);
+        advWrite (HEAD_PRIOQUEUE(QueuePesanan).dropOff); advWrite(BLANK);
+        advWrite (HEAD_PRIOQUEUE(QueuePesanan).jenisItem);
+
+        if ((HEAD_PRIOQUEUE(QueuePesanan).jenisItem) == 'P'){
+            
+            advWrite(BLANK);
+            WriteIntToFile(HEAD_PRIOQUEUE(QueuePesanan).waktuHangus);
+        }
+        dequeuePRIOQUEUE(&QueuePesanan, &trashPesanan);
+        advWrite('\n');
+    }
+    // PrioQueue untuk Static perishable
+    WriteIntToFile(lengthPRIOQUEUE(staticPerishQueue)); advWrite('\n');
+    len  = lengthPRIOQUEUE(staticPerishQueue);
+    for (i=0; i<len; i++){
+
+        WriteIntToFile(HEAD_PRIOQUEUE(staticPerishQueue).waktuMasuk); advWrite(BLANK);
+        advWrite (HEAD_PRIOQUEUE(staticPerishQueue).pickUp); advWrite(BLANK);
+        advWrite (HEAD_PRIOQUEUE(staticPerishQueue).dropOff); advWrite(BLANK);
+        advWrite (HEAD_PRIOQUEUE(staticPerishQueue).jenisItem);advWrite(BLANK);
+        WriteIntToFile(HEAD_PRIOQUEUE(staticPerishQueue).waktuHangus);
+        dequeuePRIOQUEUE(&staticPerishQueue, &trashPesanan);
+        advWrite('\n');
+    }
+    //PESANAN DIANTAR
+    WriteIntToFile(pesananDiantar); advWrite('\n');
+
+    //posisi mobita
+    advWrite (PosisiMobita.name); advWrite(BLANK);
+    WriteIntToFile(PosisiMobita.X); advWrite(BLANK);
+    WriteIntToFile(PosisiMobita.Y);
+    advWrite('\n');
+    
+    //Money,time,speedboost,heavyItem
+    WriteIntToFile(Money);advWrite('\n');
+    WriteIntToFile(time);advWrite('\n');
+    WriteIntToFile(speedboost);advWrite('\n');
+    WriteIntToFile(heavyitem);advWrite('\n');
+
+    // INPROGRESS LIST DAN TAS
+    int count =0;
+    while (!isEmpty_InProg(progress)){
+        count++;
+        deleteFirst_InProgList(&progress, &trashProg);
+    }
+
+    //TAS
+    WriteIntToFile(count); advWrite(BLANK);
+    WriteIntToFile(tasMobita.capacity);advWrite('\n');
+   
+    while (!isEmptyTas(tasMobita)){
+        advWrite(TOP_TAS(tasMobita).pickUp); advWrite(BLANK);
+        advWrite(TOP_TAS(tasMobita).dropOff); advWrite(BLANK);
+        advWrite(TOP_TAS(tasMobita).itemType); 
+
+        if (TOP_TAS(tasMobita).itemType == 'P'){
+            advWrite(BLANK);
+            WriteIntToFile(TOP_TAS(tasMobita).perishTime);
+        }
+        advWrite('\n');
+        popTas(&tasMobita, &trashTas);
+    }
+
+   
+    //todo
+    
+    WriteIntToFile(length_ToDoList(Todo));advWrite('\n');
+    while (!isEmpty_ToDo(Todo)){
+        WriteIntToFile(TIMEIN_TODO(Todo)); advWrite(BLANK);
+        advWrite(PICKUP_TODO(Todo)); advWrite(BLANK);
+        advWrite(DROPOFF_TODO(Todo)); advWrite(BLANK);
+        advWrite(ITEMTYPE_TODO(Todo)); 
+
+        if ((ITEMTYPE_TODO(Todo)) == 'P'){
+            advWrite(BLANK);
+            WriteIntToFile(PERISHTIME_TODO(Todo));
+        }
+        advWrite('\n');
+        delete_ToDoList(&Todo, INFO_TODO(Todo), &trashTodo);
+    }
+    i =0;
+    //inventory
+     WriteIntToFile(lengthListInventory(inventory));advWrite('\n');
+    while (i < lengthListInventory(inventory)){
+        WriteIntToFile(ELMTInventory(inventory, i));
+        if ( i != lengthListInventory(inventory)-1) advWrite(BLANK);
+        i++;
+    }
+    closeFile();
+}
+
+void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *PosisiMobita, int *Money, int *time, int *speedboost, int *heavyitem, Tas *tasMobita, InProgList *progress, ToDoList *Todo, ListInventory *inventory){
+    
+    /* KAMUS LOKAL */
+    int lenTas;
+    int lenToDo;
+    int lenInven;
+    int lenPerish;
+    ElTypeTas tempELTas;
+    InProgType tempElProgList;
+    ToDoType tempElToDo;
+    Gadget tempGadget;
+    Word kata;
+    int i,j,k,jumlahBangunan,jumlahPesanan;
+    int X,Y;
+    char tempName;
+    Pesanan tempPesanan;
+    Point tempBangunan;
+    lenPerish = WordToInt(currentWord);advWord(true);
+    for (i = 0; i<lenPerish; i++){
+        tempPesanan.waktuMasuk =  WordToInt(currentWord);advWord(true);
+        tempPesanan.pickUp =  WordtoSingleChar(currentWord);advWord(true);
+        tempPesanan.dropOff =  WordtoSingleChar(currentWord);advWord(true);
+        tempPesanan.jenisItem =  WordtoSingleChar(currentWord);advWord(true);
+        tempPesanan.waktuHangus =  WordToInt(currentWord);advWord(true);
+
+        if (HEAD_PRIOQUEUE(*staticPerishQueue).waktuMasuk !=tempPesanan.waktuMasuk){
+            enqueuePRIOQUEUE(staticPerishQueue,tempPesanan);
+        } else{
+            if (HEAD_PRIOQUEUE(*staticPerishQueue).pickUp !=tempPesanan.pickUp){
+                
+            } else{
+                if (HEAD_PRIOQUEUE(*staticPerishQueue).dropOff !=tempPesanan.dropOff){
+                    enqueuePRIOQUEUE(staticPerishQueue,tempPesanan);
+                } else{
+                    if (HEAD_PRIOQUEUE(*staticPerishQueue).waktuHangus !=tempPesanan.waktuHangus){
+                        enqueuePRIOQUEUE(staticPerishQueue,tempPesanan);
+                    }
+                }
+            }
+        }
+                
+             
+          
+    }
+
+    //jumlah pesanan terantar;
+    *pesananDiantar = WordtoSingleChar(currentWord);advWord(true);
+    
+
+    //PosisiMobita
+    
+   
+    Name(*PosisiMobita) = WordtoSingleChar(currentWord);advWord(true);
+    
+    Absis(*PosisiMobita) = WordToInt(currentWord);advWord(true);
+    
+    Ordinat(*PosisiMobita) = WordToInt(currentWord);advWord(true);
+
+    //Money, time, speedboost,heavy
+    
+    *Money = WordToInt(currentWord) -50;advWord(true);
+    *time = WordToInt(currentWord);advWord(true);
+    *speedboost = WordToInt(currentWord);advWord(true);
+    *heavyitem = WordToInt(currentWord);advWord(true);
+    
+    
+    //Tas *tasMobita dan InProgList *progress,
+    
+    lenTas = WordToInt(currentWord);advWord(true);
+    TAS_CAPACITY(*tasMobita) = WordToInt(currentWord);
+    for (i = 0; i<lenTas; i++){
+        advWord(true);
+       
+        tempELTas.pickUp = WordtoSingleChar(currentWord); 
+        tempElProgList.pickUp =  WordtoSingleChar(currentWord); advWord(true);
+        
+        tempELTas.dropOff = WordtoSingleChar(currentWord); 
+        tempElProgList.dropOff =  WordtoSingleChar(currentWord); advWord(true);
+         
+        tempELTas.itemType = WordtoSingleChar(currentWord); 
+        tempElProgList.itemType =  WordtoSingleChar(currentWord);
+        if (WordtoSingleChar(currentWord) == 'P'){
+            advWord(true);
+            tempELTas.perishTime = WordToInt(currentWord); 
+            tempElProgList.perishTime =  WordToInt(currentWord);
+        }else{
+            tempELTas.perishTime = IDX_TAS_UNDEF; 
+            tempElProgList.perishTime =  -1;
+        }
+       
+        insertFirst_InProgList(progress, tempElProgList);
+        pushTas(tasMobita,tempELTas);
+        
+    }
+    // ToDoList *Todo, 
+    advWord(true);
+     
+    lenToDo = WordToInt(currentWord);
+    
+    for (i=0; i<lenToDo; i++){
+        advWord(true);
+       
+        tempElToDo.pickUp = WordtoSingleChar(currentWord); advWord(true);
+        tempElToDo.dropOff =  WordtoSingleChar(currentWord); advWord(true);
+        tempElToDo.itemType =  WordtoSingleChar(currentWord);
+
+        if (WordtoSingleChar(currentWord) == 'P'){
+            advWord(false);
+            tempElToDo.perishTime = WordToInt(currentWord); 
+        }
+
+        insert_ToDoList(Todo,tempElToDo);
+        
+    }
+    displayToDoList(*Todo);    
+    //ListInventory *inventory)
+    
+    ListGadget kumpulanGadget;
+    createListGadget(&kumpulanGadget);
+    ELMTListGadget(kumpulanGadget,0) = setGadget(1, 800);
+    ELMTListGadget(kumpulanGadget,1) = setGadget(2, 1200);
+    ELMTListGadget(kumpulanGadget,2) = setGadget(3, 1500);
+    ELMTListGadget(kumpulanGadget,3) = setGadget(4, 3000);
+    advWord(true);
+    
+    lenInven = WordToInt(currentWord);
+    
+    for (i = 0; i<lenInven; i++){
+        
+        advWord(false);
+        insertGadget(inventory, LISTGADGET_IDNAME(kumpulanGadget,WordToInt(currentWord)-1));
+    }
+    closeFile();
+}
