@@ -42,6 +42,7 @@ int main() {
     insertLastListPoint(&l,Q);
     Matrix adjacency;
     CreateMatrix(18,18,&adjacency);
+    // Hanya membaca baris pertama adjacency matrix karena posisi mobita berada di HQ
     readMatrix(&adjacency,1,18);                             
     move(l,adjacency,&mobita,HQ);
     return 0;
