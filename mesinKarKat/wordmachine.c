@@ -270,7 +270,8 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
     //Untuk Queue Pesanan
     
     jumlahPesanan = WordToInt(currentWord);
-    if (jumlahPesanan ==0) advWord(false);
+    // if (jumlahPesanan ==0) advWord(false);
+    // if (jumlahPesanan ==0);
     for (j=0 ; j<jumlahPesanan; j++){
         advWord(true);
         
@@ -287,11 +288,9 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
             enqueuePRIOQUEUE(QueuePerishable,tempPesanan);
             
         }    
-        // advWord(false);
-        
+
         enqueuePRIOQUEUE(QueuePesanan, tempPesanan);
     }
-    // displayPRIOQUEUE(*QueuePesanan);
 }
 
 void saveFile(char *namaFile,int N,int M, Point HQ, ListPoint Listbangunan, PrioQueuePesanan QueuePesanan,PrioQueuePesanan staticPerishQueue, Matrix Adjency,int pesananDiantar, Point PosisiMobita, int Money, int time, int speedboost, int heavyitem, Tas tasMobita, InProgList progress, ToDoList Todo, ListInventory inventory){
@@ -436,6 +435,7 @@ void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *P
     
     /* KAMUS LOKAL */
     
+    
     int lenTas;
     int lenToDo;
     int lenInven;
@@ -444,14 +444,13 @@ void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *P
     InProgType tempElProgList;
     ToDoType tempElToDo;
     Gadget tempGadget;
-    Word kata;
     int i,j,k,jumlahBangunan,jumlahPesanan;
     int X,Y;
     char tempName;
     Pesanan tempPesanan;
     Point tempBangunan;
     advWord(true);
-    // printWord(currentWord);
+   
     lenPerish = WordToInt(currentWord);advWord(true);
     
     for (i = 0; i<lenPerish; i++){
