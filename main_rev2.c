@@ -109,6 +109,10 @@ else if (isKataSama(currentWord, "START_GAME") || isKataSama(currentWord, "LOAD_
     closeFile();
 
     // Assignment current position setelah baca file konfigurasi
+    Time = 0;
+    heavyitems = 0;
+    speedboost = 0;
+    Money = 3000;
     currentPos = pointHQ; 
 
     printf("===================\n");
