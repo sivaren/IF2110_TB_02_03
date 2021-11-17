@@ -3,7 +3,7 @@
 
 int main() {
     ListPoint l;
-    CreateListPoint(&l,10);
+    CreateListPoint(&l,20);
     Point HQ = CreatePoint('8',1,1);
     Point mobita = HQ;
     Point A = CreatePoint('A',10,1);
