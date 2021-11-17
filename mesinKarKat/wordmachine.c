@@ -495,7 +495,7 @@ void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *P
 
     //Money, time, speedboost,heavy
     
-    *Money = WordToInt(currentWord) -50;advWord(true);
+    *Money = WordToInt(currentWord);advWord(true);
     *time = WordToInt(currentWord);advWord(true);
     *speedboost = WordToInt(currentWord);advWord(true);
     *heavyitem = WordToInt(currentWord);advWord(true);
