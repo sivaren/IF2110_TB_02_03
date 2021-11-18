@@ -26,7 +26,7 @@
 $ git clone https://github.com/sivaren/IF2110_TB_02_03.git
 ```
 
-## Run Prog
+## Run Program
 > **To first setup this project run** </br>
 
 **Windows (Open `PowerShell` on this folder)**
