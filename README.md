@@ -56,8 +56,8 @@ $ git clone https://github.com/sivaren/IF2110_TB_02_03.git
       <td>Untuk memulai permainan dengan game state yang telah ada</b></td>
     </tr>
     <tr>
-      <td><b>EXIT</td>
-      <td><b>Keluar dari permainan</td>
+      <td>EXIT</td>
+      <td>Keluar dari permainan</td>
     </tr>
     <tr>
       <td>MOVE</td>
