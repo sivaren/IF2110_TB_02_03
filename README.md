@@ -29,7 +29,7 @@ $ git clone https://github.com/sivaren/IF2110_TB_02_03.git
 ## Run Program
 > **To first setup this project run** </br>
 
-**Windows (Open `PowerShell` on this folder)**
+**Windows (Open `PowerShell pada windows terminal` atau `VS code terminal` on this folder)**
 ```
     cd src
     ./main.bat
