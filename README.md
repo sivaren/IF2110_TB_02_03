@@ -9,11 +9,14 @@
 ## Daftar Isi
 * [Deskripsi Program](#deskripsi-program)
 * [Prasyarat](#prasyarat)
+* [Run Program](#run-program)
 * [Fitur Program](#fitur-program)
 * [Status Pengerjaan](#status-pengerjaan)
 * [Pembagian Tugas](#pembagian-tugas)
 
 ## Deskripsi Program
+- Sebuah permainan berbasis **CLI** (_command-line interface_) tentang pengantaran barang
+- Permainan dibuat dalam **bahasa C** dengan menggunakan struktur data yang telah dipelajari di mata kuliah (IF2110)
 
 ## Prasyarat
 > **Pastikan branch repository berada di `main`** </br>
@@ -23,27 +26,81 @@
 $ git clone https://github.com/sivaren/IF2110_TB_02_03.git
 ```
 
-> **To first setup this project run**
-Windows (Open `PowerShell` window on this folder)
-```bash
+## Run Program
+> **To first setup this project run** </br>
 
+**Windows (Open `PowerShell` on this folder)**
+```
+    cd src
+    ./main.bat
+```
+> **Akan terdapat file `mainOutput.exe` pada current directory, program siap dijalankan**  </br>
+
+**Run program dengan command sebagai berikut**
+```
+    ./mainOutput
 ```
 
 ## Fitur Program
-- START_GAME: Untuk memulai permainan baru
-- LOAD_GAME: Untuk memulai permainan dengan game state yang telah ada
-- EXIT: Keluar dari permainan
-
-- Move: Untuk berpindah ke lokasi selanjutnya
-- PICK_UP: Untuk mengambil item di lokasi terkini
-- DROP_OFF: Untuk mengantarkan item ke lokasi terkini
-- MAP: Untuk menampilkan peta permainan
-- TO_DO: Untuk menampilkan pesanan yang masuk ke To Do List
-- IN_PROGRESS: Untuk menampilkan pesanan yang sedang dikerjakan
-- BUY: Untuk menampilkan gadget yang dapat dibeli lalu membelinya
-- INVENTORY: Untuk melihat gadget yang dimiliki dan menggunakannya
-- SAVE_GAME: Untuk menyimpan state dari permainan yang sedang dijalankan
-- HELP: Untuk mengeluarkan list command dan kegunaannya
+<table>
+    <tr>
+      <td><b>Fitur</b></td>
+      <td><b>Deskripsi</b></td>
+    </tr>
+    <tr>
+      <td><b>START_GAME</b></td>
+      <td><b>Untuk memulai permainan baru</b></td>
+    </tr>
+    <tr>
+      <td><b>LOAD_GAME</b></td>
+      <td><b>Untuk memulai permainan dengan game state yang telah ada</b></td>
+    </tr>
+    <tr>
+      <td><b>EXIT</b></td>
+      <td><b>Keluar dari permainan</b></td>
+    </tr>
+    <tr>
+      <td><b>MOVE</b></td>
+      <td><b>Untuk berpindah ke lokasi selanjutnya</b></td>
+    </tr>
+    <tr>
+      <td><b>PICK_UP</b></td>
+      <td><b>Untuk mengambil item di lokasi terkini</b></td>
+    </tr>
+    <tr>
+      <td><b>DROP_OFF</b></td>
+      <td><b>Untuk mengantarkan item ke lokasi terkini</b></td>
+    </tr>
+    <tr>
+      <td><b>MAP</b></td>
+      <td><b>Untuk menampilkan peta permainan</b></td>
+    </tr>
+    <tr>
+      <td><b>TO_DO</b></td>
+      <td><b>Untuk menampilkan pesanan yang masuk ke To Do List</b></td>
+    </tr>
+    <tr>
+      <td><b>IN_PROGRESS</b></td>
+      <td><b>Untuk menampilkan pesanan yang sedang dikerjakan</b></td>
+    </tr>
+    <tr>
+      <td><b>BUY</b></td>
+      <td><b>Untuk menampilkan gadget yang dapat dibeli lalu membelinya</b></td>
+    </tr>
+    <tr>
+      <td><b>INVENTORY</b></td>
+      <td><b>Untuk melihat gadget yang dimiliki dan menggunakannya</b></td>
+    </tr>
+    <tr>
+      <td><b>SAVE_GAME</b></td>
+      <td><b>Untuk menyimpan state dari permainan yang sedang dijalankan</b></td>
+    </tr>
+    <tr>
+      <td><b>HELP</b></td>
+      <td><b>Untuk mengeluarkan list command dan kegunaannya
+</b></td>
+    </tr>
+</table>
 
 ## Status Pengerjaan
 > **Project is: _complete_**
