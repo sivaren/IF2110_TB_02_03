@@ -20,7 +20,7 @@ Word temp;
 while (!quit) {
     printf("==========================================\n");
     printf("(^///^) SELAMAT DATANG DI MOBILITA (^///^)\n");
-    printf("==========================================\n");
+    printf("==========================================\n\n");
     printf("1. START_GAME untuk memulai game baru\n");
     printf("2. LOAD_GAME untuk load game sebelumnya\n");
     printf("3. EXIT untuk keluar dari game\n");
@@ -246,7 +246,7 @@ else if (isKataSama(temp, "START_GAME") || isKataSama(temp, "LOAD_GAME")) {
             
             saveFile(namaFile,rows,cols,pointHQ,DaftarBangunan,DaftarPesanan,staticPesananPerish, Adjacency,PesananDiantar,currentPos,Money,Time,speedboost,heavyitems,
             TasNobita,DaftarInprog,Todo,Inventory);
-            printf("Save file berhasil terbuat!\n");
+            printf("Save file berhasil terbuat!\n\n");
         }
         else{
             printf("COMMAND SALAH! Ketik HELP untuk melihat command\n\n");
