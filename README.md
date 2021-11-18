@@ -26,7 +26,7 @@
 $ git clone https://github.com/sivaren/IF2110_TB_02_03.git
 ```
 
-## Run Program
+## Run Prog
 > **To first setup this project run** </br>
 
 **Windows (Open `PowerShell` on this folder)**
@@ -44,61 +44,61 @@ $ git clone https://github.com/sivaren/IF2110_TB_02_03.git
 ## Fitur Program
 <table>
     <tr>
-      <td><b>Fitur</b></td>
-      <td><b>Deskripsi</b></td>
+      <td><b>Fitur</td>
+      <td><b>Deskripsi</td>
     </tr>
     <tr>
-      <td><b>START_GAME</b></td>
-      <td><b>Untuk memulai permainan baru</b></td>
+      <td>START_GAME</td>
+      <td>Untuk memulai permainan baru</b></td>
     </tr>
     <tr>
-      <td><b>LOAD_GAME</b></td>
-      <td><b>Untuk memulai permainan dengan game state yang telah ada</b></td>
+      <td>LOAD_GAME</td>
+      <td>Untuk memulai permainan dengan game state yang telah ada</b></td>
     </tr>
     <tr>
-      <td><b>EXIT</b></td>
-      <td><b>Keluar dari permainan</b></td>
+      <td><b>EXIT</td>
+      <td><b>Keluar dari permainan</td>
     </tr>
     <tr>
-      <td><b>MOVE</b></td>
-      <td><b>Untuk berpindah ke lokasi selanjutnya</b></td>
+      <td>MOVE</td>
+      <td>Untuk berpindah ke lokasi selanjutnya></td>
     </tr>
     <tr>
-      <td><b>PICK_UP</b></td>
-      <td><b>Untuk mengambil item di lokasi terkini</b></td>
+      <td>PICK_UP</td>
+      <td>Untuk mengambil item di lokasi terkini</td>
     </tr>
     <tr>
-      <td><b>DROP_OFF</b></td>
-      <td><b>Untuk mengantarkan item ke lokasi terkini</b></td>
+      <td>DROP_OFF</td>
+      <td>Untuk mengantarkan item ke lokasi terkini</td>
     </tr>
     <tr>
-      <td><b>MAP</b></td>
-      <td><b>Untuk menampilkan peta permainan</b></td>
+      <td>MAP</td>
+      <td>Untuk menampilkan peta permainan</td>
     </tr>
     <tr>
-      <td><b>TO_DO</b></td>
-      <td><b>Untuk menampilkan pesanan yang masuk ke To Do List</b></td>
+      <td>TO_DO</td>
+      <td>Untuk menampilkan pesanan yang masuk ke To Do List</td>
     </tr>
     <tr>
-      <td><b>IN_PROGRESS</b></td>
-      <td><b>Untuk menampilkan pesanan yang sedang dikerjakan</b></td>
+      <td>IN_PROGRESS</td>
+      <td>Untuk menampilkan pesanan yang sedang dikerjakan</td>
     </tr>
     <tr>
-      <td><b>BUY</b></td>
-      <td><b>Untuk menampilkan gadget yang dapat dibeli lalu membelinya</b></td>
+      <td>BUY</td>
+      <td>Untuk menampilkan gadget yang dapat dibeli lalu membelinya</td>
     </tr>
     <tr>
-      <td><b>INVENTORY</b></td>
-      <td><b>Untuk melihat gadget yang dimiliki dan menggunakannya</b></td>
+      <td>INVENTORY</td>
+      <td>Untuk melihat gadget yang dimiliki dan menggunakannya</td>
     </tr>
     <tr>
-      <td><b>SAVE_GAME</b></td>
-      <td><b>Untuk menyimpan state dari permainan yang sedang dijalankan</b></td>
+      <td>SAVE_GAME</td>
+      <td>Untuk menyimpan state dari permainan yang sedang dijalankan</td>
     </tr>
     <tr>
-      <td><b>HELP</b></td>
-      <td><b>Untuk mengeluarkan list command dan kegunaannya
-</b></td>
+      <td>HELP</td>
+      <td>Untuk mengeluarkan list command dan kegunaannya
+</td>
     </tr>
 </table>
 
