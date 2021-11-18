@@ -27,15 +27,6 @@ typedef struct {
    int length;
 } Word;
 
-// typedef struct {
-//    int waktuMasuk;
-//    Point pickUp;
-//    Point dropOff;
-//    char jenisItem;
-//    int waktuHangus;     //untuk perishable
-// } Pesanan;
-
-
 
 /* Word Engine State */
 extern boolean endWord;
@@ -73,7 +64,7 @@ int WordToInt(Word C);
 char WordtoSingleChar(Word C);
 void printWord(Word C);
 
-// void convertWordToString(Word C,  char *string);
+
 int panjangString (char* string);
 boolean isKataSama (Word C, char* string);
 int scanINT ();

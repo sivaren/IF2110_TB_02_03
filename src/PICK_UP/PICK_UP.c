@@ -23,7 +23,6 @@ boolean isPickAvailable(Point CurrentBangunan, Tas TasNobita, ToDoList Todo, ToD
 // mengecek apakah ada pesanan pada bangunan tersebut
 {
     boolean found = false;
-    int i = 0;
     AddressTodo p = FIRST_TODO(Todo);
     while (!found && p!= NULL) {
         if (CurrentBangunan.name == INFO_TODO(p).pickUp) {

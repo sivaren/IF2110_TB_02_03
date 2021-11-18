@@ -41,7 +41,7 @@ void enqueuePRIOQUEUE(PrioQueuePesanan *q, Pesanan val) {
         Jika q penuh semu, maka perlu dilakukan aksi penggeseran "maju" elemen-elemen q
         menjadi rata kiri untuk membuat ruang kosong bagi TAIL baru  */
     /* KAMUS LOKAL */
-    int i, j;
+    int i;
     /* ALGORITMA */
     if (isEmptyPRIOQUEUE(*q)) {
         IDX_HEAD_PRIOQUEUE(*q)=0;}

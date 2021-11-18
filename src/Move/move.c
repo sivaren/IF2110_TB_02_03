@@ -7,7 +7,6 @@ ListPoint adjacent(ListPoint map, Matrix adjacency_matrix, Point coordinate_mobi
     int num = 1, row_mobita; int j;
     ListPoint l;
     CreateListPoint(&l,100);
-    int total_building = lengthListPoint(map);
     if (EQ(coordinate_mobita,HQ))
     {
         row_mobita = 0;

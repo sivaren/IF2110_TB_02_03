@@ -44,7 +44,6 @@ void copyWordKeyboard() {
     /* ALGORITMA */
     // MARK_ENGINE = "\n" blank =""   MARK_FILE = "."
     while (currentChar != MARK_ENGINE && currentChar != BLANK) {
-        // printf("saat ini %c \n", currentChar);
         currentWord.contents[i] = currentChar;
         adv();
         i++;
@@ -53,7 +52,6 @@ void copyWordKeyboard() {
     if (currentWord.length > CAPACITY_WORD) {
         currentWord.length = CAPACITY_WORD;
     }
-    // if(currentChar == MARK_ENGINE):
 }
 
 
@@ -226,10 +224,7 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
 
 
    /* KAMUS LOKAL */
-    Word kata;
-    int i,j,k,jumlahBangunan,jumlahPesanan;
-    int X,Y;
-    char tempName;
+    int i,j,jumlahBangunan,jumlahPesanan;
     Pesanan tempPesanan;
     Point tempBangunan;
     
@@ -296,14 +291,11 @@ void readFile(char *namaFile,  int *N, int *M, Point *HQ, ListPoint *Listbanguna
 void saveFile(char *namaFile,int N,int M, Point HQ, ListPoint Listbangunan, PrioQueuePesanan QueuePesanan,PrioQueuePesanan staticPerishQueue, Matrix Adjency,int pesananDiantar, Point PosisiMobita, int Money, int time, int speedboost, int heavyitem, Tas tasMobita, InProgList progress, ToDoList Todo, ListInventory inventory){
     
     /* KAMUS LOKAL */
-    Point temp;
     int i,j;
-    char stringTemp[10];
     Pesanan trashPesanan;
     ElTypeTas trashTas;
     InProgType trashProg;
     ToDoType trashTodo;
-    Gadget trashGadget;
     /* ALGORITMA */
     writeFile(namaFile);
     //Ukuran Peta
@@ -443,12 +435,9 @@ void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *P
     ElTypeTas tempELTas;
     InProgType tempElProgList;
     ToDoType tempElToDo;
-    Gadget tempGadget;
-    int i,j,k,jumlahBangunan,jumlahPesanan;
-    int X,Y;
-    char tempName;
+    int i;
+
     Pesanan tempPesanan;
-    Point tempBangunan;
     advWord(true);
    
     lenPerish = WordToInt(currentWord);advWord(true);
@@ -549,8 +538,6 @@ void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *P
         insert_ToDoList(Todo,tempElToDo);
         
     }
-    // displayToDoList(*Todo);    
-    //ListInventory *inventory)
     
     ListGadget kumpulanGadget;
     createListGadget(&kumpulanGadget);
@@ -562,7 +549,6 @@ void LoadFile(PrioQueuePesanan *staticPerishQueue, int *pesananDiantar, Point *P
     copyWord(true);
    
     lenInven = WordToInt(currentWord);
-    // advWord(true);
     advForFile();
     for (i = 0; i<lenInven; i++){
         printf("ini i: %d\n huruf 1 : %c\n",i, currentChar);
